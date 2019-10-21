@@ -15,7 +15,7 @@ Polished Content uses the HTML5 [Intersection Observer](https://developer.mozill
 
 ## Getting Started
 
-[Download](https://github.com/CodingJack/polished-content/raw/master/polished-content.zip) the plugin from this repository and then [upload and install](https://www.wpbeginner.com/beginners-guide/step-by-step-guide-to-install-a-wordpress-plugin-for-beginners/) the plugin to your WordPress site.
+[Download](https://github.com/CodingJack/polished-content/raw/master/polished-content.zip) the plugin and then [upload and install](https://www.wpbeginner.com/beginners-guide/step-by-step-guide-to-install-a-wordpress-plugin-for-beginners/) the plugin to your WordPress site.
 
 ## Built With / Techology Used
 
