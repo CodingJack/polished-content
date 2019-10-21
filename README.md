@@ -46,4 +46,4 @@ The Gutenberg editor is required to create an animation, but inside the editor t
 
 ## Acknowledgments
 
-Hats off the the creators of [Gutenberg](https://github.com/WordPress/gutenberg) and [Greensock](https://greensock.com/) for allowing this plugin to exist.  They are the real heroes of Polished Content.
+Hats off the the creators of [Gutenberg](https://github.com/WordPress/gutenberg) and [Greensock](https://greensock.com/) for allowing this plugin to exist.  They are the real heroes of this plugin.
