@@ -1,0 +1,39 @@
+$bg-color: linear-gradient(345deg, #000 0%, #0073aa 100%);
+$text-color: #FFF;
+$wrap-padding: 50px;
+$hover-opacity: 0.7;
+$spacing: 30px;
+$icon-size: 64px;
+
+@mixin size($property) {
+	#{$property}: calc(100% - 100px)
+}
+
+body{margin:0; color: $text-color; background: $bg-color}
+.wrap{display:flex; align-items: center; padding: $wrap-padding 0; @include size(min-height)}
+img{animation: reset 0.3s ease-out; margin: 0 auto; @include size(max-width)}
+
+.fade-in{animation-name: animate}
+.arrow {cursor: pointer; position: fixed; top: 50%; z-index: 99; transform: translateY(-50%); user-select: none}
+.icon {
+	display: inline-block; transition: all 0.2s ease-out;
+	> * {display: inline-block}
+	&:hover {opacity: $hover-opacity}
+}
+.prev {left: $spacing}
+.next {right: $spacing}
+.material-icons{font-size: $icon-size}
+.logo {position: fixed; top: $spacing; left: $spacing}
+svg{width:64; height: $icon-size; fill: $text-color}
+.git{font-size: 54px; position:fixed; right: $spacing; bottom: $spacing}
+a:visited{color: $text-color}
+
+@keyframes animate{from {opacity: 0} to{ opacity: 1}}
+@keyframes reset{to { width: auto}}
+
+@media screen and (max-width: 1280px) {
+	.icon{background: rgba(0, 0, 0, $hover-opacity)}
+	.arrow{border-radius: 50%}
+	.git{padding: 5px}
+	.icon:hover{opacity: 1; background: #000}
+}

@@ -1,0 +1,406 @@
+/*
+ * Editor formatting
+*/
+
+$namespace: polished-content;
+$preview-color: #f3f4f5; 
+$preview-border-color: #e2e4e7;
+$save-preset-bg: #363b3f;
+$preview-height: 200px;
+$preview-el-size: 80px;
+$play-pause-font-size: 13px;
+$help-font-size: 11px;
+$tabs-font-size: 20px;
+$button-font-size: 11px;
+$tabs-panel-btn-width: 36px;
+$tabs-panel-btn-height: 36px;
+$tabs-border-radius: 50%;
+$mini-delete-icon-size: 18px;
+$mini-delete-svg-size: 12px;
+$mini-delete-border-radius: 3px;
+$mini-icon-hover-opacity: 0.75;
+$position-btn-border-radius: 2px;
+$save-preset-modal-bg: #000; 
+$save-preset-modal-close-btn: #FFF;
+$align-btn-border-clr: #CCC;
+$rc-menu-border-color: #b5bcc2;
+$rc-menu-background: #FFF;
+$rc-menu-box-shadow-clr: rgba(0, 0, 0, 0.2);
+ 
+/*
+ * generic
+*/ 
+.#{$namespace} {
+	label {cursor: auto; pointer-events: none}
+	hr {margin: 24px 0 23px 0}
+	.components-base-control__help {font-size: $help-font-size}
+	.components-select-control__input {text-transform: none}
+}
+
+.#{$namespace}-settings {
+	position: relative;
+	button:not(.components-panel__body-toggle) {font-size: $button-font-size !important}
+}
+ 
+/* 
+ * animation preview 
+ */
+.#{$namespace} {
+	&:not(.polished-content-sidebar) {border-bottom: 1px solid $preview-border-color !important; position: relative; bottom: -1px;}
+	&-wrap {position: relative; width: 100%; background: $preview-color; box-shadow: inset 0 0 0 1px $preview-border-color; height: $preview-height; margin-bottom: 8px; overflow: hidden}
+	&-preview-wrap {display: flex; align-items: center; justify-content: center; width: 100%; height: 100%}
+	&-preview-container {
+		perspective: 160px;
+		&.pcx-has-mask {overflow: hidden}
+		.#{$namespace}-gradient {position: absolute}
+		&.pcx-grayscale {
+			.#{$namespace}-preview-el svg {
+				fill: url(##{$namespace}-linear);
+			}
+		}
+	}
+	&-preview-el {display: block; width: $preview-el-size; height: $preview-el-size}
+}
+
+/* 
+ * Play/Pause Buttons 
+ */
+.#{$namespace} {
+	&-iconbtn {
+		padding: 0 4px; margin-right: 5px; align-items: center;
+		/* svg {position: relative; top: 1px} */
+	}
+	.components-button.is-small {font-size: $play-pause-font-size}
+}
+.#{$namespace} {
+	&-create-preset {float: right}
+	&-playpause {
+		.dashicons-controls {
+			&-play {position: relative; left: 1px}
+			&-pause {display: none}
+		}
+		&.is-playing {
+			.dashicons-controls {
+				&-play {display: none}
+				&-pause {display: inline-flex}
+			}
+		}
+	}
+}
+
+/* 
+ * alignment grid buttons
+*/
+.#{$namespace} {
+	&-positions {
+		margin: 15px 0 11px 0;
+		&-first {margin-top: 22px}
+	}
+	&-points {margin-top: 3px}
+	&-positions .#{$namespace}-select-wrap {width: calc(100% - 78px)}
+	&-positions:last-child {margin-bottom: 0}
+	&-position-btn {
+		float: left; padding: 0 10px !important; border-radius: 0 !important; margin: -2px 0 0 -1px !important; box-shadow: none !important;
+		&:nth-child(4),
+		&:nth-child(7) {clear: both}
+		&:nth-child(1) {border-radius: $position-btn-border-radius 0 0 0 !important}
+		&:nth-child(3) {border-radius: 0 $position-btn-border-radius 0 0 !important}
+		&:nth-child(7) {border-radius: 0 0 0 $position-btn-border-radius !important}
+		&:nth-child(9) {border-radius: 0 0 $position-btn-border-radius 0 !important}
+	}
+}
+
+/* 
+ * <ToggleControl> 
+*/
+.#{$namespace}-toggle {
+	margin-bottom: 0 !important;
+	.components-toggle-control__label {margin-bottom: 0}
+}
+
+/* 
+ * <RangeControl> 
+ */
+.#{$namespace}-ranges {
+	border-top-width: 0; margin: 0 !important; padding: 0; padding-bottom: 0; width: 100%;
+	.components {
+		&-base-control__field {margin-bottom: 10px}
+		&-base-control__label {margin-bottom: -6px}
+		&-range-control__slider {padding: 10px 0 5px 0; margin-left: 0 !important; cursor: pointer}
+	}
+	.components-button.is-small {margin-left: 6px}
+	.dashicon {margin-right: 0 !important}
+}
+
+.#{$namespace}-ranges.pcx-stagger-hide {display: none}
+.#{$namespace}-ranges .components-button.is-small svg,
+.#{$namespace}-delete svg {width: $mini-delete-svg-size !important; height: $mini-delete-svg-size !important}
+.#{$namespace}-ranges .components-button.is-small,
+.#{$namespace}-delete {border-radius: $mini-delete-border-radius}
+
+
+/* 
+ * <TabPanel> 
+ */
+.#{$namespace}-tabs {
+	width: 100%;
+	.components-tab-panel__tabs {
+		width: 100%; margin-bottom: 35px; white-space: nowrap; display: flex; justify-content: space-between;
+		> button {
+			width: $tabs-panel-btn-width; 
+			height: $tabs-panel-btn-height; 
+			display: inline-block !important; 
+			padding: 0; 
+			font-size: $tabs-font-size !important; 
+			border-radius: $tabs-border-radius !important;
+		}
+	}
+}
+
+/* 
+ * <PanelRow> 
+ */
+.#{$namespace} {
+	.components-panel__row {
+		align-items: flex-start;
+		.is-default {margin: 1px 0 0 12px}
+	}
+}
+.#{$namespace}-row {
+	&:first-child {margin: 0 0 5px 0 !important}
+	margin: -7px 0 5px 0 !important;
+	.components-base-control__field {margin-bottom: 0 !important}
+	> {
+		.components-base-control,
+		.#{$namespace}-wrapper {width: 47.5%}
+	}
+}
+.#{$namespace}-spacer .#{$namespace}-text-input:first-child {margin-right: 10px}
+
+/* 
+ * <SelectControl> 
+ */
+.#{$namespace}-wrapper {position: relative}
+.#{$namespace}-select-wrap {
+	.components-panel__row label {max-width: 100%}
+	.components-base-control__label {margin-bottom: 5px}
+	.components-base-control__help {margin-top: -1px}
+}
+
+/* 
+ * mini control buttons
+ */
+.#{$namespace}-small-btns {
+	position: absolute; top: 0; right: 0;
+	.components-base-control {margin-bottom: 0 !important}
+	.#{$namespace}-iconbtn {margin-right: 0}
+}
+.#{$namespace}-small-btns .components-button.is-small,
+.#{$namespace}-ranges .components-button.is-small,
+.#{$namespace}-presets .components-button.is-small {height: $mini-delete-icon-size; line-height: $mini-delete-icon-size; padding: 0 2px 1px}
+.#{$namespace}-text-input .#{$namespace}-iconbtn {border-radius: $mini-delete-border-radius !important}
+
+/*
+* create preset
+*/
+.#{$namespace}-save-preset {
+	display: flex; 
+	align-items: center; 
+	justify-content: center; 
+	text-align: center;
+	position: absolute; 
+	top: 0; 
+	left: 0; 
+	width: 100%; 
+	height: 100%; 
+	z-index: 999999; 
+	background: $save-preset-bg;
+}
+
+.#{$namespace}-preset-name {
+	max-width: 100%;
+}
+
+.#{$namespace}-save {
+	&-preset > div {width: 165px}
+	&-btn {float: right; margin-top: 4px; width: 100%; text-align: center}
+	&-text {
+		width: 100%; position: relative; text-align: center;
+		.components-spinner {display: none; position: absolute; right: 0; background: $save-preset-modal-bg; margin: 3px 0 0 0}
+	}
+}
+
+.#{$namespace} {
+	&-create-preset[aria-disabled=true],
+	&-save-btn[aria-disabled=true] {pointer-events: none}
+}
+
+.#{$namespace}-mini-icon {
+	position: absolute; top: 10px; right: 10px; color: $save-preset-modal-close-btn; padding: 0 !important;
+	&:active {box-shadow: none !important}
+	&:hover {background: transparent !important; box-shadow: none !important; color: $save-preset-modal-close-btn !important; opacity: $mini-icon-hover-opacity}
+}
+
+/*
+ * ajax loading
+*/
+.#{$namespace}-settings.pcx-ajax-loading {
+	pointer-events: none;
+	.#{$namespace}-tabs,
+	> .components-button,
+	.#{$namespace} {
+		&-save-preset > div,
+		&-select-pcxPresets {opacity: 0.75; pointer-events: none}
+		&-save-text .components-spinner {display: inline-block}
+	}
+}
+
+/*
+* trash icons
+*/
+.#{$namespace} {
+	&-presets {position: relative; margin-top: 16px}
+	&-delete {
+		position: absolute; top: 0; right: 0; color: inherit; margin-right: 0; visibility: hidden;
+		&:hover {top: 0; right: 0; color: inherit !important}
+	}
+}
+
+/*
+ * formatting tab
+*/
+.#{$namespace}-formatting-tab {
+	.#{$namespace}-toggle {
+		margin-bottom: 24px !important;
+		&:last-child {margin-bottom: 21px !important}
+	}
+	##{$namespace}-transform-origin-wrap {padding-top: 4px}
+	.#{$namespace}-text-input {
+		margin-top: -5px;
+		.components-base-control__help {margin: 7px 0 11px}
+	}
+	.#{$namespace}-toggle-classes {padding-top: 14px}
+	.#{$namespace}-classes-enabed {margin-bottom: 19px !important}
+}
+
+/*
+ * advanced tab
+*/
+.#{$namespace}-advanced-tab {
+	.#{$namespace}-ranges:last-child > .components-base-control,
+	.#{$namespace}-select-wrap:last-child > .components-base-control {margin-bottom: 0}
+	##{$namespace}-pcxPerspective + .#{$namespace}-ranges {margin-bottom: 15px !important}
+}
+
+/*
+* timing tab
+*/
+.#{$namespace}-timing-tab > div {
+	margin-top: -1px;
+	&:first-child {margin-top: 0}
+}
+.#{$namespace}-timing-tab {
+	.#{$namespace}-text-input {
+		.components-base-control__help {margin: 7px 0 11px}
+		&:last-child > .components-base-control {margin-bottom: 0}
+	}
+	.#{$namespace}-select-wrap:last-child > .components-base-control {margin-bottom: 0}
+	.#{$namespace}-toggle {padding-top: 5px}
+}
+
+.#{$namespace}-viewports {
+	margin-top: 21px;
+	label {display: block; margin-bottom: 18px}
+	.dashicons {margin-right: 5px}
+}
+##{$namespace}-transform-origin-wrap {padding-top: 10px}
+
+/*
+* settings tab
+*/
+.#{$namespace}-scroll-option {margin-top: 26px}
+##{$namespace}-pcxScrollType {padding-bottom: 0px}
+##{$namespace}-pcxStaggerReset {margin-top:24px}
+.#{$namespace}-viewports {
+	.components-base-control__help {margin-top: 13px}
+}
+
+/*
+ * reset buttons
+*/
+.#{$namespace}-reset-btns {
+	margin: 25px 0 7px;
+	white-space: nowrap;
+	button:first-child {margin-right: 9px}
+}
+
+/*
+ * text align buttons
+*/
+.#{$namespace}-align-btns {
+	margin: -10px 0 26px;
+}
+
+/*
+ * page settings sidebar
+*/
+.#{$namespace}-sidebar {
+	padding: 0 16px; border: 0;
+	.#{$namespace}-settings {
+		border: 0;
+		.components-panel__body {
+			margin-top: 0 !important;
+			&.is-opened > .components-panel__body-title {margin-bottom: 12px}
+			&:last-child {margin-bottom: 0}
+		}
+	}
+	.#{$namespace}-toggle:first-child {margin-bottom: 28px !important}
+	.#{$namespace}-override {margin-bottom: 27px !important}
+}
+
+/*
+ * right click menu
+*/
+.#{$namespace}-rc-menu {
+	visibility: hidden; 
+	position: absolute; 
+	white-space: nowrap; 
+	z-index: 999; 
+	font-size: 11px; 
+	background: $rc-menu-background; 
+	border: 1px solid $rc-menu-border-color; 
+	
+	box-shadow: 2px 2px 5px $rc-menu-box-shadow-clr;
+	> div {
+		display: flex; align-items: center; padding: 3px 6px; cursor: pointer;
+		&:hover {background: #32373c; color: white}
+	}
+	.dashicons {font-size: 15px; width: auto; height: auto; transition: none}
+	.dashicons-migrate {transform: rotate(90deg)};
+	&-text {margin-left: 6px}
+}
+.rtl {
+	.#{$namespace} {
+		&-create-preset {float: left}
+		&-small-btns {right: auto; left: 0}
+		.components-panel__row .is-default {margin: 1px 12px 0 0}
+		&-ranges .components-button.is-small {margin-left: 0; margin-right: 6px}
+		&-ranges .dashicon {margin-left: 0 !important}
+		&-reset-btns button:first-child {margin-right: 0; margin-left: 0}
+		&-ranges .components-range-control__slider {margin-left: 1px !important}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

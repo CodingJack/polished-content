@@ -1,0 +1,53 @@
+{
+  "name": "polished-content-screenshots",
+  "version": "1.0.0",
+  "description": "Polished Content Screenshots",
+  "author": "CodingJack",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "Gutenberg",
+    "Blocks",
+    "Animated",
+    "Animated Blocks",
+    "Block Animations",
+    "Gutenberg Animations"
+  ],
+  "homepage": "http://www.codingjack.com/polished-content",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CodingJack/polished-content"
+  },
+  "bugs": {
+    "url": "https://github.com/CodingJack/polished-content",
+    "email": "support@codingjack.com"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "css-loader": "^3.2.0",
+    "material-icons": "^0.3.1",
+    "style-loader": "^1.0.0",
+    "url-loader": "^2.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "core-js": "^3.2.1",
+    "eslint-loader": "^3.0.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "node-sass": "^4.0.0",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "sass-loader": "^7.2.0",
+    "webpack": "^4.41.2"
+  },
+  "scripts": {
+    "watch": "webpack --watch src/js/index.js --output-path dist/js --config config/webpack.config.js --mode=development",
+    "build": "webpack src/js/index.js --output-path dist/js --config config/webpack.config.js --mode=production"
+  }
+}

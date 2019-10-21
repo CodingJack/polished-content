@@ -1,0 +1,1632 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2019-10-20 18:09-0700\n"
+"PO-Revision-Date: 2019-10-20 18:09-0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.4\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/admin.php:225
+msgid "Polished Content Ajax Error"
+msgstr ""
+
+#: admin/admin.php:248 admin/admin.php:256
+msgid "success"
+msgstr ""
+
+#: admin/admin.php:250
+msgid "preset settings did not exist"
+msgstr ""
+
+#: admin/admin.php:258
+msgid "settings key did not exist"
+msgstr ""
+
+#: admin/admin.php:262
+msgid "ajax post params not correct"
+msgstr ""
+
+#: admin/allowed_blocks.php:24
+msgid "Heading"
+msgstr ""
+
+#: admin/allowed_blocks.php:25
+msgid "Paragraph"
+msgstr ""
+
+#: admin/allowed_blocks.php:26
+msgid "Image"
+msgstr ""
+
+#: admin/allowed_blocks.php:27
+msgid "Cover"
+msgstr ""
+
+#: admin/allowed_blocks.php:28
+msgid "Gallery"
+msgstr ""
+
+#: admin/allowed_blocks.php:29
+msgid "List"
+msgstr ""
+
+#: admin/allowed_blocks.php:30
+msgid "Quote"
+msgstr ""
+
+#: admin/allowed_blocks.php:31 admin/allowed_blocks.php:96
+#: admin/allowed_blocks.php:106 admin/allowed_blocks.php:174
+msgid "Column"
+msgstr ""
+
+#: admin/allowed_blocks.php:32
+msgid "Video"
+msgstr ""
+
+#: admin/allowed_blocks.php:33
+msgid "Audio"
+msgstr ""
+
+#: admin/allowed_blocks.php:34
+msgid "File"
+msgstr ""
+
+#: admin/allowed_blocks.php:37 admin/allowed_blocks.php:142
+msgid "Button"
+msgstr ""
+
+#: admin/allowed_blocks.php:38
+msgid "Columns"
+msgstr ""
+
+#: admin/allowed_blocks.php:39
+msgid "Media & Text"
+msgstr ""
+
+#: admin/allowed_blocks.php:40 admin/allowed_blocks.php:159
+msgid "Separator"
+msgstr ""
+
+#: admin/allowed_blocks.php:41
+msgid "Group"
+msgstr ""
+
+#: admin/allowed_blocks.php:44
+msgid "Code"
+msgstr ""
+
+#: admin/allowed_blocks.php:45
+msgid "Preformatted"
+msgstr ""
+
+#: admin/allowed_blocks.php:46 admin/allowed_blocks.php:158
+msgid "Pullquote"
+msgstr ""
+
+#: admin/allowed_blocks.php:47
+msgid "Table"
+msgstr ""
+
+#: admin/allowed_blocks.php:48
+msgid "Verse"
+msgstr ""
+
+#: admin/allowed_blocks.php:51
+msgid "Embed"
+msgstr ""
+
+#: admin/allowed_blocks.php:52
+msgid "Twitter"
+msgstr ""
+
+#: admin/allowed_blocks.php:53
+msgid "YouTube"
+msgstr ""
+
+#: admin/allowed_blocks.php:54
+msgid "Facebook"
+msgstr ""
+
+#: admin/allowed_blocks.php:55
+msgid "Instagram"
+msgstr ""
+
+#: admin/allowed_blocks.php:56
+msgid "WordPress"
+msgstr ""
+
+#: admin/allowed_blocks.php:57
+msgid "SoundCloud"
+msgstr ""
+
+#: admin/allowed_blocks.php:58
+msgid "Spotify"
+msgstr ""
+
+#: admin/allowed_blocks.php:59
+msgid "Flickr"
+msgstr ""
+
+#: admin/allowed_blocks.php:60
+msgid "Vimeo"
+msgstr ""
+
+#: admin/allowed_blocks.php:61
+msgid "Animoto"
+msgstr ""
+
+#: admin/allowed_blocks.php:62
+msgid "Cloudup"
+msgstr ""
+
+#: admin/allowed_blocks.php:63
+msgid "CollegeHumor"
+msgstr ""
+
+#: admin/allowed_blocks.php:64
+msgid "Crowdsignal"
+msgstr ""
+
+#: admin/allowed_blocks.php:65
+msgid "Dailymotion"
+msgstr ""
+
+#: admin/allowed_blocks.php:66
+msgid "Hulu"
+msgstr ""
+
+#: admin/allowed_blocks.php:67
+msgid "Imgur"
+msgstr ""
+
+#: admin/allowed_blocks.php:68
+msgid "Issuu"
+msgstr ""
+
+#: admin/allowed_blocks.php:69
+msgid "Kickstarter"
+msgstr ""
+
+#: admin/allowed_blocks.php:70
+msgid "Meetup.com"
+msgstr ""
+
+#: admin/allowed_blocks.php:71
+msgid "Mixcloud"
+msgstr ""
+
+#: admin/allowed_blocks.php:72
+msgid "Polldaddy"
+msgstr ""
+
+#: admin/allowed_blocks.php:73
+msgid "Reddit"
+msgstr ""
+
+#: admin/allowed_blocks.php:74
+msgid "ReverbNation"
+msgstr ""
+
+#: admin/allowed_blocks.php:75
+msgid "Screencast"
+msgstr ""
+
+#: admin/allowed_blocks.php:76
+msgid "Scribd"
+msgstr ""
+
+#: admin/allowed_blocks.php:77
+msgid "Slideshare"
+msgstr ""
+
+#: admin/allowed_blocks.php:78
+msgid "SmugMug"
+msgstr ""
+
+#: admin/allowed_blocks.php:79
+msgid "Speaker"
+msgstr ""
+
+#: admin/allowed_blocks.php:80
+msgid "title"
+msgstr ""
+
+#: admin/allowed_blocks.php:81
+msgid "TED"
+msgstr ""
+
+#: admin/allowed_blocks.php:82
+msgid "Tumblr"
+msgstr ""
+
+#: admin/allowed_blocks.php:83
+msgid "VideoPress"
+msgstr ""
+
+#: admin/allowed_blocks.php:84
+msgid "WordPress.tv"
+msgstr ""
+
+#: admin/allowed_blocks.php:85
+msgid "Amazon Kindle"
+msgstr ""
+
+#: admin/allowed_blocks.php:88
+msgid "Advanced Heading"
+msgstr ""
+
+#: admin/allowed_blocks.php:89
+msgid "Section"
+msgstr ""
+
+#: admin/allowed_blocks.php:90
+msgid "Multi Buttons"
+msgstr ""
+
+#: admin/allowed_blocks.php:91
+msgid "Team"
+msgstr ""
+
+#: admin/allowed_blocks.php:92
+msgid "Social Share"
+msgstr ""
+
+#: admin/allowed_blocks.php:93
+msgid "Google Map"
+msgstr ""
+
+#: admin/allowed_blocks.php:94 admin/allowed_blocks.php:113
+#: admin/allowed_blocks.php:153
+msgid "Icon List"
+msgstr ""
+
+#: admin/allowed_blocks.php:95
+msgid "Content Timeline"
+msgstr ""
+
+#: admin/allowed_blocks.php:97
+msgid "Advanced Columns"
+msgstr ""
+
+#: admin/allowed_blocks.php:98 admin/allowed_blocks.php:141
+msgid "Blockquote"
+msgstr ""
+
+#: admin/allowed_blocks.php:99
+msgid "Marketing Button"
+msgstr ""
+
+#: admin/allowed_blocks.php:100
+msgid "Table of Contents"
+msgstr ""
+
+#: admin/allowed_blocks.php:103
+msgid "Spacer/Divider"
+msgstr ""
+
+#: admin/allowed_blocks.php:104 admin/allowed_blocks.php:121
+msgid "Advanced Button"
+msgstr ""
+
+#: admin/allowed_blocks.php:105
+msgid "Row Layout"
+msgstr ""
+
+#: admin/allowed_blocks.php:107 admin/allowed_blocks.php:182
+msgid "Icon"
+msgstr ""
+
+#: admin/allowed_blocks.php:108 admin/allowed_blocks.php:136
+msgid "Tabs"
+msgstr ""
+
+#: admin/allowed_blocks.php:109
+msgid "Tab"
+msgstr ""
+
+#: admin/allowed_blocks.php:110
+msgid "Info Box"
+msgstr ""
+
+#: admin/allowed_blocks.php:111 admin/allowed_blocks.php:118
+#: admin/allowed_blocks.php:140 admin/allowed_blocks.php:166
+msgid "Accordion"
+msgstr ""
+
+#: admin/allowed_blocks.php:112
+msgid "Pane"
+msgstr ""
+
+#: admin/allowed_blocks.php:114
+msgid "Testimonials"
+msgstr ""
+
+#: admin/allowed_blocks.php:115
+msgid "Advanced Gallery"
+msgstr ""
+
+#: admin/allowed_blocks.php:119 admin/allowed_blocks.php:167
+msgid "Accordion Item"
+msgstr ""
+
+#: admin/allowed_blocks.php:120
+msgid "Advanced Accordion"
+msgstr ""
+
+#: admin/allowed_blocks.php:122
+msgid "Advanced Image"
+msgstr ""
+
+#: admin/allowed_blocks.php:123
+msgid "Advanced List"
+msgstr ""
+
+#: admin/allowed_blocks.php:124
+msgid "Advanced Table"
+msgstr ""
+
+#: admin/allowed_blocks.php:125
+msgid "Advanced Video"
+msgstr ""
+
+#: admin/allowed_blocks.php:126
+msgid "Contact Form"
+msgstr ""
+
+#: admin/allowed_blocks.php:127 admin/allowed_blocks.php:145
+msgid "Container"
+msgstr ""
+
+#: admin/allowed_blocks.php:128 admin/allowed_blocks.php:146
+msgid "Count Up"
+msgstr ""
+
+#: admin/allowed_blocks.php:129
+msgid "Images Slider"
+msgstr ""
+
+#: admin/allowed_blocks.php:130
+msgid "Login/Register Form"
+msgstr ""
+
+#: admin/allowed_blocks.php:131 admin/allowed_blocks.php:184
+msgid "Map"
+msgstr ""
+
+#: admin/allowed_blocks.php:132
+msgid "Newsletter"
+msgstr ""
+
+#: admin/allowed_blocks.php:133
+msgid "Search Bar"
+msgstr ""
+
+#: admin/allowed_blocks.php:134
+msgid "Social Links"
+msgstr ""
+
+#: admin/allowed_blocks.php:135
+msgid "Summary"
+msgstr ""
+
+#: admin/allowed_blocks.php:137 admin/allowed_blocks.php:162
+msgid "Testimonial"
+msgstr ""
+
+#: admin/allowed_blocks.php:143
+msgid "Call to Action"
+msgstr ""
+
+#: admin/allowed_blocks.php:144
+msgid "Card"
+msgstr ""
+
+#: admin/allowed_blocks.php:147
+msgid "Divider"
+msgstr ""
+
+#: admin/allowed_blocks.php:148
+msgid "Expand / Show More"
+msgstr ""
+
+#: admin/allowed_blocks.php:149
+msgid "Feature Grid"
+msgstr ""
+
+#: admin/allowed_blocks.php:150 admin/allowed_blocks.php:176
+msgid "Feature"
+msgstr ""
+
+#: admin/allowed_blocks.php:151
+msgid "Ghost Button"
+msgstr ""
+
+#: admin/allowed_blocks.php:152
+msgid "Header"
+msgstr ""
+
+#: admin/allowed_blocks.php:154
+msgid "Image Box"
+msgstr ""
+
+#: admin/allowed_blocks.php:155
+msgid "Notification"
+msgstr ""
+
+#: admin/allowed_blocks.php:156
+msgid "Number Box"
+msgstr ""
+
+#: admin/allowed_blocks.php:157
+msgid "Pricing Box"
+msgstr ""
+
+#: admin/allowed_blocks.php:160
+msgid "Spacer"
+msgstr ""
+
+#: admin/allowed_blocks.php:161
+msgid "Team Member"
+msgstr ""
+
+#: admin/allowed_blocks.php:163
+msgid "Video Popup"
+msgstr ""
+
+#: admin/allowed_blocks.php:168
+msgid "Alert"
+msgstr ""
+
+#: admin/allowed_blocks.php:169 admin/options_page/src/js/data.js:88
+#: admin/options_page/src/js/data.js:490
+msgid "Author"
+msgstr ""
+
+#: admin/allowed_blocks.php:170
+msgid "Buttons"
+msgstr ""
+
+#: admin/allowed_blocks.php:171
+msgid "Collage"
+msgstr ""
+
+#: admin/allowed_blocks.php:172
+msgid "Carousel"
+msgstr ""
+
+#: admin/allowed_blocks.php:173
+msgid "Click to Tweet"
+msgstr ""
+
+#: admin/allowed_blocks.php:175
+msgid "Dynamic HR"
+msgstr ""
+
+#: admin/allowed_blocks.php:177
+msgid "Features"
+msgstr ""
+
+#: admin/allowed_blocks.php:178
+msgid "Food & Drinks"
+msgstr ""
+
+#: admin/allowed_blocks.php:179
+msgid "Gist"
+msgstr ""
+
+#: admin/allowed_blocks.php:180
+msgid "Hero"
+msgstr ""
+
+#: admin/allowed_blocks.php:181
+msgid "Highlight"
+msgstr ""
+
+#: admin/allowed_blocks.php:183
+msgid "Logos & Badges"
+msgstr ""
+
+#: admin/allowed_blocks.php:185
+msgid "Masonry"
+msgstr ""
+
+#: admin/allowed_blocks.php:186
+msgid "Media Card"
+msgstr ""
+
+#: admin/allowed_blocks.php:187
+msgid "Pricing Table"
+msgstr ""
+
+#: admin/allowed_blocks.php:188
+msgid "Pricing Table Item"
+msgstr ""
+
+#: admin/allowed_blocks.php:189
+msgid "Row"
+msgstr ""
+
+#: admin/allowed_blocks.php:190
+msgid "Service"
+msgstr ""
+
+#: admin/allowed_blocks.php:191
+msgid "Services"
+msgstr ""
+
+#: admin/allowed_blocks.php:192
+msgid "Shape Divider"
+msgstr ""
+
+#: admin/allowed_blocks.php:193
+msgid "Stacked"
+msgstr ""
+
+#: admin/block_editor/dist/js/polished-content.min.js:19
+msgid "com.greensock"
+msgstr ""
+
+#: admin/block_editor/src/js/components/my-classes-control.js:64
+#: admin/options_page/src/js/data.js:334
+msgid "Copy Animation Classes"
+msgstr ""
+
+#: admin/block_editor/src/js/components/my-presets-control.js:51
+msgid "Delete this Custom Preset Option?"
+msgstr ""
+
+#: admin/block_editor/src/js/components/my-tab-panel-control.js:83
+#: admin/block_editor/src/js/panels.js:84
+msgid ""
+"Letter Spacing is only compatible with text that would normally always "
+"appear on a single line"
+msgstr ""
+
+#: admin/block_editor/src/js/components/my-tab-panel-control.js:86
+#: admin/block_editor/src/js/panels.js:87
+msgid "vw would equal"
+msgstr ""
+
+#: admin/block_editor/src/js/components/my-tab-panel-control.js:87
+#: admin/block_editor/src/js/panels.js:88
+#, javascript-format
+msgid "% of the screen's width"
+msgstr ""
+
+#: admin/block_editor/src/js/components/my-tab-panel-control.js:91
+#: admin/block_editor/src/js/panels.js:92
+msgid ""
+"This easing function can be visually glitchy when combined with the \"Auto "
+"Reverse\" option"
+msgstr ""
+
+#: admin/block_editor/src/js/index.js:148
+msgid "Polished Content"
+msgstr ""
+
+#: admin/block_editor/src/js/sidebar.js:26
+#: admin/block_editor/src/js/sidebar.js:30 admin/options_page.php:143
+msgid "Polished Content Settings"
+msgstr ""
+
+#: admin/block_editor/src/js/utils.js:388 shared/js/data.js:999
+msgid "Custom Presets"
+msgstr ""
+
+#: admin/options_page.php:145
+msgid ""
+"Modify plugin/preset defaults and choose which block-types should be enabled "
+"for the plugin"
+msgstr ""
+
+#: admin/options_page/dist/js/polished-content.min.js:2
+msgid "symbols"
+msgstr ""
+
+#: admin/options_page/dist/js/polished-content.min.js:2
+msgid "op-symbols"
+msgstr ""
+
+#: admin/options_page/dist/js/polished-content.min.js:2
+msgid "string-to-symbol-registry"
+msgstr ""
+
+#: admin/options_page/dist/js/polished-content.min.js:2
+msgid "symbol-to-string-registry"
+msgstr ""
+
+#: admin/options_page/dist/js/polished-content.min.js:2
+msgid "wks"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:19
+msgid "Desktop"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:20 shared/js/data.js:298
+msgid "Tablet"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:21 shared/js/data.js:294
+msgid "Laptop"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:22 shared/js/data.js:302
+msgid "Smartphone"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:50
+msgid "Plugin Settings"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:56
+msgid "Panel Starts Opened"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:57
+msgid ""
+"Choose if you want the Animation Panel to be open automatically when a block "
+"is selected"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:62
+msgid "Viewport Widths"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:63
+msgid ""
+"You can enable/disable animations based on a viewport inside the editor.  "
+"The numbers here act like {{CSS breakpoints||https://developer.mozilla.org/"
+"en-US/docs/Web/CSS/@media||blank}}"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:74
+msgid "Plugin Script Loading"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:75
+msgid ""
+"Load the plugin's script only when a page/post's content has an animation "
+"(Default) or on all pages (Global)"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:77
+msgid "Default"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:78
+msgid "Global"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:84
+msgid "User Permissions"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:85
+msgid "Select which admin user-roles will have access to the animation editor"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:87
+msgid "Editor"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:89
+msgid "Contributor"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:95
+msgid "Default Preset Settings"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:101
+msgid "Front-end Override"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:102
+msgid ""
+"Override all animations on the front-end with the settings below.  Useful "
+"for batch-testing animations on multiple pages."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:107 admin/options_page/src/js/data.js:355
+msgid "Animate Content"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:108
+msgid ""
+"Choose if the block should only animate once or if it should animate as it "
+"scrolls into and out of view"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:110 shared/js/data.js:434
+msgid "Once when in view"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:111 shared/js/data.js:438
+msgid "Each time it appears"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:112 shared/js/data.js:442
+msgid "In and out in both directions"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:118 admin/options_page/src/js/data.js:363
+msgid "Percentage in View"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:120
+msgid "Regular Percentage"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:130
+msgid ""
+"The block will begin to animate when its inside this percentage of the "
+"page's viewport"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:132
+msgid "Scroll Stagger %"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:142 admin/options_page/src/js/data.js:367
+msgid "Auto Reverse"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:143
+msgid ""
+"Movements, wipes, rotations and skews will be reversed when scrolled up and "
+"out of view"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:148 admin/options_page/src/js/data.js:371
+msgid "Stagger on Scroll"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:149
+msgid ""
+"Choose if the block will animate in relation to the page's scroll position"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:157
+msgid "Enable/Disable Animation for..."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:162
+msgid "Default Presets"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:179
+msgid "Blocks"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:201
+msgid "Page Overflow Fix"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:202
+msgid ""
+"This is an important option when the page has Block animations that would "
+"normally bleed outside the screen, such as movements and transforms.  It "
+"adds some CSS to make sure the these animations never interfere with the "
+"page's scrollbars."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:207 admin/options_page/src/js/data.js:318
+msgid "Inherit Margins"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:208
+msgid ""
+"Animated Blocks are wrapped in a container which may effect content "
+"margins.  This option will remove the margins from the Block, allowing the "
+"wrapper to inherit them instead."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:213
+msgid "Additional CSS"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:214
+msgid ""
+"CSS added here will print on the front-end whenever a page/post includes an "
+"animation."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:230
+msgid "Additional JavaScript"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:231
+msgid ""
+"JavaScript added here will print on the front-end whenever a page/post "
+"includes an animation."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:239
+msgid "Plugin Information"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:244
+msgid "Panels"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:247
+msgid "The Animation Editor"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:249
+msgid ""
+"When you select a block in the page/post editor, the animation editor can be "
+"accessed in the Block settings toward the right."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:251
+msgid "Plugin Location Screenshot"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:257
+msgid "Page/Post Settings"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:259
+msgid ""
+"You can also use the Page/Post settings to disable all animations or "
+"override specific settings on the front-end which is useful for batch-"
+"testing."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:261
+msgid "Page/Post Settings Screenshot 1"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:262
+msgid "Page/Post Settings Screenshot 2"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:272
+msgid "Presets"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:275
+msgid "Preset Animations"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:277
+msgid ""
+"You can start with a predefined animation from the presets dropdown.  And "
+"then after applying custom settings you can create your own preset for later "
+"usage."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:279
+msgid "Presets Screenshot 1"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:280
+msgid "Presets Screenshot 2"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:281
+msgid "Presets Screenshot 3"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:290
+msgid "Animations"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:293
+msgid "Customize your Animation"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:295
+msgid ""
+"Modify your animations inside the Basics and Advanced sections.  And set the "
+"animation's duration and easing inside the Timing section."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:297
+msgid "Basics Screenshot"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:298
+msgid "Advanced Screenshot"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:299
+msgid "Timing Screenshot"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:308
+msgid "Formatting"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:311
+msgid "Formatting & Style Settings"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:313
+msgid ""
+"Use the Content Mask and Tansform Origin options to create different looks "
+"for your animations and apply layout formatting to the animated wrapper."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:315
+msgid "Formatting Screenshot"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:319
+msgid ""
+"This option is useful resolving spacing issues that might occur once the "
+"Block is wrapped in its animated container.  This option can also be applied "
+"globally in the {{Custom CSS||#0|2}} section."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:322
+msgid "Animate as Inline Block"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:323
+msgid ""
+"Enable this option for content that doesn't normally appear as full-width, "
+"such as buttons, icon's etc.  And then set its alignment if your Block's "
+"content is meant to be aligned to the center or right."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:326
+msgid "CSS Float"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:327
+msgid ""
+"This option is useful if your block is meant to display inline next to other "
+"content.  For example, an image and a paragraph, etc."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:330
+msgid "Wrapper Class"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:331
+msgid ""
+"Classes added here will get added to the animation's outer wrapper.  Then "
+"you can target the class with some {{Custom CSS||#0|2}} if needed."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:335
+msgid ""
+"Click this option to copy the current animation classes for the Block.  The "
+"classes can then be added to any other ocntent on your site.  Then you can "
+"load the \"Plugin Script Loading\" option in the settings {{here||#0|0}}."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:345
+msgid "Scroll Settings"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:348
+msgid "Scrolling & Viewport Settings"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:350
+msgid ""
+"Choose how and when your content should animate.  The settings in this "
+"section can also be applied globally with the \"Front-end Override\" option "
+"in the {{Default Preset Settings||#0|0}} or also per-page in the {{Page/"
+"Post||#1|0}} settings panel."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:352
+msgid "Scroll Settings Screenshot"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:357
+msgid ""
+"[[Once when in view:||bold]] Content will animate once and only once "
+"whenever it first appears in view."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:358
+msgid ""
+"[[Each time it appears:||bold]] Content will animate in every time it's "
+"scrolled into view."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:359
+msgid ""
+"[[In and out in both directions:||bold]] Content will animate both in and "
+"out as the page is scrolled in both directions."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:364
+msgid ""
+"Content will begin to animate when it's this percentage inside the page's "
+"viewport.  There's no magic number here as the best visual often depends on "
+"the size of the content and also whether or not the Stagger on Scroll option "
+"is enabled.  But check out the {{Technology||#1|7}} section if you'd like to "
+"learn more."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:368
+msgid ""
+"Enabling this option will reverse movements, rotations, wipes and skews when "
+"content is animated out of view.  For example, if a Block animates in from "
+"the right, it would animate out to the left, etc."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:372
+msgid ""
+"Enabling this option will tie the animation to the page's scroll position.  "
+"For example, normally when content enters the viewport it would just animate "
+"into its final position all at once.  But with Stagger on Scroll, the "
+"animation will play and pause depending on the the Percentage in View option."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:375
+msgid "Enable/Disable animation for..."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:376
+msgid ""
+"Here you can choose which screen sizes the animation should play on.  You "
+"can customize the screen width values over in the {{settings section||#0|0}} "
+"of this page."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:385
+msgid "Copy/Paste"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:388
+msgid "Right Click Menu"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:390
+msgid ""
+"The animation editor has a right-click menu can be used to easily copy and "
+"paste settings from one Block to another.  Useful for quickly adjusting the "
+"settings between Blocks when creating your animations."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:392
+msgid "Right-click Menu Screenshot 1"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:393
+msgid "Right-click Menu Screenshot 2"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:402
+msgid "Plugin Editing"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:405
+msgid "Adding Custom Blocks"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:407
+msgid ""
+"All the blocks listed in the {{Allowed Blocks||#0|1}} page have been pre-"
+"tested and will work out of the box.  There's also built in support for many "
+"of the blocks in these plugins:"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:413
+msgid ""
+"If you want to add your own blocks this can be done by manually editing the "
+"\"blocks.php\" file inside the plugin's admin folder.  Then once added there "
+"you can enable them inside the {{options page here||#0|1}}.  Just keep in "
+"mind that the \"Additional CSS Class\" option must already exist for the "
+"Block in order to be compatible with Polished Content."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:418
+msgid "Editing JavaScript"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:420
+msgid ""
+"The plugin's JavaScript has three parts.  The options page here, the Block "
+"Editor, and the front-end:"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:424
+msgid ""
+"The options page and front-end have their own config found in the plugin's "
+"root \"config\" folder, and the Block Editor uses the default {{@wordpress/"
+"scripts||https://developer.wordpress.org/block-editor/packages/packages-"
+"scripts/||blank}} config.  All three parts are compiled together in Node "
+"with the scripts below.  To get started:"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:426
+msgid "... from the plugin's root directory."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:427
+msgid "Then the scripts you can run are:"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:431
+msgid ""
+"The core package.json file is where you can edit the source and distribution "
+"paths and there you'll also find some command line actions to handle the ."
+"scss files for the admin parts."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:435
+msgid "Editing CSS"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:437
+msgid ""
+"The admin's CSS can be found in the same folders as the JavaScript above, "
+"with the difference being that the .scss files are in the \"src\" folder and "
+"the \"css\" files in the \"dist\" folder."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:438
+msgid ""
+"You can edit the SASS files and recompile using the \"npm run build\" "
+"command above, or edit the CSS files manually inside the \"dist\" folders.  "
+"The small CSS for the front-end is located at the top of the plugin's "
+"\"front/front.php\" file."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:445
+msgid "Technology"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:448
+msgid "Technology used for the Plugin"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:451
+msgid "Intersection Observer"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:453
+msgid ""
+"Polished Content uses the {{HTML5 Intersection Observer||https://developer."
+"mozilla.org/en-US/docs/Web/API/Intersection_Observer_API||blank}} to watch "
+"for when content is scrolled into and out of view.  This is in contrast to "
+"the traditional window \"scroll\" event that's often used for animating "
+"elements when scrolling."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:454
+msgid ""
+"When using the traditional window scroll event, every time the page is "
+"scrolled you normally have to run a big programmatic loop checking the exact "
+"size and position of each and every piece of content being animated.  And "
+"this can be a big performance hit."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:455
+msgid ""
+"But with the Intersection Observer, the browser handles all the calculations "
+"behind the scenes, and only notifies us when the content is where we expect "
+"it to be.  Inside the viewport!"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:456
+msgid ""
+"However, there are some drawbacks.  Since the Intersection Observer only "
+"tells us when the content is \"intersecting\" (entering or leaving the "
+"viewport), we can essentially \"lose track\" of the element once it's "
+"completely in view.  And this limits the ability to further control the "
+"element."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:457
+msgid ""
+"But Intersection Observer is used in Polished Content because the pros "
+"outweigh the cons :)"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:463
+msgid ""
+"{{Greensock||https://greensock.com/||blank}} is an animation engine that "
+"does amazing things without compromising performance.  There are many "
+"animation libraries available on the web, but Greensock was the only one I "
+"could find that allows you to animate between different points in a timeline "
+"while passing custom settings along the way, which was essential for "
+"Polished Content.  Greensock is \"mostly\" free.  You can check out their "
+"\"No Charge\" license {{here||https://greensock.com/standard-license/||"
+"blank}}."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:467
+msgid "Everything else..."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:493
+msgid "Hi, I'm CodingJack"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:495
+msgid ""
+"I've spent endless hours writing PHP but my real passion is JavaScript.  I'm "
+"currently in a special relationship with React but my roots are in building "
+"and maintaining interactive plugins for WordPress."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:497
+msgid "My Background"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:499
+msgid ""
+"I worked at {{ThemePunch||https://www.themepunch.com/||blank}} for 6 years "
+"doing a little bit of everything, with one of my main roles making all the "
+"fun special effect plugins you see {{here||https://revolution.themepunch.com/"
+"addons/||blank}}.  Before that I sold premium plugins on {{CodeCanyon||"
+"https://codecanyon.net/user/codingjack||blank}} and before that I built "
+"websites for small businesses."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:500
+msgid ""
+"You can follow me on {{Twitter||https://twitter.com/codingjack?"
+"lang=enTwitter||blank}} or check out some of my tutorials on {{YouTube||"
+"https://www.youtube.com/watch?v=j3Lzc625_jw||blank}}.  Or feel free to shoot "
+"me an email to support@codingjack.com if you have a question about the "
+"plugin."
+msgstr ""
+
+#: admin/options_page/src/js/data.js:501
+msgid "I hope you enjoy Polished Content! 🙂"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:515
+msgid "Settings/Presets"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:520
+msgid "Allowed Blocks"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:525
+msgid "Custom CSS"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:530
+msgid "Custom JS"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:535
+msgid "Info/Docs"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:540
+msgid "Screenshots"
+msgstr ""
+
+#: admin/options_page/src/js/index.js:156
+msgid "Polished Content Screenshots"
+msgstr ""
+
+#: front/dist/js/polished-content.min.js:2
+msgid "BackOut"
+msgstr ""
+
+#: front/dist/js/polished-content.min.js:2
+msgid "BackIn"
+msgstr ""
+
+#: front/dist/js/polished-content.min.js:2
+msgid "BackInOut"
+msgstr ""
+
+#: plugin.php:40
+msgid "Settings"
+msgstr ""
+
+#: shared/js/data.js:163
+msgid "Select a Preset Animation"
+msgstr ""
+
+#: shared/js/data.js:168
+msgid "Simple Fade"
+msgstr ""
+
+#: shared/js/data.js:172
+msgid "Gaussian Blur"
+msgstr ""
+
+#: shared/js/data.js:176
+msgid "Wipe Left"
+msgstr ""
+
+#: shared/js/data.js:180
+msgid "Wipe Right"
+msgstr ""
+
+#: shared/js/data.js:184
+msgid "Move from Bottom"
+msgstr ""
+
+#: shared/js/data.js:188
+msgid "Move from Right"
+msgstr ""
+
+#: shared/js/data.js:192
+msgid "Move from Left"
+msgstr ""
+
+#: shared/js/data.js:196
+msgid "Slide in Right"
+msgstr ""
+
+#: shared/js/data.js:200
+msgid "Slide in Left"
+msgstr ""
+
+#: shared/js/data.js:204
+msgid "Headline Motion"
+msgstr ""
+
+#: shared/js/data.js:208
+msgid "Flip Horizontal"
+msgstr ""
+
+#: shared/js/data.js:212
+msgid "Flip Vertical"
+msgstr ""
+
+#: shared/js/data.js:216
+msgid "Smooth Zoom"
+msgstr ""
+
+#: shared/js/data.js:220
+msgid "Inverted Zoom"
+msgstr ""
+
+#: shared/js/data.js:224
+msgid "Zoom from Bottom"
+msgstr ""
+
+#: shared/js/data.js:228
+msgid "Zoom from Right"
+msgstr ""
+
+#: shared/js/data.js:232
+msgid "Zoom from Left"
+msgstr ""
+
+#: shared/js/data.js:236
+msgid "Grayscale Blur"
+msgstr ""
+
+#: shared/js/data.js:240
+msgid "Reverse Flip"
+msgstr ""
+
+#: shared/js/data.js:244
+msgid "Phantom Zone"
+msgstr ""
+
+#: shared/js/data.js:248
+msgid "Text Dust"
+msgstr ""
+
+#: shared/js/data.js:252
+msgid "Sliding Doors"
+msgstr ""
+
+#: shared/js/data.js:256
+msgid "Open Sesame"
+msgstr ""
+
+#: shared/js/data.js:262
+msgid "Short Distance"
+msgstr ""
+
+#: shared/js/data.js:266
+msgid "Full Content"
+msgstr ""
+
+#: shared/js/data.js:270
+msgid "Full Screen"
+msgstr ""
+
+#: shared/js/data.js:276 shared/js/data.js:290 shared/js/data.js:358
+#: shared/js/data.js:448
+msgid "None"
+msgstr ""
+
+#: shared/js/data.js:280 shared/js/data.js:412
+msgid "Left"
+msgstr ""
+
+#: shared/js/data.js:284 shared/js/data.js:404
+msgid "Right"
+msgstr ""
+
+#: shared/js/data.js:306
+msgid "Custom Width"
+msgstr ""
+
+#: shared/js/data.js:312
+msgid "100vw"
+msgstr ""
+
+#: shared/js/data.js:316
+msgid "90vw"
+msgstr ""
+
+#: shared/js/data.js:320
+msgid "80vw"
+msgstr ""
+
+#: shared/js/data.js:324
+msgid "70vw"
+msgstr ""
+
+#: shared/js/data.js:328
+msgid "60vw"
+msgstr ""
+
+#: shared/js/data.js:332
+msgid "50vw"
+msgstr ""
+
+#: shared/js/data.js:336
+msgid "40vw"
+msgstr ""
+
+#: shared/js/data.js:340
+msgid "30vw"
+msgstr ""
+
+#: shared/js/data.js:344
+msgid "20vw"
+msgstr ""
+
+#: shared/js/data.js:348
+msgid "10vw"
+msgstr ""
+
+#: shared/js/data.js:352
+msgid "Custom Value"
+msgstr ""
+
+#: shared/js/data.js:362
+msgid "From Top"
+msgstr ""
+
+#: shared/js/data.js:366
+msgid "From Right"
+msgstr ""
+
+#: shared/js/data.js:370
+msgid "From Bottom"
+msgstr ""
+
+#: shared/js/data.js:374
+msgid "From Left"
+msgstr ""
+
+#: shared/js/data.js:378 shared/js/data.js:416
+msgid "Top Left"
+msgstr ""
+
+#: shared/js/data.js:382 shared/js/data.js:420
+msgid "Top Right"
+msgstr ""
+
+#: shared/js/data.js:386 shared/js/data.js:424
+msgid "Bottom Right"
+msgstr ""
+
+#: shared/js/data.js:390 shared/js/data.js:428
+msgid "Bottom Left"
+msgstr ""
+
+#: shared/js/data.js:396
+msgid "Center"
+msgstr ""
+
+#: shared/js/data.js:400
+msgid "Top"
+msgstr ""
+
+#: shared/js/data.js:408
+msgid "Bottom"
+msgstr ""
+
+#: shared/js/data.js:452
+msgid "Power 1"
+msgstr ""
+
+#: shared/js/data.js:456
+msgid "Power 2"
+msgstr ""
+
+#: shared/js/data.js:460
+msgid "Power 3"
+msgstr ""
+
+#: shared/js/data.js:464
+msgid "Power 4"
+msgstr ""
+
+#: shared/js/data.js:468
+msgid "Back"
+msgstr ""
+
+#: shared/js/data.js:472
+msgid "Bounce"
+msgstr ""
+
+#: shared/js/data.js:476
+msgid "Elastic"
+msgstr ""
+
+#: shared/js/data.js:480
+msgid "Circ"
+msgstr ""
+
+#: shared/js/data.js:484
+msgid "Expo"
+msgstr ""
+
+#: shared/js/data.js:488
+msgid "Sine"
+msgstr ""
+
+#: shared/js/data.js:494
+msgid "easeOut"
+msgstr ""
+
+#: shared/js/data.js:498
+msgid "easeIn"
+msgstr ""
+
+#: shared/js/data.js:502
+msgid "easeInOut"
+msgstr ""
+
+#: shared/js/data.js:512
+msgid "Custom Values"
+msgstr ""
+
+#: shared/js/data.js:832
+msgid "Copy All"
+msgstr ""
+
+#: shared/js/data.js:836
+msgid "Paste Copied Settings"
+msgstr ""
+
+#: shared/js/data.js:840
+msgid "Copy Basics"
+msgstr ""
+
+#: shared/js/data.js:844
+msgid "Copy Advanced"
+msgstr ""
+
+#: shared/js/data.js:848
+msgid "Copy Timing"
+msgstr ""
+
+#: shared/js/data.js:852
+msgid "Copy Formatting"
+msgstr ""
+
+#: shared/js/data.js:856
+msgid "Copy Scroll Settings"
+msgstr ""
+
+#: shared/js/data.js:860
+msgid "Disable Menu"
+msgstr ""

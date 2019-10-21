@@ -1,0 +1,74 @@
+{
+  "name": "polished-content",
+  "version": "1.0.0",
+  "description": "Animate your Gutenberg Blocks",
+  "author": "Jason McElwaine",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "Gutenberg",
+    "Blocks",
+    "Animated",
+    "Animated Blocks",
+    "Block Animations",
+    "Gutenberg Animations"
+  ],
+  "homepage": "http://www.codingjack.com/polished-content",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CodingJack/polished-content"
+  },
+  "bugs": {
+    "url": "https://github.com/CodingJack/polished-content",
+    "email": "support@codingjack.com"
+  },
+  "main": "admin/block_editor/src/js/index.js",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "gsap": "^2.1.3",
+    "intersection-observer": "^0.7.0",
+    "qs": "^6.8.0",
+    "requestidlecallback": "^0.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "@wordpress/scripts": "^5.1.0",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "classnames": "^2.2.6",
+    "core-js": "^3.2.1",
+    "eslint-loader": "^3.0.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "node-sass": "^4.12.0",
+    "npm-run-all": "^4.1.5",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "webpack": "^4.40.2"
+  },
+  "scripts": {
+    "watch:scss_options_page": "node-sass --watch admin/options_page/src/scss -o admin/options_page/dist/css",
+    "watch:scss_block_editor": "node-sass --watch admin/block_editor/src/scss -o admin/block_editor/dist/css",
+    "watch:block_editor": "wp-scripts start admin/block_editor/src/js/index.js --output-path=admin/block_editor/dist/js --output-filename=polished-content.min.js",
+    "watch:options_page": "webpack --watch admin/options_page/src/js/index.js --output-path admin/options_page/dist/js --config config/webpack.config.js --mode=development",
+    "watch:front": "webpack --watch front/src/js/index.js --output-path front/dist/js --config config/webpack.config.js --mode=development",
+    "build:scss_options_page": "node-sass admin/options_page/src/scss --output-style compressed -o admin/options_page/dist/css",
+    "build:scss_block_editor": "node-sass admin/block_editor/src/scss --output-style compressed -o admin/block_editor/dist/css",
+    "build:block_editor": "wp-scripts build admin/block_editor/src/js/index.js --output-path=admin/block_editor/dist/js --output-filename=polished-content.min.js",
+    "build:options_page": "webpack admin/options_page/src/js/index.js --output-path admin/options_page/dist/js --config config/webpack.config.js --mode=production",
+    "build:front": "webpack front/src/js/index.js --output-path front/dist/js --config config/webpack.config.js --mode=production",
+    "lint:shared": "wp-scripts lint-js shared",
+    "lint:block_editor": "wp-scripts lint-js admin/block_editor/src/js",
+    "lint:options_page": "wp-scripts lint-js admin/options_page/src/js",
+    "lint:front": "wp-scripts lint-js front/src/js",
+    "lint:pkg-json": "wp-scripts lint-pkg-json",
+    "watch": "npm-run-all -p watch:*",
+    "build": "npm-run-all -p build:*",
+    "lint": "npm-run-all -p lint:*",
+    "check-licenses": "wp-scripts check-licenses --prod --gpl2 --ignore=abab",
+    "check-engines": "wp-scripts check-engines"
+  }
+}
