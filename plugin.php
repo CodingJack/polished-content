@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Polished Content
- * Plugin URI: http://www.codingjack.com
+ * Plugin URI: https://github.com/CodingJack/polished-content
  * Description: Add customized scroll-based animations to your Gutenberg Blocks 
  * Author: CodingJack
  * Author URI: http://www.codingjack.com

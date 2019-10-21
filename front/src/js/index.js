@@ -21,6 +21,7 @@ import {
 } from '../../../shared/js/data';
 
 import {
+	addClasses,
 	resetElement,
 	checkOverflow,
 	createCssReset,
@@ -221,12 +222,20 @@ const hasPcx = ( el ) => {
 */
 const polishedContent = {
 	add: ( selector, classes ) => {
-		const classNames = classes.split( ' ' );
-		classNames.push( 'polished-content' );
+		const classNames = classes.replace( /  +/g, ' ' ).trim().split( ' ' );
+		classNames.unshift( namespace );
 
-		document.querySelectorAll( selector ).forEach( ( el ) => {
-			classNames.forEach( ( clas ) => el.classList.add( clas ) );
-		} );
+		if ( typeof selector === 'string' ) {
+			document.querySelectorAll( selector ).forEach( ( el ) => {
+				addClasses( el, classNames );
+			} );
+		} else if ( 'length' in selector ) {
+			selector.forEach( ( el ) => {
+				addClasses( el, classNames );
+			} );
+		} else {
+			addClasses( selector, classNames );
+		}
 	},
 	run: ( settings ) => {
 		/*
@@ -1063,4 +1072,3 @@ class PolishedContentAnimation {
 
 // exposing global variable to be called from inline WP script
 window.polishedContent = polishedContent;
-

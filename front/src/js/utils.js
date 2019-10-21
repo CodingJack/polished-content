@@ -103,6 +103,16 @@ export const createCssReset = ( props, ieClip ) => {
 };
 
 /*
+ * @desc adds classes to elements added dynamically with the API
+ * @param HTMLElement el - the animated element
+ * @param array classNames - the list of classes to add
+ * @since 1.0.0
+*/
+export const addClasses = ( el, classNames ) => {
+	classNames.forEach( ( clas ) => el.classList.add( clas ) );
+};
+
+/*
  * @desc removes all plugin classes from the element
  * @param HTMLElement el - the animated element
  * @since 1.0.0

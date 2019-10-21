@@ -417,6 +417,7 @@ const helpPage = [
 					{
 						header: __( 'Editing JavaScript', 'polished-content' ),
 						paragraphs: [
+							__( 'To edit the plugin\'s JavaScript first clone or download the full source files from GitHub {{here||https://github.com/CodingJack/polished-content||blank}}', 'polished-content' ),
 							__( 'The plugin\'s JavaScript has three parts.  The options page here, the Block Editor, and the front-end:', 'polished-content' ),
 							'[[admin/options_page/src/||code]]',
 							'[[admin/block_editor/src/||code]]',
