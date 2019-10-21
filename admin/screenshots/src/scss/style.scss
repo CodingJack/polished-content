@@ -11,9 +11,9 @@ $icon-size: 64px;
 
 body{margin:0; color: $text-color; background: $bg-color}
 .wrap{display:flex; align-items: center; padding: $wrap-padding 0; @include size(min-height)}
-img{animation: reset 0.3s ease-out; margin: 0 auto; @include size(max-width)}
+img{visibility: hidden;animation: reset 0.2s ease-out; margin: 0 auto; @include size(max-width)}
 
-.fade-in{animation-name: animate}
+.fade-in{visibility: visible;animation-name: animate}
 .arrow {cursor: pointer; position: fixed; top: 50%; z-index: 99; transform: translateY(-50%); user-select: none}
 .icon {
 	display: inline-block; transition: all 0.2s ease-out;

@@ -19,7 +19,7 @@ class MainImage extends Component {
 		super( ...arguments );
 		this.ref = createRef();
 	}
-	componentDidUpdate() {
+	onLoad = () => {
 		this.ref.current.classList.add( 'fade-in' );
 	}
 	render() {
@@ -32,7 +32,7 @@ class MainImage extends Component {
 		}
 		
 		return (
-			<div className="wrap"><img src={ `${ imgPath }${ active }.jpg` } ref={ this.ref } /></div>
+			<div className="wrap"><img onLoad={ this.onLoad } src={ `${ imgPath }${ active }.jpg` } ref={ this.ref } /></div>
 		);
 	}
 }
