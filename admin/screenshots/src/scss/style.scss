@@ -9,8 +9,9 @@ $icon-size: 64px;
 	#{$property}: calc(100% - 100px)
 }
 
-body{margin:0; color: $text-color; background: $bg-color}
-.wrap{display:flex; align-items: center; padding: $wrap-padding 0; @include size(min-height)}
+body{margin:0; color: $text-color}
+#app {height:100%}
+.wrap{display:flex; align-items: center;  background: $bg-color; padding: $wrap-padding 0; @include size(min-height)}
 img{visibility: hidden;animation: reset 0.2s ease-out; margin: 0 auto; @include size(max-width)}
 
 .fade-in{visibility: visible;animation-name: animate}
@@ -26,6 +27,7 @@ img{visibility: hidden;animation: reset 0.2s ease-out; margin: 0 auto; @include 
 .logo {position: fixed; top: $spacing; left: $spacing}
 svg{width:64; height: $icon-size; fill: $text-color}
 .git{font-size: 54px; position:fixed; right: $spacing; bottom: $spacing}
+.fa-github {color: #FFF}
 a:visited{color: $text-color}
 
 @keyframes animate{from {opacity: 0} to{ opacity: 1}}
