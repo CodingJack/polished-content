@@ -1,7 +1,7 @@
 # Polished Content
 WordPress Gutenberg Block Animation Builder w/ Intersection Observer
 
-[Front-end Demo](http://www.codingjack.com/polished-content/) | [Admin Screenshots](http://www.codingjack.com/polished-content-screenshots/)
+[Demo Home Page](http://www.codingjack.com/polished-content/) | [Demo Blog Post](http://www.codingjack.com/polished-content/2018/12/21/how-you-can-also-be-a-billionaire/) | [Admin Screenshots](http://www.codingjack.com/polished-content-screenshots/)
 
 ![Screenshot of the Plugin's Animation Editor, editing a post in WordPress](/admin/screenshots/dist/img/git-screenshot.jpg)
 
@@ -42,7 +42,7 @@ All of the built-in supported blocks have been tested and will work out of the b
 
 ## Not limited to Gutenberg Blocks
 
-The Gutenberg editor is required to create an animation, but inside the editor there's an option to copy the animation's classes.  And then those classes can be added to any of your WP site's content (see the "Custom JS" section in the plugin's settings page for an API example).  However, the plugin's script will normally only load if a page/post's "the_content()" contains an element with the expected animation classes, so if you add the classes to your site's header or footer you will need to set the plugin's "Script Loading" option to "Global" in the plugin's main settings page.  
+The Gutenberg editor is required to create an animation, but inside the editor there's an option to copy the animation's classes.  And then those classes can be added to any of your WP site's content (see the "Custom JS" section in the plugin's settings page for an API example).  However, the plugin's script will normally only load if a page/post's "the_content()" contains an element with the expected animation classes, so if you add the classes to your site's header or footer you will need to set the plugin's "Script Loading" option to "Global" in the plugin's main settings page.
 
 ## Acknowledgments
 
