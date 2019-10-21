@@ -67,7 +67,7 @@ class Screenshots extends Component {
 						<path d="M18 3v2H2V3h16zm-6 4v2H2V7h10zm6 0v2h-4V7h4zM8 11v2H2v-2h6zm10 0v2h-8v-2h8zm-4 4v2H2v-2h12z"/>
 					</svg>
 				</a>
-				<a className="icon git" target="_blank" href="https://github.com/CodingJack"><i className="fab fa-github"></i></a>
+				<a className="icon git" target="_blank" href="https://github.com/CodingJack/polished-content"><i className="fab fa-github"></i></a>
 				<span className="icon arrow prev" onClick={ this.prev }>
 					<span className="material-icons">navigate_before</span>
 				</span>
