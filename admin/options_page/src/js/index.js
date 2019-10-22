@@ -19,8 +19,8 @@ import {
 } from '../../../../shared/js/data';
 
 const {
-	screenshotsUrl,
 	settingsDefaults,
+	screenshotsDirectory,
 } = polishedContentGlobals; // eslint-disable-line no-undef
 
 import pages from './data';
@@ -153,7 +153,7 @@ class Settings extends Component {
 				/>
 				{ screenshotsActive && (
 					<>
-						<iframe title={ __( 'Polished Content Screenshots', 'polished-content' ) } className={ `${ namespace }-iframe` } src={ `${ screenshotsUrl }index.html` }></iframe>
+						<iframe title={ __( 'Polished Content Screenshots', 'polished-content' ) } className={ `${ namespace }-iframe` } src={ `${ screenshotsDirectory }/index.html` }></iframe>
 						<button className={ `${ namespace }-close-iframe` } href="#" onClick={ activateScreenshots }>
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
 								<path fill="none" d="M0 0h20v20H0z" />

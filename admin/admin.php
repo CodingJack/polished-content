@@ -162,8 +162,7 @@ if ( !class_exists( 'PolishedContentAdmin' ) ) {
 					array(
 						'settingsDefaults' => $defaultSettings,
 						'supportedBlocks' => $filteredBlocks['supportedBlocks'],
-						'imageDirectory' => plugins_url( 'options_page/dist/img/', __FILE__ ),
-						'screenshotsUrl' => plugins_url( 'screenshots/', __FILE__ ),
+						'screenshotsDirectory' => plugins_url( 'screenshots/dist/', __FILE__ ),
 						'codeMirrorCSS' => wp_enqueue_code_editor( array( 'type' => 'text/css' ) ),
 						'codeMirrorJS' => wp_enqueue_code_editor( array( 'type' => 'text/javascript' ) )
 					)

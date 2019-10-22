@@ -50,10 +50,10 @@ if ( !class_exists( 'PolishedContentSettings' ) ) {
 			$hex = $this->fullhex( $hex );
 			$hex = trim( str_replace( '#', '' , $hex ) );
 			$r = hexdec( substr( $hex, 0, 2 ) );
-	      	$g = hexdec( substr( $hex, 2, 2 ) );
-	      	$b = hexdec( substr( $hex, 4, 2 ) );
+			$g = hexdec( substr( $hex, 2, 2 ) );
+			$b = hexdec( substr( $hex, 4, 2 ) );
 			
-	      	return $r * 0.299 + $g * 0.587 + $b * 0.114 > 150 ? '#23282d' : '#fff';
+			return $r * 0.299 + $g * 0.587 + $b * 0.114 > 150 ? '#23282d' : '#fff';
 		}
 		
 		/*
@@ -65,8 +65,8 @@ if ( !class_exists( 'PolishedContentSettings' ) ) {
 			global $_wp_admin_css_colors;
 			
 			return $scheme !== false && 
-				   is_string( $scheme ) && 
-			       is_array( $_wp_admin_css_colors ) ? $_wp_admin_css_colors[$scheme] : false;
+					is_string( $scheme ) && 
+					is_array( $_wp_admin_css_colors ) ? $_wp_admin_css_colors[$scheme] : false;
 			
 		
 		}

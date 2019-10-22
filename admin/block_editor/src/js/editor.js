@@ -38,8 +38,8 @@ import {
 	getOriginalSettings,
 } from './utils';
 
+import MyTabPanels from './panels';
 import MyHeaderControl from './header';
-import MyTabPanelControl from './panels';
 import MyToggleControl from './components/my-toggle-control';
 import MyResetButtons from './components/my-reset-buttons';
 import MyRightClickMenu from './components/my-right-click-menu';
@@ -55,8 +55,10 @@ class PolishedContentEditor extends Component {
 		const { selectedPreset } = presetData;
 
 		checkInitialTab( pcxEnabled, selectedPreset );
+		const { currentTab } = polishedContentGlobals; // eslint-disable-line no-undef
 
 		this.state = {
+			currentTab,
 			ajaxLoading: false,
 			rcMenuActive: false,
 			previewIsPlaying: false,
@@ -357,8 +359,7 @@ class PolishedContentEditor extends Component {
 		}, () => {
 			document.body.addEventListener( 'click', this.hideRcMenu );
 			document.body.addEventListener( 'contextmenu', this.hideRcMenu );
-		}
-		);
+		} );
 	}
 
 	/*
@@ -439,6 +440,7 @@ class PolishedContentEditor extends Component {
 
 		const {
 			rcEvent,
+			currentTab,
 			rcMenuActive,
 			ajaxLoading,
 			selectedPreset,
@@ -449,6 +451,7 @@ class PolishedContentEditor extends Component {
 		const { current } = settingsRef;
 
 		const block = {
+			currentTab,
 			updateProp,
 			updateState,
 			updateFromPreset,
@@ -475,7 +478,7 @@ class PolishedContentEditor extends Component {
 						<>
 							<MyHeaderControl block={ block } ref={ animatedElements } />
 							<hr />
-							<MyTabPanelControl block={ block } />
+							<MyTabPanels block={ block } />
 							<MyResetButtons
 								onClear={ onClear }
 								onUndo={ onUndo }
@@ -486,7 +489,9 @@ class PolishedContentEditor extends Component {
 									wrap={ current }
 									rcEvent={ rcEvent }
 									attrs={ block.props }
+									menuBuffer={ 16 }
 									hideRcMenu={ hideRcMenu }
+									updateState={ updateState }
 									updateBatchProp={ updateBatchProp }
 								/>
 							) }

@@ -4,38 +4,76 @@ $wrap-padding: 50px;
 $hover-opacity: 0.7;
 $spacing: 30px;
 $icon-size: 64px;
+$git-icon-size: 54px;
 
 @mixin size($property) {
 	#{$property}: calc(100% - 100px)
 }
 
-body{margin:0; color: $text-color}
-#app {height:100%}
-.wrap{display:flex; align-items: center;  background: $bg-color; padding: $wrap-padding 0; @include size(min-height)}
-img{visibility: hidden;animation: reset 0.2s ease-out; margin: 0 auto; @include size(max-width)}
+body {margin:0; color: $text-color}
+#app {height:100%; overflow:hidden}
+.wrap {max-height: 100%; overflow-y: auto}
+.inner {overflow-x: hidden; display: flex; align-items: center;  background: $bg-color; padding: $wrap-padding 0; @include size(min-height)}
 
-.fade-in{visibility: visible;animation-name: animate}
-.arrow {cursor: pointer; position: fixed; top: 50%; z-index: 99; transform: translateY(-50%); user-select: none}
+img {visibility: hidden; animation: reset 0.2s ease-out; margin: 0 auto; @include size(max-width)}
+img[class^='fade'] {visibility: visible}
+.fade-in {visibility: visible; animation-name: animate}
+
 .icon {
 	display: inline-block; transition: all 0.2s ease-out;
 	> * {display: inline-block}
 	&:hover {opacity: $hover-opacity}
 }
+
+.arrow {cursor: pointer; position: absolute; top: 50%; z-index: 99; transform: translateY(-50%); user-select: none}
+.elements {position: absolute; top:0; left: 0;width: 100%; height: 100%; pointer-events: none}
+.elements * {pointer-events: all}
 .prev {left: $spacing}
 .next {right: $spacing}
-.material-icons{font-size: $icon-size}
-.logo {position: fixed; top: $spacing; left: $spacing}
-svg{width:64; height: $icon-size; fill: $text-color}
-.git{font-size: 54px; position:fixed; right: $spacing; bottom: $spacing}
-.fa-github {color: #FFF}
-a:visited{color: $text-color}
+.material-icons {font-size: $icon-size}
+.logo {position: absolute; top: $spacing; left: $spacing}
+svg {width: $icon-size; height: $icon-size; fill: $text-color}
+.git {font-size: $git-icon-size; position: absolute; right: $spacing; bottom: $spacing}
+.fa-github {color: $text-color}
+a:visited {color: $text-color}
 
-@keyframes animate{from {opacity: 0} to{ opacity: 1}}
-@keyframes reset{to { width: auto}}
+@keyframes animate{from {opacity: 0} to {opacity: 1}}
+@keyframes reset{to {width: auto}}
+
+.preloader {
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -23px 0 0 -23px;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s ease-out;
+	transition-property: opacity, visibility;
+	animation: preloading 1.2s linear infinite;
+}
+.preloader:after {
+	content: " ";
+	display: block;
+	width: 46px;
+	height: 46px;
+	border-radius: 50%;
+	border: 5px solid #fff;
+	border-color: #fff transparent #fff transparent;
+}
+.preloader.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+@keyframes preloading {
+	0% {transform: rotate(0deg)}
+	100% {transform: rotate(360deg)}
+}
 
 @media screen and (max-width: 1280px) {
-	.icon{background: rgba(0, 0, 0, $hover-opacity)}
-	.arrow{border-radius: 50%}
-	.git{padding: 5px}
-	.icon:hover{opacity: 1; background: #000}
+	.icon {background: rgba(0, 0, 0, $hover-opacity)}
+	.arrow {border-radius: 50%}
+	.git {padding: 5px}
+	.icon:hover {opacity: 1; background: #000}
 }

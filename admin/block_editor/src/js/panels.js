@@ -4,7 +4,6 @@
 const { __ } = wp.i18n;
 
 const {
-	TabPanel,
 	PanelRow,
 } = wp.components;
 
@@ -19,6 +18,7 @@ import MyToggleControl from './components/my-toggle-control';
 import MyAlignButtons from './components/my-align-buttons';
 import MySelectWrapper from './components/my-select-wrapper';
 import MyClassesControl from './components/my-classes-control';
+import MyTabPanelControl from './components/my-tab-panel-control';
 
 import {
 	HelpSettingsLink,
@@ -32,10 +32,12 @@ import {
 /*
 * Main settings oanel with all the controls
 */
-const MyTabPanelControl = ( { block } ) => {
+const MyTabPanels = ( { block } ) => {
 	const {
 		props,
+		currentTab,
 		updateProp,
+		updateState,
 	} = block;
 
 	const {
@@ -93,15 +95,16 @@ const MyTabPanelControl = ( { block } ) => {
 	}
 
 	const onSelect = ( tabName ) => {
-		polishedContentGlobals.currentTab = tabName.replace( `${ namespace }-`, '' ); // eslint-disable-line no-undef
+		const selectedTab = tabName.replace( `${ namespace }-`, '' );
+		updateState( { currentTab: selectedTab }, () => {
+			polishedContentGlobals.currentTab = selectedTab; // eslint-disable-line no-undef
+		} );
 	};
 
-	const { currentTab } = polishedContentGlobals; // eslint-disable-line no-undef
-
 	return (
-		<TabPanel className={ `${ namespace }-tabs components-button-group` }
+		<MyTabPanelControl className={ `${ namespace }-tabs components-button-group` }
 			activeClass="is-primary"
-			initialTabName={ `${ namespace }-${ currentTab }` }
+			currentTab={ `${ namespace }-${ currentTab }` }
 			onSelect={ onSelect }
 			tabs={ [
 				{
@@ -490,8 +493,8 @@ const MyTabPanelControl = ( { block } ) => {
 			{
 				( tab ) => tab.container
 			}
-		</TabPanel>
+		</MyTabPanelControl>
 	);
 };
 
-export default MyTabPanelControl;
+export default MyTabPanels;

@@ -15,15 +15,13 @@ const {
 	createRef,
 } = wp.element;
 
-const menuBuffer = 16;
-
 const writeSettings = ( key, attrs, settings ) => {
 	panelSettings[ key ].forEach( ( prop ) => {
 		settings[ prop ] = attrs[ prop ];
 	} );
 };
 
-const RightClickItems = ( { attrs, hideRcMenu, updateBatchProp } ) => {
+const RightClickItems = ( { attrs, hideRcMenu, updateState, updateBatchProp } ) => {
 	const {
 		copiedPanel,
 		copiedSettings,
@@ -48,18 +46,10 @@ const RightClickItems = ( { attrs, hideRcMenu, updateBatchProp } ) => {
 					break;
 				case 'paste':
 					updateBatchProp();
+
+					// if copied from a single panel's settings, change the  panel for the current block
 					if ( copiedPanel ) {
-						/*
-						 * to avoid this we'd have to lift the state up from the tab panels all the way to the root level
-						 * and that would create lots of unecessary rendering for this "paste" task that will be used rarely
-						 * also storing refs for each button at the root level and handling it that way is overkill for this task as well
-						*/
-						document.querySelectorAll( `.${ namespace }-tabs > .components-tab-panel__tabs > button` ).forEach( ( btn ) => {
-							const ids = btn.id.split( `${ namespace }-` );
-							if ( ids.length && copiedPanel === ids[ ids.length - 1 ] ) {
-								btn.click();
-							}
-						} );
+						updateState( { currentTab: copiedPanel } );
 					}
 					break;
 				case 'disable':
@@ -104,6 +94,7 @@ class MyRightClickMenu extends Component {
 		const {
 			wrap,
 			rcEvent,
+			menuBuffer,
 		} = this.props;
 
 		const {

@@ -258,8 +258,8 @@ const helpPage = [
 						paragraphs: [
 							__( 'You can also use the Page/Post settings to disable all animations or override specific settings on the front-end which is useful for batch-testing.', 'polished-content' ),
 							[
-								{ alt: __( 'Page/Post Settings Screenshot 1', 'polished-content' ), file: 'screen_2.jpg' },
-								{ alt: __( 'Page/Post Settings Screenshot 2', 'polished-content' ), file: 'screen_3.jpg' },
+								{ alt: __( 'Page/Post Settings Screenshot 1', 'polished-content' ), file: 'screen_12.jpg' },
+								{ alt: __( 'Page/Post Settings Screenshot 2', 'polished-content' ), file: 'screen_13.jpg' },
 							],
 						],
 						className: 'flex',
@@ -276,9 +276,9 @@ const helpPage = [
 						paragraphs: [
 							__( 'You can start with a predefined animation from the presets dropdown.  And then after applying custom settings you can create your own preset for later usage.', 'polished-content' ),
 							[
-								{ alt: __( 'Presets Screenshot 1', 'polished-content' ), file: 'screen_4.jpg' },
-								{ alt: __( 'Presets Screenshot 2', 'polished-content' ), file: 'screen_5.jpg' },
-								{ alt: __( 'Presets Screenshot 3', 'polished-content' ), file: 'screen_6.jpg' },
+								{ alt: __( 'Presets Screenshot 1', 'polished-content' ), file: 'screen_2.jpg' },
+								{ alt: __( 'Presets Screenshot 2', 'polished-content' ), file: 'screen_3.jpg' },
+								{ alt: __( 'Presets Screenshot 3', 'polished-content' ), file: 'screen_4.jpg' },
 							],
 						],
 						className: 'flex',
@@ -294,9 +294,9 @@ const helpPage = [
 						paragraphs: [
 							__( 'Modify your animations inside the Basics and Advanced sections.  And set the animation\'s duration and easing inside the Timing section.', 'polished-content' ),
 							[
-								{ alt: __( 'Basics Screenshot', 'polished-content' ), file: 'screen_7.jpg' },
-								{ alt: __( 'Advanced Screenshot', 'polished-content' ), file: 'screen_8.jpg' },
-								{ alt: __( 'Timing Screenshot', 'polished-content' ), file: 'screen_9.jpg' },
+								{ alt: __( 'Basics Screenshot', 'polished-content' ), file: 'screen_5.jpg' },
+								{ alt: __( 'Advanced Screenshot', 'polished-content' ), file: 'screen_6.jpg' },
+								{ alt: __( 'Timing Screenshot', 'polished-content' ), file: 'screen_7.jpg' },
 							],
 						],
 						className: 'flex',
@@ -312,7 +312,7 @@ const helpPage = [
 						paragraphs: [
 							__( 'Use the Content Mask and Tansform Origin options to create different looks for your animations and apply layout formatting to the animated wrapper.', 'polished-content' ),
 							[
-								{ alt: __( 'Formatting Screenshot', 'polished-content' ), file: 'screen_11.jpg' },
+								{ alt: __( 'Formatting Screenshot', 'polished-content' ), file: 'screen_8.jpg' },
 							],
 							{
 								subheader: __( 'Inherit Margins', 'polished-content' ),
@@ -349,7 +349,7 @@ const helpPage = [
 						paragraphs: [
 							__( 'Choose how and when your content should animate.  The settings in this section can also be applied globally with the "Front-end Override" option in the {{Default Preset Settings||#0|0}} or also per-page in the {{Page/Post||#1|0}} settings panel.', 'polished-content' ),
 							[
-								{ alt: __( 'Scroll Settings Screenshot', 'polished-content' ), file: 'screen_10.jpg' },
+								{ alt: __( 'Scroll Settings Screenshot', 'polished-content' ), file: 'screen_9.jpg' },
 							],
 							{
 								subheader: __( 'Animate Content', 'polished-content' ),
@@ -389,8 +389,8 @@ const helpPage = [
 						paragraphs: [
 							__( 'The animation editor has a right-click menu can be used to easily copy and paste settings from one Block to another.  Useful for quickly adjusting the settings between Blocks when creating your animations.', 'polished-content' ),
 							[
-								{ alt: __( 'Right-click Menu Screenshot 1', 'polished-content' ), file: 'screen_12.jpg' },
-								{ alt: __( 'Right-click Menu Screenshot 2', 'polished-content' ), file: 'screen_13.jpg' },
+								{ alt: __( 'Right-click Menu Screenshot 1', 'polished-content' ), file: 'screen_10.jpg' },
+								{ alt: __( 'Right-click Menu Screenshot 2', 'polished-content' ), file: 'screen_11.jpg' },
 							],
 						],
 						className: 'flex',

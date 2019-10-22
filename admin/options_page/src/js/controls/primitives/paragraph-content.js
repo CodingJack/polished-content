@@ -11,7 +11,7 @@ import GroupedText from './grouped-text';
 import ParseHTML from './parse-html';
 
 const {
-	imageDirectory,
+	screenshotsDirectory,
 } = polishedContentGlobals; // eslint-disable-line no-undef
 
 const ParagraphContent = ( { namespace, paragraph, isText, changePage, menuIndex } ) => {
@@ -44,7 +44,7 @@ const ParagraphContent = ( { namespace, paragraph, isText, changePage, menuIndex
 			file,
 		} = contentImage;
 
-		return <img key={ `${ namespace }-image-${ index }` } alt={ alt } src={ `${ imageDirectory }${ file }` } />;
+		return <img key={ `${ namespace }-image-${ index }` } alt={ alt } src={ `${ screenshotsDirectory }/img/${ file }` } />;
 	} );
 };
 
