@@ -48,7 +48,7 @@ const MyPresetsControl = ( { block } ) => {
 		if ( typeof ajaxurl === 'undefined' ) {
 			return;
 		}
-		if ( window.confirm( __( 'Delete this Custom Preset Option?', namespace ) ) ) { // eslint-disable-line no-alert
+		if ( window.confirm( __( 'Delete this Custom Preset Option?', 'polished-content' ) ) ) { // eslint-disable-line no-alert
 			const { updateState } = block;
 
 			// guarantee that the settings panel has recieved the "ajax is loading" class
