@@ -15,7 +15,7 @@ Polished Content uses the HTML5 [Intersection Observer](https://developer.mozill
 
 ## Getting Started
 
-[Download](https://github.com/CodingJack/polished-content/raw/master/polished-content.zip) the plugin and then [upload and install](https://www.wpbeginner.com/beginners-guide/step-by-step-guide-to-install-a-wordpress-plugin-for-beginners/) the plugin to your WordPress site.  Then visit the plugin's [settings page](https://github.com/CodingJack/polished-content/raw/master/admin/screenshots/dist/img/screen_15.jpg) and select the block types you'd like to animate.  And then select a Block in your page/post editor and add an animation as shown in the screenshot above.
+[Download](https://github.com/CodingJack/polished-content/raw/master/polished-content.zip) the plugin and then [upload and install](https://www.wpbeginner.com/beginners-guide/step-by-step-guide-to-install-a-wordpress-plugin-for-beginners/) the plugin to your WordPress site.  Then visit the plugin's [settings page](https://github.com/CodingJack/polished-content/raw/master/admin/screenshots/dist/img/screen_15.jpg) and select the block types you'd like to animate.  Then select a Block in your page/post editor and add an animation as shown in the screenshot above.
 
 ## Built With / Techology Used
 
