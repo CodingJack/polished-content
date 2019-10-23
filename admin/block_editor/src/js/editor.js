@@ -8,8 +8,7 @@ const {
 
 const { __ } = wp.i18n;
 
-// sandboxing gsap ( greensock exposes globals by default )
-// "umd" is needed because regular gsap import/exports fail with ESLint
+// sandboxing gsap
 import { gsap, gsapReset } from '../../../../shared/js/sandbox-gsap';
 require( 'gsap/umd/TweenMax' );
 gsapReset();
@@ -87,7 +86,7 @@ class PolishedContentEditor extends Component {
 	}
 
 	/*
-	 * @desc updates the block's attributes on a settings change and maybe updates the state
+	 * @desc updates the block's attributes on a settings change
 	 * @param string/boolean/number value - the prop's new value
 	 * @param string prop - the attribute's name
 	 * @since 1.0.0

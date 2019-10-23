@@ -1,5 +1,5 @@
 /*
- * sandboxing gsap ( greensock pollutes globals by default )
+ * sandboxing gsap
 */
 export const gsap = window.GreenSockGlobals = {};
 

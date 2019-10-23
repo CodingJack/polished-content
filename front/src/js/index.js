@@ -5,8 +5,7 @@
 require( 'intersection-observer' );
 require( 'requestidlecallback' );
 
-// sandboxing gsap ( greensock exposes globals by default )
-// "umd" is needed because regular gsap import/exports fail with ESLint
+// sandboxing gsap
 import { gsap, gsapReset } from '../../../shared/js/sandbox-gsap';
 require( 'gsap/umd/TweenMax' );
 gsapReset();
@@ -57,6 +56,7 @@ let pcxs;
 let ioObservers;
 let resizeAdded;
 let overflowAdded;
+let cachedWindowWidth;
 
 const {
 	supportsClipPath,
@@ -68,11 +68,19 @@ const {
  * @since 1.0.0
 */
 const onResizeEvent = () => {
+	// solves issue where resize can be triggered from scrolling on mobile
+	const winWidth = window.innerWidth;
+	if ( winWidth === cachedWindowWidth ) {
+		return;
+	}
+
 	pcxs.forEach( ( pcx ) => {
 		if ( pcx ) {
 			pcx.onResize();
 		}
 	} );
+
+	cachedWindowWidth = winWidth;
 };
 
 /*
@@ -80,17 +88,10 @@ const onResizeEvent = () => {
  * @since 1.0.0
 */
 const addResizeEvents = () => {
-	if ( 'onorientationchange' in window ) {
-		window.addEventListener( 'orientationchange', onResizeEvent );
-	} else {
-		window.addEventListener( 'resize', onResizeEvent );
-	}
+	cachedWindowWidth = window.innerWidth;
+	window.addEventListener( 'resize', onResizeEvent );
 	resizeAdded = true;
 };
-
-// Thresholds will always be the same but margins can vary at increments of 5 between 5 and 50
-// So observers will be reused if possible and only created if a new margin is needed
-const threshold = [ ...Array( 101 ).keys() ].map( ( x ) => x * 0.01 );
 
 /*
  * @desc loop function for the IntersectionObserver entries
@@ -105,7 +106,7 @@ const observeForEach = ( entry ) => {
 };
 
 /*
- * @desc loop function for the IntersectionObserver entries
+ * @desc loop function for the IntersectionObserver "reverse" entries
  * @param object entry - IntersectionObserver entry
  * @since 1.0.0
 */
@@ -124,6 +125,12 @@ const observeForEachReverse = ( entry ) => {
 const observerEvent = ( entries ) => {
 	entries.forEach( observeForEach );
 };
+
+/*
+ * Thresholds will always be the same for the main animation observer but margins can vary
+ * so observers will be reused if possible and only created if a new margin is needed
+*/
+const threshold = [ ...Array( 101 ).keys() ].map( ( x ) => x * 0.01 );
 
 /*
  * @desc the initial observer used to lazy-load the real animation init for all animations
@@ -180,7 +187,6 @@ const cleanupObservers = ( observerKey, ioObserver ) => {
  * @since 1.0.0
 */
 const cleanUpPcxs = () => {
-	window.removeEventListener( 'orientationchange', onResizeEvent );
 	window.removeEventListener( 'resize', onResizeEvent );
 
 	resizeAdded = false;
@@ -216,34 +222,43 @@ const hasPcx = ( el ) => {
 };
 
 /*
- * @desc called once from inline script when WP "the_content()" hits the page
- * @param object settings - global settings data {allowedBlocks:String}
+ * @desc will be exposed as window.polishedContent
  * @since 1.0.0
 */
 const polishedContent = {
+	/*
+	 * @desc optional API method that attaches animations to elements at run time
+	 * @param string/HTMLElement/NodeList/Object settings - selector or elements to add animation classes to
+	 * @param object classes - animation classes to add copied from the block editor
+	 * @since 1.0.0
+	*/
 	add: ( selector, classes ) => {
-		const classNames = classes.replace( /  +/g, ' ' ).trim().split( ' ' );
-		classNames.unshift( namespace );
-
-		if ( typeof selector === 'string' ) {
-			document.querySelectorAll( selector ).forEach( ( el ) => {
-				addClasses( el, classNames );
-			} );
-		} else if ( 'length' in selector ) {
-			selector.forEach( ( el ) => {
-				addClasses( el, classNames );
-			} );
+		if ( typeof classes !== 'string' ) {
+			return;
+		}
+		if ( typeof jQuery !== 'undefined' && selector instanceof jQuery ) { // eslint-disable-line no-undef
+			selector.addClass( `${ namespace } ${ classes }` );
 		} else {
-			addClasses( selector, classNames );
+			const classNames = classes.replace( /  +/g, ' ' ).trim().split( ' ' );
+			classNames.unshift( namespace );
+
+			if ( typeof selector === 'string' ) {
+				document.querySelectorAll( selector ).forEach( ( el ) => addClasses( el, classNames ) );
+			} else if ( 'length' in selector ) {
+				selector.forEach( ( el ) => addClasses( el, classNames ) );
+			} else {
+				addClasses( selector, classNames );
+			}
 		}
 	},
+	/*
+	 * @desc called once from inline script when WP "the_content()" hits the page
+	 * @param object settings - global settings data {allowedBlocks:String}
+	 * @since 1.0.0
+	*/
 	run: ( settings ) => {
 		/*
 		 * if "pcxs" exists here it means the page's content was replaced
-		 * normally when content no longer exists the "rootBounds" will be null
-		 * inside the obseve event, and cleanup will happen there
-		 * so the "destroy" calls here are just a fallback really but we will also remove
-		 * the resize event as it may no longer be needed based on the incoming content
 		*/
 		if ( pcxs ) {
 			cleanUpPcxs();

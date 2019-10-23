@@ -2,8 +2,7 @@
  * External dependencies.
  */
 
-// sandboxing gsap ( greensock exposes globals by default )
-// "umd" is needed because regular gsap import/exports fail with ESLint
+// sandboxing gsap
 import { gsap, gsapReset } from '../../../shared/js/sandbox-gsap';
 require( 'gsap/umd/TweenMax' );
 gsapReset();
