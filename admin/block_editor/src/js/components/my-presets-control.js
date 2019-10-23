@@ -71,7 +71,7 @@ const MyPresetsControl = ( { block } ) => {
 					}
 				} ).catch( () => {
 					updateState( { ajaxLoading: false } );
-					console.log( 'Polished Content Ajax Request Failed' ); // eslint-disable-line no-console
+					console.log( __( 'Polished Content Ajax Request Failed', 'polished-content' ) ); // eslint-disable-line no-console
 				} );
 			} );
 		}
