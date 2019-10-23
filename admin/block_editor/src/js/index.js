@@ -145,7 +145,7 @@ const polishedContentControls = createHigherOrderComponent( ( BlockEdit ) => {
 					<BlockEdit { ...props } />
 					<InspectorControls>
 						<PanelBody
-							title={ __( 'Polished Content' ) }
+							title={ __( 'Polished Content', 'polished-content' ) }
 							className={ `${ namespace }` }
 							initialOpen={ openPanel }
 						>

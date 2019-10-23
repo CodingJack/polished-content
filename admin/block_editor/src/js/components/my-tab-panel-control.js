@@ -1,3 +1,9 @@
+/*
+ * pretty much a clone from the original except the state has been lifted up
+ * so the panels can be triggered from outside the component
+ * https://github.com/WordPress/gutenberg/tree/master/packages/components/src/tab-panel
+*/
+
 /**
  * External dependencies
  */
@@ -27,10 +33,6 @@ const TabButton = ( { tabId, onClick, children, selected, ...rest } ) => (
 	</Button>
 );
 
-/*
- * pretty much a clone from the original except the state has been lifted up
- * so the panels can be triggered from outside the component
-*/
 class MyTabPanel extends Component {
 	constructor() {
 		super( ...arguments );

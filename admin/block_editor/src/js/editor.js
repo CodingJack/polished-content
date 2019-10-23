@@ -469,7 +469,7 @@ class PolishedContentEditor extends Component {
 				<div className={ `${ namespace }-settings${ ajaxIsLoading }` } ref={ settingsRef }>
 					<MyToggleControl
 						prop="pcxEnabled"
-						label={ __( 'Enable/Disable', namespace ) }
+						label={ __( 'Enable/Disable', 'polished-content' ) }
 						checked={ pcxEnabled }
 						callback={ updateProp }
 					/>

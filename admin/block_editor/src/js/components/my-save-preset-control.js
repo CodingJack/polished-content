@@ -95,7 +95,7 @@ const MySavePresetControl = ( { block, togglePresetModal } ) => {
 				}
 			} ).catch( () => {
 				updateState( { ajaxLoading: false } );
-				console.log( 'Polished Content Ajax Request Failed' ); // eslint-disable-line no-console
+				console.log( __( 'Polished Content Ajax Request Failed', 'polished-content' ) ); // eslint-disable-line no-console
 			} );
 		} );
 	};
@@ -114,11 +114,11 @@ const MySavePresetControl = ( { block, togglePresetModal } ) => {
 						className={ `${ namespace }-preset-name` }
 						onChange={ onChange }
 						onKeyUp={ onKeyUp }
-						placeholder={ __( 'Custom Preset Name', namespace ) }
+						placeholder={ __( 'Custom Preset Name', 'polished-content' ) }
 						ref={ ref }
 					/>
 					<Button className={ `${ namespace }-save-btn` } isPrimary disabled={ disabled } onClick={ savePreset }>
-						<span className={ `${ namespace }-save-text` }>{ __( 'Save Preset', namespace ) }<Spinner /></span>
+						<span className={ `${ namespace }-save-text` }>{ __( 'Save Preset', 'polished-content' ) }<Spinner /></span>
 					</Button>
 				</div>
 				<IconButton className={ `${ namespace }-mini-icon` } icon="no" size="24" onClick={ onClick } />

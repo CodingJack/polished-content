@@ -7,7 +7,6 @@ const { __ } = wp.i18n;
  * Internal dependencies.
  */
 import {
-	namespace,
 	selectOptions,
 	mainDefaults,
 	defaultValues,
@@ -385,7 +384,7 @@ const addRemoveCustomLabel = ( add ) => {
 	if ( add ) {
 		if ( ! hasLabel ) {
 			pcxPresets.push( {
-				label: `*** ${ __( 'Custom Presets', namespace ) } ***`,
+				label: `*** ${ __( 'Custom Presets', 'polished-content' ) } ***`,
 				value: 'PcxCustomPresets',
 				disabled: true,
 			} );

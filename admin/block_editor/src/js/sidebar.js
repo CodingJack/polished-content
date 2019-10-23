@@ -23,7 +23,7 @@ registerPlugin( sidebar, {
 		return (
 			<>
 				<PluginSidebarMoreMenuItem target={ sidebar }>
-					{ __( 'Polished Content Settings', 'textdomain' ) }
+					{ __( 'Polished Content Settings', 'polished-content' ) }
 				</PluginSidebarMoreMenuItem>
 				<PluginSidebar
 					name={ sidebar }
