@@ -379,6 +379,7 @@ class PolishedContentInit {
 		this.el = null;
 		this.props = null;
 		this.settings = null;
+		this.attributes = null;
 		this.enabledViews = null;
 	}
 }
