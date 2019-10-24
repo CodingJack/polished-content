@@ -12,21 +12,44 @@ import {
 	namespace,
 } from '../../../../shared/js/data';
 
-const panels = {
-	basics: MyBasicsPanel,
-	advanced: MyAdvancedPanel,
-	timing: MyTimingPanel,
-	formatting: MyFormattingPanel,
-	settings: MySettingsPanel,
-};
+const tabs = [
+	{
+		slug: 'basics',
+		icon: 'admin-settings',
+		component: MyAdvancedPanel,
+	},
+	{
+		slug: 'advanced',
+		icon: 'admin-plugins',
+		component: MyBasicsPanel,
+	},
+	{
+		slug: 'timing',
+		icon: 'dashboard',
+		component: MyTimingPanel,
+	},
+	{
+		slug: 'formatting',
+		icon: 'art',
+		component: MyFormattingPanel,
+	},
+	{
+		slug: 'settings',
+		icon: 'admin-generic',
+		component: MySettingsPanel,
+	},
+];
 
-const Panel = ( { panel, block } ) => {
-	const Component = panels[ panel ];
-	return (
-		<div className={ `${ namespace }-tab ${ namespace }-${ panel }-tab` }>
-			<Component block={ block } />
-		</div>
-	);
+const MyPanel = ( { slug, icon, component: Component }, block ) => {
+	return {
+		name: `${ namespace }-${ slug }`,
+		className: `is-button is-default is-small dashicons dashicons-${ icon }`,
+		container: (
+			<div className={ `${ namespace }-tab ${ namespace }-${ slug }-tab` }>
+				<Component block={ block } />
+			</div>
+		),
+	};
 };
 
 /*
@@ -46,29 +69,14 @@ const MyTabPanels = ( { block } ) => {
 		} );
 	};
 
-	const myPanel = ( panel, icon ) => {
-		return {
-			name: `${ namespace }-${ panel }`,
-			className: `is-button is-default is-small dashicons dashicons-${ icon }`,
-			container: <Panel panel={ panel } block={ block } />,
-		};
-	};
-
 	return (
 		<MyTabPanelControl className={ `${ namespace }-tabs components-button-group` }
 			activeClass="is-primary"
 			currentTab={ `${ namespace }-${ currentTab }` }
 			onSelect={ onSelect }
-			tabs={ [
-				myPanel( 'basics', 'admin-settings' ),
-				myPanel( 'advanced', 'admin-plugins' ),
-				myPanel( 'timing', 'dashboard' ),
-				myPanel( 'formatting', 'art' ),
-				myPanel( 'settings', 'admin-generic' ),
-			] }>
-			{
-				( tab ) => tab.container
-			}
+			tabs={ tabs.map( ( tab ) => MyPanel( tab, block ) ) }
+		>
+			{ ( tab ) => tab.container }
 		</MyTabPanelControl>
 	);
 };
