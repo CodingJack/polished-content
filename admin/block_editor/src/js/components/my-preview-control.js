@@ -41,6 +41,11 @@ const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
 	} = block;
 
 	const {
+		pcxMask,
+		pcxGrayscale,
+	} = props;
+
+	const {
 		selectedPreset,
 		hideSavePresetBtn,
 		showSavePresetModal,
@@ -53,11 +58,6 @@ const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
 
 	const { previewIsPlaying } = state;
 	const { pcxPresets } = selectOptions;
-	const {
-		pcxMask,
-		pcxGrayscale,
-	} = props;
-
 	const values = pcxPresets.map( ( option ) => option.value );
 
 	const playPause = () => {
