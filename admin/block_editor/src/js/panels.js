@@ -16,12 +16,12 @@ const tabs = [
 	{
 		slug: 'basics',
 		icon: 'admin-settings',
-		component: MyAdvancedPanel,
+		component: MyBasicsPanel,
 	},
 	{
 		slug: 'advanced',
 		icon: 'admin-plugins',
-		component: MyBasicsPanel,
+		component: MyAdvancedPanel,
 	},
 	{
 		slug: 'timing',

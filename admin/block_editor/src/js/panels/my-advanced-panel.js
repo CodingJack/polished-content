@@ -119,26 +119,26 @@ const MyAdvancedPanel = ( { block } ) => {
 				</PanelRow>
 			</div>
 			<MySelectWrapper
-				component={ 'range' }
 				prop="pcxPerspective"
 				label={ __( '3D Perspective', 'polished-content' ) }
 				customLabel={ __( 'Custom 3D Perspective', 'polished-content' ) }
 				value={ pcxPerspective }
 				callback={ updateProp }
 				custom="custom"
+				component="range"
 				min={ 200 }
 				max={ 5000 }
 				step={ 50 }
 				help={ persepectiveHelp }
 			/>
 			<MySelectWrapper
-				component={ 'text' }
 				prop="pcxTransformReset"
 				label={ __( 'Reset Transform Origin at...', 'polished-content' ) }
 				customLabel={ __( 'Transform Origin Reset Width', 'polished-content' ) }
 				value={ pcxTransformReset }
 				callback={ updateProp }
 				custom="custom"
+				component="text"
 				help={ (
 					<HelpSettingsLink text={ __( 'Reset transform-origin to center at a certain screen width set in the ', 'polished-content' ) } />
 				) }

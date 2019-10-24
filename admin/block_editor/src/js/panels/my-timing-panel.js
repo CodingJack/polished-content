@@ -95,12 +95,12 @@ const MyTimingPanel = ( { block } ) => {
 				</PanelRow>
 			</div>
 			<MySelectWrapper
-				component={ 'text' }
 				prop="pcxDelayBreak"
 				label={ __( 'Disable Delays at...', 'polished-content' ) }
 				customLabel={ __( 'Disable Delay Width', 'polished-content' ) }
 				value={ pcxDelayBreak }
 				callback={ updateProp }
+				component="text"
 				custom="custom"
 				help={ (
 					<HelpSettingsLink text={ __( 'Remove delays at a certain viewport width set in the plugin\'s', 'polished-content' ) } />
