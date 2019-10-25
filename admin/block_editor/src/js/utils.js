@@ -38,10 +38,7 @@ export const getClasses = ( attrs ) => {
 
 	if ( pcxScrollStagger ) {
 		attrs.pcxPercentageIn = pcxPercentageInStagger;
-	} else {
-		delete attrs.pcxStaggerReset;
 	}
-
 	if ( pcxPosition === 'center-center' ) {
 		delete attrs.pcxStrength;
 	}

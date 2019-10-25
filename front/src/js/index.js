@@ -236,6 +236,7 @@ const polishedContent = {
 		if ( typeof classes !== 'string' ) {
 			return;
 		}
+
 		if ( typeof jQuery !== 'undefined' && selector instanceof jQuery ) { // eslint-disable-line no-undef
 			selector.addClass( `${ namespace } ${ classes }` );
 		} else {
@@ -848,21 +849,27 @@ class PolishedContentAnimation {
 	}
 
 	/*
+	 * @desc set the dynamic delay for an animation
+	 * @param number/string start - the timline's start time or start label
+	 * @param number/string end - the timline's end time or end label
+	 * @since 1.0.0
+	*/
+	getDelay( start, end, point ) {
+		if ( this.delayBreak && this.breakDelay ) {
+			return 0;
+		} else if ( this.point === start || point === end ) {
+			return this.delay;
+		}
+
+		return this.reverseDelay !== null ? this.reverseDelay : this.delay;
+	}
+
+	/*
 	 * @desc sets the correct delay before a tween begins
 	 * @param number point - the point the timeline will be heading toward
 	 * @since 1.0.0
 	*/
 	setEaseDelay( point, reverse ) {
-		let delay;
-
-		if ( this.delayBreak && this.breakDelay ) {
-			delay = 0;
-		} else if ( this.point === 'start' || point === 'end' ) {
-			delay = this.delay;
-		} else {
-			delay = this.reverseDelay !== null ? this.reverseDelay : this.delay;
-		}
-
 		if ( this.easeReverse ) {
 			if ( ! reverse ) {
 				this.animeParams.ease = this.easing;
@@ -871,7 +878,19 @@ class PolishedContentAnimation {
 			}
 		}
 
-		this.animeParams.delay = delay;
+		this.animeParams.delay = this.getDelay( 'start', 'end', point );
+	}
+
+	/*
+	 * @desc interpolate the tween's duration for smoothness on stagger scrolls
+	 * @param number point - the point the timeline will be heading toward
+	 * @since 1.0.0
+	*/
+	setDuration( point ) {
+		if ( this.point !== undefined ) {
+			const difTime = this.duration / Math.abs( this.point - point );
+			this.animeParams.duration = difTime * this.duration;
+		}
 	}
 
 	/*
@@ -1000,6 +1019,7 @@ class PolishedContentAnimation {
 
 					// "isIdle" will be false if the user is resizing the window so we will only animate when idle
 					if ( this.isIdle ) {
+						this.setDuration( point );
 						this.timeline.tweenTo( point, { ...this.animeParams } );
 					} else {
 						this.seekTimeline( point );
@@ -1017,6 +1037,7 @@ class PolishedContentAnimation {
 				if ( this.reverse ) {
 					// "isIdle" will be false if the user is resizing the window so we will only animate when idle
 					if ( this.isIdle ) {
+						this.setDuration( point );
 						this.timeline.tweenTo( point, { ...this.animeParams } );
 					} else {
 						this.seekTimeline( point );
