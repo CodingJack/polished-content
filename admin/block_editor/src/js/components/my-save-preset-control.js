@@ -35,7 +35,7 @@ const {
 	ajaxNonce,
 } = polishedContentGlobals; // eslint-disable-line no-undef
 
-const MySavePresetControl = ( { block, togglePresetModal } ) => {
+const MySavePresetControl = ( { block } ) => {
 	const [
 		disabled,
 		setDisabled,
@@ -46,7 +46,11 @@ const MySavePresetControl = ( { block, togglePresetModal } ) => {
 		updateTitle,
 	] = useState( '' );
 
-	const { state } = block;
+	const {
+		state,
+		updateState,
+	} = block;
+
 	const { rcMenuActive } = state;
 
 	const savePreset = () => {
@@ -54,56 +58,44 @@ const MySavePresetControl = ( { block, togglePresetModal } ) => {
 			return;
 		}
 
-		const { props, updateState } = block;
-
 		// guarantee that the settings panel has recieved the "ajax is loading" class
 		updateState( { ajaxLoading: true }, () => {
+			const { props } = block;
 			const obj = { ...props };
 
-			// strip out block props not related to plugin
+			// strip out block props not related to plugin and also props nthat equal defaults
 			Object.keys( obj ).forEach( ( key ) => {
-				if ( defaultValues[ key ] === undefined ) {
+				if ( defaultValues[ key ] === undefined || obj[ key ] === defaultValues[ key ] ) {
 					delete obj[ key ];
 				}
 			} );
 
-			// only store values different than defaults
-			for ( const [ key, defValue ] of Object.entries( defaultValues ) ) {
-				if ( obj[ key ] === defValue ) {
-					delete obj[ key ];
-				}
-			}
+			const releaseAjax = () => {
+				updateState( {
+					ajaxLoading: false,
+					showSavePresetModal: false,
+				} );
+			};
 
 			axios.post( ajaxurl, qs.stringify( { // eslint-disable-line no-undef
-
 				action: 'polished_content',
 				nonce: ajaxNonce,
 				addremove: 'add',
 				name: presetTitle,
 				settings: JSON.stringify( obj ),
-
 			} ) ).then( ( st ) => {
 				if ( st.data === 'success' ) {
-					const key = addPreset( presetTitle, obj );
-					const { updateFromPreset } = block;
-
-					updateFromPreset( key, true );
-					togglePresetModal( false );
+					addPreset( presetTitle, obj );
 				} else {
 					console.log( st ); // eslint-disable-line no-console
-					updateState( { ajaxLoading: false } );
 				}
+				releaseAjax();
 			} ).catch( () => {
-				updateState( { ajaxLoading: false } );
 				console.log( __( 'Polished Content Ajax Request Failed', 'polished-content' ) ); // eslint-disable-line no-console
+				releaseAjax();
 			} );
 		} );
 	};
-
-	const onChange = ( e ) => updateTitle( e.target.value );
-	const onKeyUp = ( e ) => setDisabled( ! e.target.value );
-	const onClick = () => togglePresetModal( false );
-	const ref = ( input ) => ! rcMenuActive && input && input.focus();
 
 	return (
 		<>
@@ -112,16 +104,16 @@ const MySavePresetControl = ( { block, togglePresetModal } ) => {
 					<input
 						type="text"
 						className={ `${ namespace }-preset-name` }
-						onChange={ onChange }
-						onKeyUp={ onKeyUp }
+						onChange={ ( e ) => updateTitle( e.target.value ) }
+						onKeyUp={ ( e ) => setDisabled( ! e.target.value ) }
 						placeholder={ __( 'Custom Preset Name', 'polished-content' ) }
-						ref={ ref }
+						ref={ ( input ) => ! rcMenuActive && input && input.focus() }
 					/>
 					<Button className={ `${ namespace }-save-btn` } isPrimary disabled={ disabled } onClick={ savePreset }>
 						<span className={ `${ namespace }-save-text` }>{ __( 'Save Preset', 'polished-content' ) }<Spinner /></span>
 					</Button>
 				</div>
-				<IconButton className={ `${ namespace }-mini-icon` } icon="no" size="24" onClick={ onClick } />
+				<IconButton className={ `${ namespace }-mini-icon` } icon="no" size="24" onClick={ () => updateState( { showSavePresetModal: false } ) } />
 			</div>
 		</>
 	);

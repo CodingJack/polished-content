@@ -25,7 +25,7 @@ if ( !class_exists( 'PolishedContentPresets' ) ) {
 				'PcxMoveLeft',
 				'PcxSlideInRight',
 				'PcxSlideInLeft',
-				'pcxHeadlineMotion',
+				'PcxHeadlineMotion',
 				'PcxFlipHorizontal',
 				'PcxFlipVertical',
 				'PcxGrayscaleBlur',

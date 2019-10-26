@@ -51,27 +51,31 @@ const MyPresetsControl = ( { block } ) => {
 		if ( window.confirm( __( 'Delete this Custom Preset Option?', 'polished-content' ) ) ) { // eslint-disable-line no-alert
 			const { updateState } = block;
 
+			const releaseAjax = () => {
+				updateState( {
+					ajaxLoading: false,
+					showSavePresetModal: false,
+				} );
+			};
+
 			// guarantee that the settings panel has recieved the "ajax is loading" class
 			updateState( { ajaxLoading: true }, () => {
 				axios.post( ajaxurl, qs.stringify( { // eslint-disable-line no-undef
-
 					action: 'polished_content',
 					nonce: ajaxNonce,
 					addremove: 'remove',
 					name: selectedPreset,
-
 				} ) ).then( ( st ) => {
 					if ( st.data === 'success' ) {
 						const { props } = block;
-						const preset = removePreset( selectedPreset, props );
-						updateFromPreset( preset, true, true );
+						removePreset( selectedPreset, { ...props } );
 					} else {
 						console.log( st ); // eslint-disable-line no-console
-						updateState( { ajaxLoading: false } );
 					}
+					releaseAjax();
 				} ).catch( () => {
-					updateState( { ajaxLoading: false } );
 					console.log( __( 'Polished Content Ajax Request Failed', 'polished-content' ) ); // eslint-disable-line no-console
+					releaseAjax();
 				} );
 			} );
 		}

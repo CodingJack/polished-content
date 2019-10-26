@@ -73,7 +73,7 @@ const selectOptions = {
 			pcxMask: true,
 			pcxEasing: 'Power2',
 		},
-		pcxHeadlineMotion: {
+		PcxHeadlineMotion: {
 			pcxBlur: 5,
 			pcxEasing: 'Power2',
 			pcxOpacity: 0,
@@ -202,7 +202,7 @@ const selectOptions = {
 		},
 		{
 			label: __( 'Headline Motion', 'polished-content' ),
-			value: 'pcxHeadlineMotion',
+			value: 'PcxHeadlineMotion',
 		},
 		{
 			label: __( 'Flip Horizontal', 'polished-content' ),
@@ -924,9 +924,11 @@ if ( hasGlobals ) {
  * defaultValues
  * mainDefaults
  * animatable
+ * allDataProps
  * originalPresets
  *
 */
+const allDataProps = Object.keys( defaultData );
 const defaultValues = {};
 const animatable = [];
 
@@ -1031,6 +1033,7 @@ export {
 	transformable,
 	reversable,
 	whitelisted,
+	allDataProps,
 	threeD,
 };
 

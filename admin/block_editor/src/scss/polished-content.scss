@@ -37,6 +37,18 @@ $rc-menu-box-shadow-clr: rgba(0, 0, 0, 0.2);
 	.components-select-control__input {text-transform: none}
 }
 
+/*
+ * initial loader
+*/
+.#{$namespace}-loading {
+	display: flex;
+	align-items: center;
+	.components-spinner {
+		float: none;
+		margin: 0 10px 0 0;
+	}
+}
+
 .#{$namespace}-settings {
 	position: relative;
 	button:not(.components-panel__body-toggle) {font-size: $button-font-size !important}
@@ -390,17 +402,6 @@ $rc-menu-box-shadow-clr: rgba(0, 0, 0, 0.2);
 		&-ranges .components-range-control__slider {margin-left: 1px !important}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

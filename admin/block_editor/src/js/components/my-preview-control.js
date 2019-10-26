@@ -19,6 +19,7 @@ const {
 import {
 	namespace,
 	selectOptions,
+	defaultValues,
 } from '../../../../../shared/js/data';
 
 import {
@@ -47,7 +48,7 @@ const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
 
 	const {
 		selectedPreset,
-		hideSavePresetBtn,
+		hideCreatePresetBtn,
 		showSavePresetModal,
 	} = state;
 
@@ -61,21 +62,35 @@ const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
 	const values = pcxPresets.map( ( option ) => option.value );
 
 	const playPause = () => {
+		// if the preset dropdown is set to "Select a Preset", just play the next animateable preset
 		if ( selectedPreset === 'PcxDefaults' ) {
-			onClickNext();
+			let selection = getPrevNextSelection( pcxPresets, values, 'PcxDefaults', true );
+
+			// the next preset could be "custom values", and there might not be anything to animate
+			// so just move on to the next default preset in that case which will have animateable values
+			if ( selection === 'PcxCustom' ) {
+				const { pcxAnimations } = selectOptions;
+				const newProps = { ...defaultValues, ...pcxAnimations[ selection ] };
+				const animate = shouldAnimate( { ...newProps } );
+				if ( ! animate ) {
+					selection = getPrevNextSelection( pcxPresets, values, selection, true );
+				}
+			}
+
+			updateFromPreset( selection );
 			return;
 		}
 
-		const { previewIsPlaying: previewPlaying } = state;
-		updateState( { previewIsPlaying: ! previewPlaying } );
-	};
-
-	const togglePresetModal = ( show ) => {
-		updateState( { showSavePresetModal: show } );
+		updateState( ( prevState ) => {
+			return { previewIsPlaying: ! prevState.previewIsPlaying };
+		} );
 	};
 
 	const createPreset = () => {
-		updateState( { previewIsPlaying: false, showSavePresetModal: true } );
+		updateState( {
+			previewIsPlaying: false,
+			showSavePresetModal: true,
+		} );
 	};
 
 	const onClickPrev = () => {
@@ -88,10 +103,12 @@ const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
 		updateFromPreset( selection );
 	};
 
-	const isPlaying = previewIsPlaying ? ' is-playing' : '';
 	const maskEnabed = pcxMask ? ' pcx-has-mask' : '';
-	const disabled = selectedPreset === 'PcxCustom' && ! previewIsPlaying && ! shouldAnimate( { ...props } );
+	const isPlaying = previewIsPlaying ? ' is-playing' : '';
 	const grayscale = parseInt( pcxGrayscale, 10 ) > 0 ? ' pcx-grayscale' : '';
+
+	const playPauseDisabled = selectedPreset !== 'PcxDefaults' && ! shouldAnimate( { ...props } );
+	const btnDisabled = showSavePresetModal || playPauseDisabled;
 
 	let iconLeft;
 	let iconRight;
@@ -129,7 +146,7 @@ const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
 					</div>
 				</div>
 				{ showSavePresetModal && (
-					<MySavePresetControl block={ block } togglePresetModal={ togglePresetModal } />
+					<MySavePresetControl block={ block } />
 				) }
 			</div>
 			<Button
@@ -142,8 +159,8 @@ const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
 			</Button>
 			<Button
 				isSmall
-				isPrimary={ ! disabled }
-				disabled={ disabled }
+				isPrimary={ ! btnDisabled }
+				disabled={ btnDisabled }
 				className={ `${ namespace }-playpause ${ namespace }-iconbtn ${ isPlaying }` }
 				onClick={ playPause }
 			>
@@ -162,7 +179,7 @@ const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
 				isSmall
 				className={ `${ namespace }-create-preset` }
 				onClick={ createPreset }
-				aria-disabled={ hideSavePresetBtn || showSavePresetModal }
+				aria-disabled={ hideCreatePresetBtn || showSavePresetModal }
 			> { __( 'Create Preset', 'polished-content' ) }</Button>
 		</>
 	);

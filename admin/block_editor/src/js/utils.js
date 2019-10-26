@@ -17,6 +17,24 @@ import {
 } from '../../../../shared/js/data';
 
 /*
+ * @desc verifies objects for block hooks just in case
+ * @param object args - the array of arguments to verify
+ * @returns boolean - if the arguments are what we expected
+ * @since 1.0.0
+*/
+const verifyObjects = ( objects ) => {
+	const len = objects.length;
+
+	for ( let i = 0; i < len; i++ ) {
+		if ( typeof objects[ i ] !== 'object' && typeof objects[ i ] !== 'function' ) {
+			return false;
+		}
+	}
+
+	return true;
+};
+
+/*
  * @desc figures out what classes need to be added to the block for the animation
  * @param object attrs - the block's current attributes
  * @returns object - if classes should be added and the list of classes to add
@@ -173,6 +191,25 @@ const shouldAnimate = ( props ) => {
 };
 
 /*
+ * @desc checks if any prop in a set of props is animatable
+ * @param object props - the current animation's properties
+ * @returns - whether or not the new set of props should be animated
+ * @since 1.0.0
+*/
+const animatableProps = ( props ) => {
+	const keys = Object.keys( props );
+	const len = keys.length;
+
+	for ( let i = 0; i < len; i++ ) {
+		if ( animatable.indexOf( keys[ i ] ) !== -1 ) {
+			return true;
+		}
+	}
+
+	return false;
+};
+
+/*
  * @desc compare props from the componentDidUpdate() event for the animation preview
  * @param object prevProps - the component's previous props
  * @param object nextProps - the component's current props
@@ -200,8 +237,8 @@ const compareProps = ( prevProps, nextProps ) => {
  * @returns - whether or not the objects are equal
  * @since 1.0.0
 */
-const objectValuesEqual = ( objectA, objectB ) => {
-	const keys = Object.keys( objectA );
+const objectValuesEqual = ( objectA, objectB, objectKeys ) => {
+	const keys = objectKeys || Object.keys( objectA );
 	const len = keys.length;
 
 	for ( let i = 0; i < len; i++ ) {
@@ -295,7 +332,7 @@ const setCustomPreset = ( current ) => {
 /*
  * @desc tries to match the current settings against the existing presets and then sets the correct preset selection based on the results
  * @param object current - the current set of settings the user has applied
- * @returns object - {selectedPreset:String, hideSavePresetBtn:Boolean, hideDeleteBtn:Boolean}
+ * @returns object - {selectedPreset:String, hideCreatePresetBtn:Boolean, hideDeleteBtn:Boolean}
  * @since 1.0.0
 */
 const getPresetSelection = ( props, resetCustom ) => {
@@ -310,7 +347,7 @@ const getPresetSelection = ( props, resetCustom ) => {
 	const { pcxAnimations } = selectOptions;
 	const animations = { ...defs, ...pcxAnimations };
 
-	let hideSavePresetBtn = true;
+	let hideCreatePresetBtn = true;
 	let hideDeleteBtn = true;
 	let selectedPreset;
 	let presetFound;
@@ -347,12 +384,12 @@ const getPresetSelection = ( props, resetCustom ) => {
 	if ( ! presetFound ) {
 		setCustomPreset( current );
 		selectedPreset = 'PcxCustom';
-		hideSavePresetBtn = false;
+		hideCreatePresetBtn = false;
 	}
 
 	return {
 		selectedPreset,
-		hideSavePresetBtn,
+		hideCreatePresetBtn,
 		hideDeleteBtn,
 	};
 };
@@ -481,7 +518,7 @@ const getOriginalSettings = ( attributes ) => {
  * @desc removes a preset on Ajax delete
  * @param string key - the presets unique key
  * @param object settings - the current user settings
- * @returns object - {selectedPreset:String, hideSavePresetBtn:Boolean, hideDeleteBtn:Boolean}
+ * @returns object - {selectedPreset:String, hideCreatePresetBtn:Boolean, hideDeleteBtn:Boolean}
  * @since 1.0.0
 */
 const removePreset = ( key, settings ) => {
@@ -529,5 +566,7 @@ export {
 	shouldAnimate,
 	compareProps,
 	checkChanges,
+	verifyObjects,
+	animatableProps,
 };
 

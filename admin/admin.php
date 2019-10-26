@@ -205,6 +205,7 @@ if ( !class_exists( 'PolishedContentAdmin' ) ) {
 					array(
 						'ajaxNonce' => wp_create_nonce( 'polished_content' ),
 						'customPresets' => get_option( 'polished_content_presets' ),
+						'chunkDirectory' => plugins_url( 'block_editor/dist/js/', __FILE__ ),
 						'defaultSettings' => $defaultSettings,
 						'initialTab' => 'basics',
 						'currentTab' => 'basics',

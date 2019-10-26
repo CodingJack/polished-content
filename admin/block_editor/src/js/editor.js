@@ -20,6 +20,7 @@ import {
 	namespace,
 	selectOptions,
 	defaultValues,
+	allDataProps,
 } from '../../../../shared/js/data';
 
 import {
@@ -32,6 +33,7 @@ import {
 	compareProps,
 	checkChanges,
 	checkInitialTab,
+	animatableProps,
 	objectValuesEqual,
 	getPresetSelection,
 	getOriginalSettings,
@@ -71,62 +73,18 @@ class PolishedContentEditor extends Component {
 		};
 
 		this.settingsRef = createRef();
-		this.updateProp = this.updateProps.bind( this );
-		this.updateState = this.updateStates.bind( this );
+		this.updateProp = this.updateProp.bind( this );
+		this.updateState = this.updateState.bind( this );
 
-		this.propertyRestore = this.restoreProperties.bind( this );
-		this.updateFromPreset = this.updateFromPresets.bind( this );
-		this.updateBatchProp = this.updateBatchProps.bind( this );
+		this.restoreProperties = this.restoreProperties.bind( this );
+		this.updateFromPreset = this.updateFromPreset.bind( this );
+		this.updateBatchProps = this.updateBatchProps.bind( this );
 
-		this.rightClick = this.onRightClick.bind( this );
-		this.hideRcMenu = this.hideRightClickMenu.bind( this );
+		this.onRightClick = this.onRightClick.bind( this );
+		this.hideRightClickMenu = this.hideRightClickMenu.bind( this );
 
 		this.hideClearBtn = ! checkChanges( { ...defaultValues }, { ...attributes } );
 		this.originalSettings = getOriginalSettings( { ... attributes } );
-	}
-
-	/*
-	 * @desc updates the block's attributes on a settings change
-	 * @param string/boolean/number value - the prop's new value
-	 * @param string prop - the attribute's name
-	 * @since 1.0.0
-	*/
-	updateProps( value, prop ) {
-		const {
-			attributes,
-		} = this.props;
-
-		const {
-			showSavePresetModal,
-			previewIsPlaying,
-		} = this.state;
-
-		const newProp = { [ prop ]: value };
-		const newProps = { ...attributes, ...newProp };
-		const presetData = getPresetSelection( { ...newProps } );
-		const { selectedPreset } = presetData;
-
-		if ( showSavePresetModal && selectedPreset !== 'PcxCustom' ) {
-			presetData.showSavePresetModal = false;
-		}
-
-		const newState = { ...presetData };
-		const animate = shouldAnimate( { ...newProps } );
-
-		if ( ! previewIsPlaying && animate ) {
-			newState.previewIsPlaying = true;
-		}
-
-		if ( prop === 'pcxEnabled' ) {
-			if ( value ) {
-				this.addRightClickListener();
-			} else {
-				this.removeAllRcListeners();
-			}
-		}
-
-		this.setState( { ...newState } );
-		this.props.setAttributes( newProp );
 	}
 
 	/*
@@ -135,8 +93,60 @@ class PolishedContentEditor extends Component {
 	 * @param function callback - a possible callback to call asynchronously
 	 * @since 1.0.0
 	*/
-	updateStates( args, callback ) {
+	updateState( args, callback ) {
+		// updateState is passed down to and called from child components as opposed to "setState"
+		// this makes it easier to debug
 		this.setState( args, callback );
+	}
+
+	/*
+	 * @desc handles all actions that are meant to change the block's attributes
+	 * @param object newProps - the new prop/values to set
+	 * @since 1.0.0
+	*/
+	updateProps( newProps ) {
+		const { attributes } = this.props;
+		const animatable = animatableProps( { ...newProps } );
+		const animate = animatable && shouldAnimate( { ...attributes, ...newProps } );
+
+		// if the play button is paused but an animatable option was changed, auto-animate the preview
+		if ( animate ) {
+			this.setState( { bounce: true, previewIsPlaying: true }, () => {
+				this.props.setAttributes( { ...newProps } );
+			} );
+		} else {
+			this.props.setAttributes( { ...newProps } );
+		}
+	}
+
+	/*
+	 * @desc updates the block's attributes on a settings change
+	 * @param string/boolean/number value - the prop's new value
+	 * @param string prop - the attribute's name
+	 * @since 1.0.0
+	*/
+	updateProp( value, prop ) {
+		if ( prop === 'pcxEnabled' ) {
+			if ( value ) {
+				this.addRightClickListener();
+			} else {
+				this.removeAllRcListeners();
+			}
+		}
+
+		this.updateProps( { [ prop ]: value } );
+	}
+
+	/*
+	 * @desc paste previously copied settings from right-click menu into a block
+	 * @since 1.0.0
+	*/
+	updateBatchProps() {
+		const {
+			copiedSettings,
+		} = polishedContentGlobals; // eslint-disable-line no-undef
+
+		this.updateProps( { ...copiedSettings } );
 	}
 
 	/*
@@ -146,27 +156,10 @@ class PolishedContentEditor extends Component {
 	 * @param boolean fromDelete - true if called from a delete preset event
 	 * @since 1.0.0
 	*/
-	updateFromPresets( selectedPreset, fromAjax, fromDelete ) {
+	updateFromPreset( selectedPreset ) {
 		const { pcxAnimations } = selectOptions;
 		const newProps = { ...defaultValues, ...pcxAnimations[ selectedPreset ] };
-
-		const newState = { previewIsPlaying: shouldAnimate( { ...newProps } ) };
-		const presetData = getPresetSelection( { ...newProps } );
-
-		const { showSavePresetModal } = this.state;
-		if ( showSavePresetModal && selectedPreset !== 'PcxCustom' ) {
-			presetData.showSavePresetModal = false;
-		}
-
-		if ( fromAjax ) {
-			newState.ajaxLoading = false;
-		}
-
-		this.setState( { ...newState, ...presetData } );
-
-		if ( ! fromDelete ) {
-			this.props.setAttributes( newProps );
-		}
+		this.updateProps( { ...newProps } );
 	}
 
 	/*
@@ -176,24 +169,12 @@ class PolishedContentEditor extends Component {
 	 * @since 1.0.0
 	*/
 	restoreProperties( e, originalSettings ) {
-		const newProps = originalSettings || { ...defaultValues };
-		const presetData = getPresetSelection( { ...newProps } );
-
-		let previewIsPlaying;
-		if ( originalSettings ) {
-			previewIsPlaying = shouldAnimate( { ...newProps } );
-		}
-
-		const newState = { previewIsPlaying };
-		const newData = { showSavePresetModal: false };
-
-		this.setState( { ...newState, ...presetData, ...newData } );
-		this.props.setAttributes( newProps );
+		const newProps = originalSettings || defaultValues;
+		this.updateProps( { ...newProps } );
 	}
 
 	/*
-	 * @desc used to determine if we should play, replay or reset the
-	 *       animated element and also to verify the preset selection
+	 * @desc used to determine if we should play, replay or reset the animated element
 	 * @param object prevProps - the component's previous props
 	 * @param object prevState - the component's previous state
 	 * @since 1.0.0
@@ -207,10 +188,6 @@ class PolishedContentEditor extends Component {
 		const { current: curElement } = el;
 		const { current: curContainer } = container;
 
-		const { attributes } = this.props;
-		const { attributes: prevAttributes } = prevProps;
-		const propsChanged = compareProps( { ...prevAttributes }, { ...attributes } );
-
 		/*
 		 * check if the preview animation should play
 		*/
@@ -218,81 +195,101 @@ class PolishedContentEditor extends Component {
 			const { previewIsPlaying } = this.state;
 
 			if ( previewIsPlaying ) {
+				const { attributes } = this.props;
+				const { attributes: prevAttributes } = prevProps;
 				const { previewIsPlaying: prevPlaying } = prevState;
+
+				// was the play/pause button clicked ?
 				let shouldPlay = previewIsPlaying !== prevPlaying;
 
+				// if the play/pause button was clicked, did the animatable props change?
 				if ( ! shouldPlay ) {
-					shouldPlay = propsChanged;
+					shouldPlay = compareProps( { ...prevAttributes }, { ...attributes } );
 				}
 				if ( shouldPlay ) {
 					playAnimation( curElement, curContainer, { ...defaultValues, ...attributes } );
+				} else {
+					const animate = shouldAnimate( { ...attributes } );
+
+					// reset the animation if it was previously playing but now has no animatable values
+					if ( ! animate ) {
+						resetAnimation( curElement, true );
+					}
 				}
 			} else {
 				resetAnimation( curElement, true );
 			}
 		}
-
-		/*
-		 * check if the preset selection is accurate
-		*/
-		if ( propsChanged ) {
-			const {
-				selectedPreset,
-				hideSavePresetBtn,
-				hideDeleteBtn,
-			} = this.state;
-
-			const curPresetData = {
-				selectedPreset,
-				hideSavePresetBtn,
-				hideDeleteBtn,
-			};
-
-			const presetData = getPresetSelection( { ...attributes } );
-			if ( ! objectValuesEqual( presetData, curPresetData ) ) {
-				const { showSavePresetModal } = this.state;
-				const { selectedPreset: curPreset } = presetData;
-
-				if ( showSavePresetModal && curPreset !== 'PcxCustom' ) {
-					presetData.showSavePresetModal = false;
-				}
-
-				this.setState( { ...presetData } );
-			}
-		}
 	}
 
 	/*
-	 * @desc paste previously copied settings from right-click menu into a block
+	 * @desc only render when a block attribute changes that's related to the plugin
+	 * @param object nextProps - the component's new props
+	 * @param object nextState - the component's new state
 	 * @since 1.0.0
 	*/
-	updateBatchProps() {
+	shouldComponentUpdate( nextProps, nextState ) {
+		const { attributes: prevAttrs } = this.props;
+		const { attributes: nextAttrs } = nextProps;
+
+		// compare two objects that definitely have the same keys
+		const statesEqual = objectValuesEqual( { ...this.state }, { ...nextState } );
+
+		// compare two objects against a specific set of keys
+		const propsEqual = objectValuesEqual( { ...prevAttrs }, { ...nextAttrs }, allDataProps.slice() );
+
+		return ! statesEqual || ! propsEqual;
+	}
+
+	/*
+	 * @desc update the internal preset selection state based on whatever the current props are
+	 *       this is needed as the block's props can change from a WP undo/redo that we aren't subscribed to
+	 *       and we don't want to modify the state in componentDidUpdate because that causes a double render
+	 * @param object nextProps - the component's new props
+	 * @param object prevState - the component's previous state
+	 * @since 1.0.0
+	*/
+	static getDerivedStateFromProps( nextProps, prevState ) {
+		// guarantees that we only set the new state after the setAttributes call
+		// view "setState" inside updateProps() to see how it works
+		const { bounce } = prevState;
+		if ( bounce ) {
+			return { bounce: false };
+		}
+
+		const { attributes } = nextProps;
+		const presetData = getPresetSelection( { ...attributes } );
+		const { hideCreatePresetBtn } = presetData;
+
 		const {
-			copiedSettings,
-		} = polishedContentGlobals; // eslint-disable-line no-undef
+			previewIsPlaying,
+			showSavePresetModal,
+		} = prevState;
 
-		const { attributes } = this.props;
-		const newProps = { ...getOriginalSettings( { ...attributes } ), ...copiedSettings };
-		const newState = { previewIsPlaying: shouldAnimate( { ...newProps } ) };
-		const presetData = getPresetSelection( { ...newProps } );
+		// we may need to reset the play/pause button if there's nothing to animate
+		if ( previewIsPlaying ) {
+			const animate = shouldAnimate( { ...attributes } );
+			if ( ! animate ) {
+				presetData.previewIsPlaying = false;
+			}
+		}
 
-		const { showSavePresetModal } = this.state;
-		const { selectedPreset } = presetData;
-
-		if ( showSavePresetModal && selectedPreset !== 'PcxCustom' ) {
+		// hide the save preset modal if it's open and an unsaveable preset is selected
+		if ( showSavePresetModal && hideCreatePresetBtn ) {
 			presetData.showSavePresetModal = false;
 		}
 
-		this.setState( { ...newState, ...presetData } );
-		this.props.setAttributes( { ...copiedSettings } );
+		return { ...presetData };
 	}
 
 	/*
 	 * @desc hides the right click menu if it was open
 	 * @param Event e - will exist if triggered from a native event
+	 * @param boolean disable - if the user chooses "disable" from the right-click menu
 	 * @since 1.0.0
 	*/
 	hideRightClickMenu( e, disable ) {
+		// if coming from a native event
 		if ( e ) {
 			if ( e.type === 'contextmenu' ) {
 				const { rcMenuActive } = this.state;
@@ -301,7 +298,10 @@ class PolishedContentEditor extends Component {
 				}
 			} else {
 				const itmClass = `${ namespace }-rc-menu-itm`;
-				if ( e.target.classList.contains( itmClass ) || e.target.closest( `.${ itmClass }` ) ) {
+				const { target } = e;
+
+				// bounce when right-clicking over the right-click menu
+				if ( target.classList.contains( itmClass ) || target.closest( `.${ itmClass }` ) ) {
 					return;
 				}
 			}
@@ -324,6 +324,8 @@ class PolishedContentEditor extends Component {
 	*/
 	onRightClick( e ) {
 		const { target } = e;
+
+		// bounce if right-clicking over input text (to allow regular copy/paste)
 		if ( target.tagName.toLowerCase() === 'input' && target.type === 'text' ) {
 			return;
 		}
@@ -333,7 +335,7 @@ class PolishedContentEditor extends Component {
 			showSavePresetModal,
 		} = this.state;
 
-		// bounce if save preset modal is open
+		// bounce if right-click over the save preset modal
 		if ( showSavePresetModal ) {
 			const presetClass = `${ namespace }-save-preset`;
 			if ( target.classList.contains( presetClass ) || target.closest( `.${ presetClass }` ) ) {
@@ -344,6 +346,8 @@ class PolishedContentEditor extends Component {
 		e.preventDefault();
 		e.stopImmediatePropagation();
 
+		// if the right click menu is already active and the user right-click's again,
+		// hide the menu and then activate the right-click menu again with the new mouse coords
 		if ( rcMenuActive ) {
 			this.removeBodyRcListeners();
 			this.setState( { rcMenuActive: false }, () => {
@@ -352,12 +356,12 @@ class PolishedContentEditor extends Component {
 			return;
 		}
 
+		document.body.addEventListener( 'click', this.hideRightClickMenu );
+		document.body.addEventListener( 'contextmenu', this.hideRightClickMenu );
+
 		this.setState( {
 			rcMenuActive: true,
 			rcEvent: e,
-		}, () => {
-			document.body.addEventListener( 'click', this.hideRcMenu );
-			document.body.addEventListener( 'contextmenu', this.hideRcMenu );
 		} );
 	}
 
@@ -368,7 +372,7 @@ class PolishedContentEditor extends Component {
 	addRightClickListener() {
 		const { current } = this.settingsRef;
 		if ( current ) {
-			current.addEventListener( 'contextmenu', this.rightClick );
+			current.addEventListener( 'contextmenu', this.onRightClick );
 		}
 	}
 
@@ -377,8 +381,8 @@ class PolishedContentEditor extends Component {
 	 * @since 1.0.0
 	*/
 	removeBodyRcListeners() {
-		document.body.removeEventListener( 'click', this.hideRcMenu );
-		document.body.removeEventListener( 'contextmenu', this.hideRcMenu );
+		document.body.removeEventListener( 'click', this.hideRightClickMenu );
+		document.body.removeEventListener( 'contextmenu', this.hideRightClickMenu );
 	}
 
 	/*
@@ -390,7 +394,7 @@ class PolishedContentEditor extends Component {
 		const { current } = this.settingsRef;
 
 		if ( current ) {
-			current.removeEventListener( 'contextmenu', this.rightClick );
+			current.removeEventListener( 'contextmenu', this.onRightClick );
 		}
 	}
 
@@ -428,13 +432,13 @@ class PolishedContentEditor extends Component {
 			updateProp,
 			updateState,
 			settingsRef,
-			hideRcMenu,
 			hideClearBtn,
-			propertyRestore,
+			hideRightClickMenu,
+			restoreProperties,
 			updateFromPreset,
 			animatedElements,
 			originalSettings,
-			updateBatchProp,
+			updateBatchProps,
 		} = this;
 
 		const {
@@ -459,10 +463,10 @@ class PolishedContentEditor extends Component {
 		};
 
 		const ajaxIsLoading = ! ajaxLoading ? '' : ' pcx-ajax-loading';
-		const onClear = ! hideClearBtn && selectedPreset !== 'PcxDefaults' ? propertyRestore : false;
+		const onClear = ! hideClearBtn && selectedPreset !== 'PcxDefaults' ? restoreProperties : false;
 
 		const hasUndo = checkChanges( { ...originalSettings }, { ...attributes }, { ...defaultValues } );
-		const onUndo = hasUndo ? propertyRestore : false;
+		const onUndo = hasUndo ? restoreProperties : false;
 
 		return (
 			<>
@@ -489,9 +493,9 @@ class PolishedContentEditor extends Component {
 									rcEvent={ rcEvent }
 									attrs={ block.props }
 									menuBuffer={ 16 }
-									hideRcMenu={ hideRcMenu }
+									hideRightClickMenu={ hideRightClickMenu }
 									updateState={ updateState }
-									updateBatchProp={ updateBatchProp }
+									updateBatchProps={ updateBatchProps }
 								/>
 							) }
 						</>

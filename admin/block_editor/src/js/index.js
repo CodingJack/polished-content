@@ -8,7 +8,8 @@ import classnames from 'classnames';
  */
 require( './sidebar.js' );
 
-import PolishedContentEditor from './editor';
+import ErrorBoundary from './error';
+import Loader from './loader';
 
 import {
 	namespace,
@@ -17,6 +18,7 @@ import {
 
 import {
 	getClasses,
+	verifyObjects,
 } from './utils';
 
 /**
@@ -31,22 +33,6 @@ const { hasBlockSupport } = wp.blocks;
 
 let supportedBlocks;
 let openPanel;
-
-/*
- * @desc verifies objects in block hooks just in case
- * @param object args - the array of arguments to verify
- * @returns boolean - if the arguments are what we expected
- * @since 1.0.0
-*/
-const verifyObjects = ( arr ) => {
-	arr.forEach( ( obj ) => {
-		if ( typeof obj !== 'object' ) {
-			return false;
-		}
-	} );
-
-	return true;
-};
 
 /*
  * @desc merges block attributes with plugin attributes
@@ -138,8 +124,6 @@ const polishedContentControls = createHigherOrderComponent( ( BlockEdit ) => {
 		const { pcxEnabled } = attributes;
 
 		if ( pcxEnabled !== undefined && isSelected ) {
-			const { currentTab } = polishedContentGlobals; // eslint-disable-line no-undef
-
 			return (
 				<>
 					<BlockEdit { ...props } />
@@ -149,11 +133,15 @@ const polishedContentControls = createHigherOrderComponent( ( BlockEdit ) => {
 							className={ `${ namespace }` }
 							initialOpen={ openPanel }
 						>
-							<PolishedContentEditor
-								setAttributes={ setAttributes }
-								attributes={ attributes }
-								currentTab={ currentTab }
-							/>
+							<ErrorBoundary>
+								<Loader
+									bufferTime={ 250 }
+									namespace={ namespace }
+									resolve={ () => import( './module' ) }
+									setAttributes={ setAttributes }
+									attributes={ attributes }
+								/>
+							</ErrorBoundary>
 						</PanelBody>
 					</InspectorControls>
 				</>
@@ -165,7 +153,12 @@ const polishedContentControls = createHigherOrderComponent( ( BlockEdit ) => {
 }, 'polishedContentControls' );
 
 if ( typeof polishedContentGlobals !== 'undefined' ) {
-	const { defaultSettings } = polishedContentGlobals; // eslint-disable-line no-undef
+	const {
+		defaultSettings,
+		chunkDirectory,
+	} = polishedContentGlobals; // eslint-disable-line no-undef
+
+	__webpack_public_path__ = chunkDirectory; // eslint-disable-line no-undef, camelcase
 
 	const {
 		allowedBlocks,

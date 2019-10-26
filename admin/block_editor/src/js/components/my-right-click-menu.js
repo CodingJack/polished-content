@@ -21,7 +21,7 @@ const writeSettings = ( key, attrs, settings ) => {
 	} );
 };
 
-const RightClickItems = ( { attrs, hideRcMenu, updateState, updateBatchProp } ) => {
+const RightClickItems = ( { attrs, hideRightClickMenu, updateState, updateBatchProps } ) => {
 	const {
 		copiedPanel,
 		copiedSettings,
@@ -45,7 +45,7 @@ const RightClickItems = ( { attrs, hideRcMenu, updateState, updateBatchProp } ) 
 					} );
 					break;
 				case 'paste':
-					updateBatchProp();
+					updateBatchProps();
 
 					// if copied from a single panel's settings, change the  panel for the current block
 					if ( copiedPanel ) {
@@ -53,7 +53,7 @@ const RightClickItems = ( { attrs, hideRcMenu, updateState, updateBatchProp } ) 
 					}
 					break;
 				case 'disable':
-					hideRcMenu( false, true );
+					hideRightClickMenu( false, true );
 					return;
 				default:
 					settings = {};
@@ -66,7 +66,7 @@ const RightClickItems = ( { attrs, hideRcMenu, updateState, updateBatchProp } ) 
 				polishedContentGlobals.copiedPanel = key !== 'all' && key !== 'paste' ? key : null; // eslint-disable-line no-undef
 			}
 
-			hideRcMenu();
+			hideRightClickMenu();
 		};
 
 		const onKeyDown = ( e ) => {
