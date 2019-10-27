@@ -136,9 +136,7 @@ export const removeClasses = ( el ) => {
 */
 export const resetElement = ( el, styles ) => {
 	const css = { ...styles };
-	const {
-		clip,
-	} = css;
+	const { clip } = css;
 
 	// gsap sets "clip: auto" to "clip: rect(0,0,0,0)" (needed for IE fallback)
 	if ( clip ) {
