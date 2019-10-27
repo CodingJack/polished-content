@@ -33,7 +33,6 @@ const MyClassesControl = ( { block } ) => {
 	let enabledClass = '';
 	let onChange;
 	let onFocus;
-	let onBlur;
 
 	if ( enabled ) {
 		const { props: attrs } = block;
@@ -51,11 +50,9 @@ const MyClassesControl = ( { block } ) => {
 
 		currentClasses = animate ? `polished-content${ classes }` : '';
 		enabledClass = ` ${ namespace }-classes-enabled`;
+		
 		onChange = () => {};
-
-		onFocus = ( e ) => {
-			e.target.select();
-		};
+		onFocus = ( e ) => e.target.select();
 	}
 
 	return (
@@ -74,7 +71,6 @@ const MyClassesControl = ( { block } ) => {
 					value={ currentClasses }
 					onChange={ onChange }
 					onFocus={ onFocus }
-					onBlur={ onBlur }
 					help={ (
 						<HelpSettingsLink text={ __( 'When adding animation classes to non-Block content the plugin\'s script can be loaded manually from the ', 'polished-content' ) } />
 					) }
