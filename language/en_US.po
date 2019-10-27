@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2019-10-20 18:09-0700\n"
-"PO-Revision-Date: 2019-10-20 18:09-0700\n"
+"POT-Creation-Date: 2019-10-27 00:54-0700\n"
+"PO-Revision-Date: 2019-10-27 00:55-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -487,7 +487,7 @@ msgid "Alert"
 msgstr ""
 
 #: admin/allowed_blocks.php:169 admin/options_page/src/js/data.js:88
-#: admin/options_page/src/js/data.js:490
+#: admin/options_page/src/js/data.js:491
 msgid "Author"
 msgstr ""
 
@@ -571,10 +571,6 @@ msgstr ""
 msgid "Stacked"
 msgstr ""
 
-#: admin/block_editor/dist/js/polished-content.min.js:19
-msgid "com.greensock"
-msgstr ""
-
 #: admin/block_editor/src/js/components/my-classes-control.js:64
 #: admin/options_page/src/js/data.js:334
 msgid "Copy Animation Classes"
@@ -584,33 +580,161 @@ msgstr ""
 msgid "Delete this Custom Preset Option?"
 msgstr ""
 
-#: admin/block_editor/src/js/components/my-tab-panel-control.js:83
-#: admin/block_editor/src/js/panels.js:84
+#: admin/block_editor/src/js/components/my-presets-control.js:77
+#: admin/block_editor/src/js/components/my-save-preset-control.js:94
+msgid "Polished Content Ajax Request Failed"
+msgstr ""
+
+#: admin/block_editor/src/js/error.js:22
+msgid "Something went wrong.  Please "
+msgstr ""
+
+#: admin/block_editor/src/js/error.js:24
+msgid "report"
+msgstr ""
+
+#: admin/block_editor/src/js/error.js:25
+msgid " the error below."
+msgstr ""
+
+#: admin/block_editor/src/js/index.js:132
+msgid "Polished Content"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-advanced-panel.js:46
 msgid ""
 "Letter Spacing is only compatible with text that would normally always "
 "appear on a single line"
 msgstr ""
 
-#: admin/block_editor/src/js/components/my-tab-panel-control.js:86
-#: admin/block_editor/src/js/panels.js:87
+#: admin/block_editor/src/js/panels/my-advanced-panel.js:50
 msgid "vw would equal"
 msgstr ""
 
-#: admin/block_editor/src/js/components/my-tab-panel-control.js:87
-#: admin/block_editor/src/js/panels.js:88
+#: admin/block_editor/src/js/panels/my-advanced-panel.js:51
 #, javascript-format
 msgid "% of the screen's width"
 msgstr ""
 
-#: admin/block_editor/src/js/components/my-tab-panel-control.js:91
-#: admin/block_editor/src/js/panels.js:92
+#: admin/block_editor/src/js/panels/my-advanced-panel.js:58
+msgid "Letter Spacing"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-advanced-panel.js:68
+msgid "2D Rotation"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-advanced-panel.js:76
+msgid "3D RotationX"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-advanced-panel.js:84
+msgid "3D RotationY"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-advanced-panel.js:92
+msgid "SkewX"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-advanced-panel.js:100
+msgid "SkewY"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-basics-panel.js:43
+msgid "Opacity"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-basics-panel.js:49
+msgid "Blur"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-basics-panel.js:57
+msgid "Grayscale"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-basics-panel.js:63
+msgid "Zoom"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-formatting-panel.js:33
+#: admin/options_page/src/js/data.js:207 admin/options_page/src/js/data.js:318
+msgid "Inherit Margins"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-formatting-panel.js:36
+msgid ""
+"Removes margins from the Block allowing the animated wrapper to inherit them "
+"instead."
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-formatting-panel.js:40
+#: admin/options_page/src/js/data.js:322
+msgid "Animate as Inline Block"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-formatting-panel.js:43
+msgid ""
+"Useful for Buttons and other content that is not intended to appear full-"
+"width."
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-formatting-panel.js:54
+#: admin/options_page/src/js/data.js:326
+msgid "CSS Float"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-formatting-panel.js:57
+msgid "Useful if your content is normally meant to display inline"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-formatting-panel.js:63
+#: admin/options_page/src/js/data.js:330
+msgid "Wrapper Class"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-formatting-panel.js:66
+msgid "Add an optional class name to the animation's outer wrapper"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-settings-panel.js:44
+#: admin/options_page/src/js/data.js:107 admin/options_page/src/js/data.js:355
+msgid "Animate Content"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-settings-panel.js:51
+msgid "Percentage In View"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-settings-panel.js:56
+#: admin/block_editor/src/js/panels/my-settings-panel.js:67
+msgid "Animate when inside this percentage of the screen's viewport"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-settings-panel.js:62
+msgid "Stagger % In View"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-settings-panel.js:73
+#: admin/options_page/src/js/data.js:142 admin/options_page/src/js/data.js:367
+msgid "Auto Reverse"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-timing-panel.js:48
 msgid ""
 "This easing function can be visually glitchy when combined with the \"Auto "
 "Reverse\" option"
 msgstr ""
 
-#: admin/block_editor/src/js/index.js:148
-msgid "Polished Content"
+#: admin/block_editor/src/js/panels/my-timing-panel.js:55
+msgid "Easing Function"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-timing-panel.js:62
+msgid "Animation Duration (ms)"
+msgstr ""
+
+#: admin/block_editor/src/js/panels/my-timing-panel.js:71
+msgid "Easing Type"
 msgstr ""
 
 #: admin/block_editor/src/js/sidebar.js:26
@@ -618,7 +742,7 @@ msgstr ""
 msgid "Polished Content Settings"
 msgstr ""
 
-#: admin/block_editor/src/js/utils.js:388 shared/js/data.js:999
+#: admin/block_editor/src/js/utils.js:421 shared/js/data.js:1001
 msgid "Custom Presets"
 msgstr ""
 
@@ -737,10 +861,6 @@ msgid ""
 "for batch-testing animations on multiple pages."
 msgstr ""
 
-#: admin/options_page/src/js/data.js:107 admin/options_page/src/js/data.js:355
-msgid "Animate Content"
-msgstr ""
-
 #: admin/options_page/src/js/data.js:108
 msgid ""
 "Choose if the block should only animate once or if it should animate as it "
@@ -775,10 +895,6 @@ msgstr ""
 
 #: admin/options_page/src/js/data.js:132
 msgid "Scroll Stagger %"
-msgstr ""
-
-#: admin/options_page/src/js/data.js:142 admin/options_page/src/js/data.js:367
-msgid "Auto Reverse"
 msgstr ""
 
 #: admin/options_page/src/js/data.js:143
@@ -818,10 +934,6 @@ msgid ""
 "normally bleed outside the screen, such as movements and transforms.  It "
 "adds some CSS to make sure the these animations never interfere with the "
 "page's scrollbars."
-msgstr ""
-
-#: admin/options_page/src/js/data.js:207 admin/options_page/src/js/data.js:318
-msgid "Inherit Margins"
 msgstr ""
 
 #: admin/options_page/src/js/data.js:208
@@ -970,10 +1082,6 @@ msgid ""
 "globally in the {{Custom CSS||#0|2}} section."
 msgstr ""
 
-#: admin/options_page/src/js/data.js:322
-msgid "Animate as Inline Block"
-msgstr ""
-
 #: admin/options_page/src/js/data.js:323
 msgid ""
 "Enable this option for content that doesn't normally appear as full-width, "
@@ -981,18 +1089,10 @@ msgid ""
 "content is meant to be aligned to the center or right."
 msgstr ""
 
-#: admin/options_page/src/js/data.js:326
-msgid "CSS Float"
-msgstr ""
-
 #: admin/options_page/src/js/data.js:327
 msgid ""
 "This option is useful if your block is meant to display inline next to other "
 "content.  For example, an image and a paragraph, etc."
-msgstr ""
-
-#: admin/options_page/src/js/data.js:330
-msgid "Wrapper Class"
 msgstr ""
 
 #: admin/options_page/src/js/data.js:331
@@ -1134,11 +1234,18 @@ msgstr ""
 
 #: admin/options_page/src/js/data.js:420
 msgid ""
+"To edit the plugin's JavaScript first clone or download the full source "
+"files from GitHub {{here||https://github.com/CodingJack/polished-content||"
+"blank}}"
+msgstr ""
+
+#: admin/options_page/src/js/data.js:421
+msgid ""
 "The plugin's JavaScript has three parts.  The options page here, the Block "
 "Editor, and the front-end:"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:424
+#: admin/options_page/src/js/data.js:425
 msgid ""
 "The options page and front-end have their own config found in the plugin's "
 "root \"config\" folder, and the Block Editor uses the default {{@wordpress/"
@@ -1147,33 +1254,33 @@ msgid ""
 "with the scripts below.  To get started:"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:426
+#: admin/options_page/src/js/data.js:427
 msgid "... from the plugin's root directory."
 msgstr ""
 
-#: admin/options_page/src/js/data.js:427
+#: admin/options_page/src/js/data.js:428
 msgid "Then the scripts you can run are:"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:431
+#: admin/options_page/src/js/data.js:432
 msgid ""
 "The core package.json file is where you can edit the source and distribution "
 "paths and there you'll also find some command line actions to handle the ."
 "scss files for the admin parts."
 msgstr ""
 
-#: admin/options_page/src/js/data.js:435
+#: admin/options_page/src/js/data.js:436
 msgid "Editing CSS"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:437
+#: admin/options_page/src/js/data.js:438
 msgid ""
 "The admin's CSS can be found in the same folders as the JavaScript above, "
 "with the difference being that the .scss files are in the \"src\" folder and "
 "the \"css\" files in the \"dist\" folder."
 msgstr ""
 
-#: admin/options_page/src/js/data.js:438
+#: admin/options_page/src/js/data.js:439
 msgid ""
 "You can edit the SASS files and recompile using the \"npm run build\" "
 "command above, or edit the CSS files manually inside the \"dist\" folders.  "
@@ -1181,19 +1288,19 @@ msgid ""
 "\"front/front.php\" file."
 msgstr ""
 
-#: admin/options_page/src/js/data.js:445
+#: admin/options_page/src/js/data.js:446
 msgid "Technology"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:448
+#: admin/options_page/src/js/data.js:449
 msgid "Technology used for the Plugin"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:451
+#: admin/options_page/src/js/data.js:452
 msgid "Intersection Observer"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:453
+#: admin/options_page/src/js/data.js:454
 msgid ""
 "Polished Content uses the {{HTML5 Intersection Observer||https://developer."
 "mozilla.org/en-US/docs/Web/API/Intersection_Observer_API||blank}} to watch "
@@ -1202,7 +1309,7 @@ msgid ""
 "elements when scrolling."
 msgstr ""
 
-#: admin/options_page/src/js/data.js:454
+#: admin/options_page/src/js/data.js:455
 msgid ""
 "When using the traditional window scroll event, every time the page is "
 "scrolled you normally have to run a big programmatic loop checking the exact "
@@ -1210,14 +1317,14 @@ msgid ""
 "this can be a big performance hit."
 msgstr ""
 
-#: admin/options_page/src/js/data.js:455
+#: admin/options_page/src/js/data.js:456
 msgid ""
 "But with the Intersection Observer, the browser handles all the calculations "
 "behind the scenes, and only notifies us when the content is where we expect "
 "it to be.  Inside the viewport!"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:456
+#: admin/options_page/src/js/data.js:457
 msgid ""
 "However, there are some drawbacks.  Since the Intersection Observer only "
 "tells us when the content is \"intersecting\" (entering or leaving the "
@@ -1226,13 +1333,13 @@ msgid ""
 "element."
 msgstr ""
 
-#: admin/options_page/src/js/data.js:457
+#: admin/options_page/src/js/data.js:458
 msgid ""
 "But Intersection Observer is used in Polished Content because the pros "
 "outweigh the cons :)"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:463
+#: admin/options_page/src/js/data.js:464
 msgid ""
 "{{Greensock||https://greensock.com/||blank}} is an animation engine that "
 "does amazing things without compromising performance.  There are many "
@@ -1244,26 +1351,26 @@ msgid ""
 "blank}}."
 msgstr ""
 
-#: admin/options_page/src/js/data.js:467
+#: admin/options_page/src/js/data.js:468
 msgid "Everything else..."
 msgstr ""
 
-#: admin/options_page/src/js/data.js:493
+#: admin/options_page/src/js/data.js:494
 msgid "Hi, I'm CodingJack"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:495
+#: admin/options_page/src/js/data.js:496
 msgid ""
 "I've spent endless hours writing PHP but my real passion is JavaScript.  I'm "
 "currently in a special relationship with React but my roots are in building "
 "and maintaining interactive plugins for WordPress."
 msgstr ""
 
-#: admin/options_page/src/js/data.js:497
+#: admin/options_page/src/js/data.js:498
 msgid "My Background"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:499
+#: admin/options_page/src/js/data.js:500
 msgid ""
 "I worked at {{ThemePunch||https://www.themepunch.com/||blank}} for 6 years "
 "doing a little bit of everything, with one of my main roles making all the "
@@ -1273,7 +1380,7 @@ msgid ""
 "websites for small businesses."
 msgstr ""
 
-#: admin/options_page/src/js/data.js:500
+#: admin/options_page/src/js/data.js:501
 msgid ""
 "You can follow me on {{Twitter||https://twitter.com/codingjack?"
 "lang=enTwitter||blank}} or check out some of my tutorials on {{YouTube||"
@@ -1282,31 +1389,31 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: admin/options_page/src/js/data.js:501
+#: admin/options_page/src/js/data.js:502
 msgid "I hope you enjoy Polished Content! 🙂"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:515
+#: admin/options_page/src/js/data.js:516
 msgid "Settings/Presets"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:520
+#: admin/options_page/src/js/data.js:521
 msgid "Allowed Blocks"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:525
+#: admin/options_page/src/js/data.js:526
 msgid "Custom CSS"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:530
+#: admin/options_page/src/js/data.js:531
 msgid "Custom JS"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:535
+#: admin/options_page/src/js/data.js:536
 msgid "Info/Docs"
 msgstr ""
 
-#: admin/options_page/src/js/data.js:540
+#: admin/options_page/src/js/data.js:541
 msgid "Screenshots"
 msgstr ""
 
