@@ -28,7 +28,7 @@ Polished Content uses the HTML5 [Intersection Observer](https://developer.mozill
 
 ## License
 
-* This original work in this project is licensed under [GPL-2.0+](https://opensource.org/licenses/GPL-2.0)
+* This original work in this project is dual licensed under the terms of the [MIT](https://opensource.org/licenses/MIT) license and [GPL-2.0+](https://opensource.org/licenses/GPL-2.0)
 * The included Greensock scripts are licensed using its [Standard License](https://greensock.com/standard-license/)
 * The [Intersection Observer Polyfill](https://www.npmjs.com/package/intersection-observer) included is licensed under [W3C License](https://opensource.org/licenses/W3C)
 
