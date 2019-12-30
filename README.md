@@ -38,7 +38,7 @@ Polished Content includes support for several 3rd party Custom Block plugins.  A
 
 ## Considerations
 
-All of the built-in supported blocks have been tested and will work out of the box in most cases.  But not all options will play nice 100% of the time, as blocks are wrapped in an animated wrapper which can sometimes lead to layout/positioning issues depending on the particular animation.  However, the animation editor has several "helper" options in the "formatting" section that resolve most issues, including an option to add a custom Class to the animation's wrapper which can then be targetted in the "Custom CSS" section in the plugin's main settings page.
+All of the built-in supported blocks have been tested and will work out of the box in most cases.  But not all options will play nice 100% of the time, as blocks are wrapped in an animated wrapper which can sometimes lead to layout/positioning issues depending on the animation used.  However, the animation editor has several "helper" options in the "formatting" section that resolve most issues, including an option to add a custom Class to the animation's wrapper which can then be targetted in the "Custom CSS" section in the plugin's main settings page.
 
 ## Not limited to Gutenberg Blocks
 
