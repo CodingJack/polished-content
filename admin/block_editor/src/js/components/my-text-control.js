@@ -1,25 +1,16 @@
 /**
  * WordPress dependencies.
  */
-const {
-	Button,
-	Icon,
-} = wp.components;
+const { Button, Icon } = wp.components;
 
-const {
-	useState,
-} = wp.element;
+const { useState } = wp.element;
 
 /**
  * Internal dependencies.
  */
-import {
-	namespace,
-	defaultValues,
-} from '../../../../../shared/js/data';
+import { namespace, defaultValues } from '../../../../../shared/js/data';
 
 const MyTextControl = ( {
-
 	prop,
 	label,
 	value,
@@ -30,12 +21,8 @@ const MyTextControl = ( {
 	min = 0,
 	max = 100,
 	type = 'number',
-
 } ) => {
-	const [
-		defaultValue,
-		setDefault,
-	] = useState( value );
+	const [ defaultValue, setDefault ] = useState( value );
 
 	const disabled = value === defaultValues[ prop ];
 
@@ -56,7 +43,11 @@ const MyTextControl = ( {
 			if ( isNaN( val ) || val < min || val > max ) {
 				callback( defaultValue, prop );
 			}
-		} else if ( validity === 'class' && curVal !== '' && ! /^[a-z _-][a-z \d_-]*$/i.test( curVal ) ) {
+		} else if (
+			validity === 'class' &&
+			curVal !== '' &&
+			! /^[a-z _-][a-z \d_-]*$/i.test( curVal )
+		) {
 			callback( defaultValue, prop );
 		}
 	};
@@ -74,10 +65,17 @@ const MyTextControl = ( {
 	};
 	return (
 		<>
-			<div className={ `${ namespace }-wrapper ${ namespace }-text-input` }>
+			<div
+				className={ `${ namespace }-wrapper ${ namespace }-text-input` }
+			>
 				<div className="components-base-control">
 					<div className="components-base-control__field">
-						<label className="components-base-control__label" htmlFor={ `inspector-select-control-${ prop }` }>{ label }</label>
+						<label
+							className="components-base-control__label"
+							htmlFor={ `inspector-select-control-${ prop }` }
+						>
+							{ label }
+						</label>
 						<input
 							name={ prop }
 							className="components-text-control__input"
@@ -90,12 +88,19 @@ const MyTextControl = ( {
 						/>
 					</div>
 					{ help && (
-						<p className="components-base-control__help">{ help }</p>
+						<p className="components-base-control__help">
+							{ help }
+						</p>
 					) }
 				</div>
 				{ type === 'number' && (
 					<div className={ `${ namespace }-small-btns` }>
-						<Button isSmall className={ `${ namespace }-iconbtn` } disabled={ disabled } onClick={ undoEvent }>
+						<Button
+							isSmall
+							className={ `${ namespace }-iconbtn` }
+							disabled={ disabled }
+							onClick={ undoEvent }
+						>
 							<Icon icon="no-alt" size="12" />
 						</Button>
 					</div>
@@ -106,4 +111,3 @@ const MyTextControl = ( {
 };
 
 export default MyTextControl;
-

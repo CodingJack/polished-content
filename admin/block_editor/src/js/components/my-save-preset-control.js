@@ -3,15 +3,9 @@
  */
 const { __ } = wp.i18n;
 
-const {
-	Button,
-	IconButton,
-	Spinner,
-} = wp.components;
+const { Button, IconButton, Spinner } = wp.components;
 
-const {
-	useState,
-} = wp.element;
+const { useState } = wp.element;
 
 /**
  * External dependencies.
@@ -22,34 +16,18 @@ import qs from 'qs';
 /**
  * Internal dependencies.
  */
-import {
-	addPreset,
-} from '../utils';
+import { addPreset } from '../utils';
 
-import {
-	namespace,
-	defaultValues,
-} from '../../../../../shared/js/data';
+import { namespace, defaultValues } from '../../../../../shared/js/data';
 
-const {
-	ajaxNonce,
-} = polishedContentGlobals; // eslint-disable-line no-undef
+const { ajaxNonce } = polishedContentGlobals; // eslint-disable-line no-undef
 
 const MySavePresetControl = ( { block } ) => {
-	const [
-		disabled,
-		setDisabled,
-	] = useState( true );
+	const [ disabled, setDisabled ] = useState( true );
 
-	const [
-		presetTitle,
-		updateTitle,
-	] = useState( '' );
+	const [ presetTitle, updateTitle ] = useState( '' );
 
-	const {
-		state,
-		updateState,
-	} = block;
+	const { state, updateState } = block;
 
 	const { rcMenuActive } = state;
 
@@ -65,7 +43,10 @@ const MySavePresetControl = ( { block } ) => {
 
 			// strip out block props not related to plugin and also props nthat equal defaults
 			Object.keys( obj ).forEach( ( key ) => {
-				if ( defaultValues[ key ] === undefined || obj[ key ] === defaultValues[ key ] ) {
+				if (
+					defaultValues[ key ] === undefined ||
+					obj[ key ] === defaultValues[ key ]
+				) {
 					delete obj[ key ];
 				}
 			} );
@@ -77,23 +58,36 @@ const MySavePresetControl = ( { block } ) => {
 				} );
 			};
 
-			axios.post( ajaxurl, qs.stringify( { // eslint-disable-line no-undef
-				action: 'polished_content',
-				nonce: ajaxNonce,
-				addremove: 'add',
-				name: presetTitle,
-				settings: JSON.stringify( obj ),
-			} ) ).then( ( st ) => {
-				if ( st.data === 'success' ) {
-					addPreset( presetTitle, obj );
-				} else {
-					console.log( st ); // eslint-disable-line no-console
-				}
-				releaseAjax();
-			} ).catch( () => {
-				console.log( __( 'Polished Content Ajax Request Failed', 'polished-content' ) ); // eslint-disable-line no-console
-				releaseAjax();
-			} );
+			/* eslint-disable */
+			axios
+				.post(
+					ajaxurl,
+					qs.stringify( {
+						action: 'polished_content',
+						nonce: ajaxNonce,
+						addremove: 'add',
+						name: presetTitle,
+						settings: JSON.stringify( obj ),
+					} )
+				)
+				.then( ( st ) => {
+					if ( st.data === 'success' ) {
+						addPreset( presetTitle, obj );
+					} else {
+						console.log( st );
+					}
+					releaseAjax();
+				} )
+				.catch( () => {
+					console.log(
+						__(
+							'Polished Content Ajax Request Failed',
+							'polished-content'
+						)
+					);
+					releaseAjax();
+				} );
+				/* eslint-enable */
 		} );
 	};
 
@@ -106,14 +100,34 @@ const MySavePresetControl = ( { block } ) => {
 						className={ `${ namespace }-preset-name` }
 						onChange={ ( e ) => updateTitle( e.target.value ) }
 						onKeyUp={ ( e ) => setDisabled( ! e.target.value ) }
-						placeholder={ __( 'Custom Preset Name', 'polished-content' ) }
-						ref={ ( input ) => ! rcMenuActive && input && input.focus() }
+						placeholder={ __(
+							'Custom Preset Name',
+							'polished-content'
+						) }
+						ref={ ( input ) =>
+							! rcMenuActive && input && input.focus()
+						}
 					/>
-					<Button className={ `${ namespace }-save-btn` } isPrimary disabled={ disabled } onClick={ savePreset }>
-						<span className={ `${ namespace }-save-text` }>{ __( 'Save Preset', 'polished-content' ) }<Spinner /></span>
+					<Button
+						className={ `${ namespace }-save-btn` }
+						isPrimary
+						disabled={ disabled }
+						onClick={ savePreset }
+					>
+						<span className={ `${ namespace }-save-text` }>
+							{ __( 'Save Preset', 'polished-content' ) }
+							<Spinner />
+						</span>
 					</Button>
 				</div>
-				<IconButton className={ `${ namespace }-mini-icon` } icon="no" size="24" onClick={ () => updateState( { showSavePresetModal: false } ) } />
+				<IconButton
+					className={ `${ namespace }-mini-icon` }
+					icon="no"
+					size="24"
+					onClick={ () =>
+						updateState( { showSavePresetModal: false } )
+					}
+				/>
 			</div>
 		</>
 	);

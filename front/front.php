@@ -5,12 +5,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( !class_exists( 'PolishedContentFront' ) ) {
+if ( ! class_exists( 'PolishedContentFront' ) ) {
 	
 	final class PolishedContentFront {
 	
 		private static $instance = null;
-		private $version = '1.0.0';
+		private $version = '1.1.0';
 		private $globalScript;
 		private $scriptUrl;
 		private $defaults;

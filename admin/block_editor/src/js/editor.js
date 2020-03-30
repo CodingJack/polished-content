@@ -1,17 +1,14 @@
 /**
+ * External dependencies.
+ */
+import gsap from 'gsap';
+
+/**
  * WordPress dependencies.
  */
-const {
-	Component,
-	createRef,
-} = wp.element;
+const { Component, createRef } = wp.element;
 
 const { __ } = wp.i18n;
-
-// sandboxing gsap
-import { gsap, gsapReset } from '../../../../shared/js/sandbox-gsap';
-require( 'gsap/umd/TweenMax' );
-gsapReset();
 
 /**
  * Internal dependencies.
@@ -23,10 +20,7 @@ import {
 	allDataProps,
 } from '../../../../shared/js/data';
 
-import {
-	playAnimation,
-	resetAnimation,
-} from './animation';
+import { playAnimation, resetAnimation } from './animation';
 
 import {
 	shouldAnimate,
@@ -83,8 +77,11 @@ class PolishedContentEditor extends Component {
 		this.onRightClick = this.onRightClick.bind( this );
 		this.hideRightClickMenu = this.hideRightClickMenu.bind( this );
 
-		this.hideClearBtn = ! checkChanges( { ...defaultValues }, { ...attributes } );
-		this.originalSettings = getOriginalSettings( { ... attributes } );
+		this.hideClearBtn = ! checkChanges(
+			{ ...defaultValues },
+			{ ...attributes }
+		);
+		this.originalSettings = getOriginalSettings( { ...attributes } );
 	}
 
 	/*
@@ -92,7 +89,7 @@ class PolishedContentEditor extends Component {
 	 * @param object args - the new state settings
 	 * @param function callback - a possible callback to call asynchronously
 	 * @since 1.0.0
-	*/
+	 */
 	updateState( args, callback ) {
 		// updateState is passed down to and called from child components as opposed to "setState"
 		// this makes it easier to debug
@@ -103,11 +100,12 @@ class PolishedContentEditor extends Component {
 	 * @desc handles all actions that are meant to change the block's attributes
 	 * @param object newProps - the new prop/values to set
 	 * @since 1.0.0
-	*/
+	 */
 	updateProps( newProps ) {
 		const { attributes } = this.props;
 		const animatable = animatableProps( { ...newProps } );
-		const animate = animatable && shouldAnimate( { ...attributes, ...newProps } );
+		const animate =
+			animatable && shouldAnimate( { ...attributes, ...newProps } );
 
 		// if the play button is paused but an animatable option was changed, auto-animate the preview
 		if ( animate ) {
@@ -124,7 +122,7 @@ class PolishedContentEditor extends Component {
 	 * @param string/boolean/number value - the prop's new value
 	 * @param string prop - the attribute's name
 	 * @since 1.0.0
-	*/
+	 */
 	updateProp( value, prop ) {
 		if ( prop === 'pcxEnabled' ) {
 			if ( value ) {
@@ -140,11 +138,9 @@ class PolishedContentEditor extends Component {
 	/*
 	 * @desc paste previously copied settings from right-click menu into a block
 	 * @since 1.0.0
-	*/
+	 */
 	updateBatchProps() {
-		const {
-			copiedSettings,
-		} = polishedContentGlobals; // eslint-disable-line no-undef
+		const { copiedSettings } = polishedContentGlobals; // eslint-disable-line no-undef
 
 		this.updateProps( { ...copiedSettings } );
 	}
@@ -155,10 +151,13 @@ class PolishedContentEditor extends Component {
 	 * @param boolean fromAjax - true if called after a save/delete preset event
 	 * @param boolean fromDelete - true if called from a delete preset event
 	 * @since 1.0.0
-	*/
+	 */
 	updateFromPreset( selectedPreset ) {
 		const { pcxAnimations } = selectOptions;
-		const newProps = { ...defaultValues, ...pcxAnimations[ selectedPreset ] };
+		const newProps = {
+			...defaultValues,
+			...pcxAnimations[ selectedPreset ],
+		};
 		this.updateProps( { ...newProps } );
 	}
 
@@ -167,7 +166,7 @@ class PolishedContentEditor extends Component {
 	 * @param object e - the event object if coming from a restore defaults button click
 	 * @param object originalSettings - the default values if coming from an undo changes action
 	 * @since 1.0.0
-	*/
+	 */
 	restoreProperties( e, originalSettings ) {
 		const newProps = originalSettings || defaultValues;
 		this.updateProps( { ...newProps } );
@@ -178,19 +177,16 @@ class PolishedContentEditor extends Component {
 	 * @param object prevProps - the component's previous props
 	 * @param object prevState - the component's previous state
 	 * @since 1.0.0
-	*/
+	 */
 	componentDidUpdate( prevProps, prevState ) {
-		const {
-			el,
-			container,
-		} = this.animatedElements;
+		const { el, container } = this.animatedElements;
 
 		const { current: curElement } = el;
 		const { current: curContainer } = container;
 
 		/*
 		 * check if the preview animation should play
-		*/
+		 */
 		if ( curElement && curContainer ) {
 			const { previewIsPlaying } = this.state;
 
@@ -204,10 +200,16 @@ class PolishedContentEditor extends Component {
 
 				// if the play/pause button was clicked, did the animatable props change?
 				if ( ! shouldPlay ) {
-					shouldPlay = compareProps( { ...prevAttributes }, { ...attributes } );
+					shouldPlay = compareProps(
+						{ ...prevAttributes },
+						{ ...attributes }
+					);
 				}
 				if ( shouldPlay ) {
-					playAnimation( curElement, curContainer, { ...defaultValues, ...attributes } );
+					playAnimation( curElement, curContainer, {
+						...defaultValues,
+						...attributes,
+					} );
 				} else {
 					const animate = shouldAnimate( { ...attributes } );
 
@@ -227,16 +229,23 @@ class PolishedContentEditor extends Component {
 	 * @param object nextProps - the component's new props
 	 * @param object nextState - the component's new state
 	 * @since 1.0.0
-	*/
+	 */
 	shouldComponentUpdate( nextProps, nextState ) {
 		const { attributes: prevAttrs } = this.props;
 		const { attributes: nextAttrs } = nextProps;
 
 		// compare two objects that definitely have the same keys
-		const statesEqual = objectValuesEqual( { ...this.state }, { ...nextState } );
+		const statesEqual = objectValuesEqual(
+			{ ...this.state },
+			{ ...nextState }
+		);
 
 		// compare two objects against a specific set of keys
-		const propsEqual = objectValuesEqual( { ...prevAttrs }, { ...nextAttrs }, allDataProps.slice() );
+		const propsEqual = objectValuesEqual(
+			{ ...prevAttrs },
+			{ ...nextAttrs },
+			allDataProps.slice()
+		);
 
 		return ! statesEqual || ! propsEqual;
 	}
@@ -248,7 +257,7 @@ class PolishedContentEditor extends Component {
 	 * @param object nextProps - the component's new props
 	 * @param object prevState - the component's previous state
 	 * @since 1.0.0
-	*/
+	 */
 	static getDerivedStateFromProps( nextProps, prevState ) {
 		// guarantees that we only set the new state after the setAttributes call
 		// view "setState" inside updateProps() to see how it works
@@ -261,10 +270,7 @@ class PolishedContentEditor extends Component {
 		const presetData = getPresetSelection( { ...attributes } );
 		const { hideCreatePresetBtn } = presetData;
 
-		const {
-			previewIsPlaying,
-			showSavePresetModal,
-		} = prevState;
+		const { previewIsPlaying, showSavePresetModal } = prevState;
 
 		// we may need to reset the play/pause button if there's nothing to animate
 		if ( previewIsPlaying ) {
@@ -287,7 +293,7 @@ class PolishedContentEditor extends Component {
 	 * @param Event e - will exist if triggered from a native event
 	 * @param boolean disable - if the user chooses "disable" from the right-click menu
 	 * @since 1.0.0
-	*/
+	 */
 	hideRightClickMenu( e, disable ) {
 		// if coming from a native event
 		if ( e ) {
@@ -301,7 +307,10 @@ class PolishedContentEditor extends Component {
 				const { target } = e;
 
 				// bounce when right-clicking over the right-click menu
-				if ( target.classList.contains( itmClass ) || target.closest( `.${ itmClass }` ) ) {
+				if (
+					target.classList.contains( itmClass ) ||
+					target.closest( `.${ itmClass }` )
+				) {
 					return;
 				}
 			}
@@ -321,24 +330,27 @@ class PolishedContentEditor extends Component {
 	 * @desc called activates the right click menu
 	 * @param Event e - the right click event object
 	 * @since 1.0.0
-	*/
+	 */
 	onRightClick( e ) {
 		const { target } = e;
 
 		// bounce if right-clicking over input text (to allow regular copy/paste)
-		if ( target.tagName.toLowerCase() === 'input' && target.type === 'text' ) {
+		if (
+			target.tagName.toLowerCase() === 'input' &&
+			target.type === 'text'
+		) {
 			return;
 		}
 
-		const {
-			rcMenuActive,
-			showSavePresetModal,
-		} = this.state;
+		const { rcMenuActive, showSavePresetModal } = this.state;
 
 		// bounce if right-click over the save preset modal
 		if ( showSavePresetModal ) {
 			const presetClass = `${ namespace }-save-preset`;
-			if ( target.classList.contains( presetClass ) || target.closest( `.${ presetClass }` ) ) {
+			if (
+				target.classList.contains( presetClass ) ||
+				target.closest( `.${ presetClass }` )
+			) {
 				return;
 			}
 		}
@@ -357,7 +369,10 @@ class PolishedContentEditor extends Component {
 		}
 
 		document.body.addEventListener( 'click', this.hideRightClickMenu );
-		document.body.addEventListener( 'contextmenu', this.hideRightClickMenu );
+		document.body.addEventListener(
+			'contextmenu',
+			this.hideRightClickMenu
+		);
 
 		this.setState( {
 			rcMenuActive: true,
@@ -368,7 +383,7 @@ class PolishedContentEditor extends Component {
 	/*
 	 * @desc added whenever the main settings panel is "enabled"
 	 * @since 1.0.0
-	*/
+	 */
 	addRightClickListener() {
 		const { current } = this.settingsRef;
 		if ( current ) {
@@ -379,16 +394,19 @@ class PolishedContentEditor extends Component {
 	/*
 	 * @desc removes right click event listeners from the body
 	 * @since 1.0.0
-	*/
+	 */
 	removeBodyRcListeners() {
 		document.body.removeEventListener( 'click', this.hideRightClickMenu );
-		document.body.removeEventListener( 'contextmenu', this.hideRightClickMenu );
+		document.body.removeEventListener(
+			'contextmenu',
+			this.hideRightClickMenu
+		);
 	}
 
 	/*
 	 * @desc added whenever the main settings panel is "disabled"
 	 * @since 1.0.0
-	*/
+	 */
 	removeAllRcListeners() {
 		this.removeBodyRcListeners();
 		const { current } = this.settingsRef;
@@ -403,7 +421,7 @@ class PolishedContentEditor extends Component {
 	 *       native React synthetic event can't be used for the right-click menu
 	 *       because we need to catch the event before it bubbles to the root
 	 * @since 1.0.0
-	*/
+	 */
 	componentDidMount() {
 		const { attributes } = this.props;
 		const { pcxEnabled } = attributes;
@@ -416,11 +434,12 @@ class PolishedContentEditor extends Component {
 	/*
 	 * @desc kill gsap animations for garbage collection
 	 * @since 1.0.0
-	*/
+	 */
 	componentWillUnmount() {
-		gsap.TweenMax.killAll( true );
-		this.removeAllRcListeners();
+		const { globalTimeline } = gsap;
+		globalTimeline.clear();
 
+		this.removeAllRcListeners();
 		this.settingsRef = null;
 		this.animatedElements = null;
 	}
@@ -463,14 +482,24 @@ class PolishedContentEditor extends Component {
 		};
 
 		const ajaxIsLoading = ! ajaxLoading ? '' : ' pcx-ajax-loading';
-		const onClear = ! hideClearBtn && selectedPreset !== 'PcxDefaults' ? restoreProperties : false;
+		const onClear =
+			! hideClearBtn && selectedPreset !== 'PcxDefaults'
+				? restoreProperties
+				: false;
 
-		const hasUndo = checkChanges( { ...originalSettings }, { ...attributes }, { ...defaultValues } );
+		const hasUndo = checkChanges(
+			{ ...originalSettings },
+			{ ...attributes },
+			{ ...defaultValues }
+		);
 		const onUndo = hasUndo ? restoreProperties : false;
 
 		return (
 			<>
-				<div className={ `${ namespace }-settings${ ajaxIsLoading }` } ref={ settingsRef }>
+				<div
+					className={ `${ namespace }-settings${ ajaxIsLoading }` }
+					ref={ settingsRef }
+				>
 					<MyToggleControl
 						prop="pcxEnabled"
 						label={ __( 'Enable/Disable', 'polished-content' ) }
@@ -479,7 +508,10 @@ class PolishedContentEditor extends Component {
 					/>
 					{ pcxEnabled && (
 						<>
-							<MyHeaderControl block={ block } ref={ animatedElements } />
+							<MyHeaderControl
+								block={ block }
+								ref={ animatedElements }
+							/>
 							<hr />
 							<MyTabPanels block={ block } />
 							<MyResetButtons

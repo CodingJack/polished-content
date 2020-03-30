@@ -5,12 +5,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( !class_exists( 'PolishedContentAdmin' ) ) {
+if ( ! class_exists( 'PolishedContentAdmin' ) ) {
 
 	final class PolishedContentAdmin {
 		
 		private static $instance = null;
-		private $version = '1.0.0';
+		private $version = '1.1.0';
 		
 		public static function instance() {
 			

@@ -25,7 +25,7 @@ class Loader extends Component {
 
 		if ( ! loaded ) {
 			polishedContentGlobals.loaded = true; // eslint-disable-line no-undef
-			
+
 			const totalTime = new Date().getTime() - this.startTime;
 			const { bufferTime } = this.props;
 
@@ -51,18 +51,18 @@ class Loader extends Component {
 
 		if ( ! Module ) {
 			return (
-				<div className={ `${ namespace }-loading` } >
-					<Spinner />{ __( 'Loading Settings...', 'polished-content' ) }
+				<div className={ `${ namespace }-loading` }>
+					<Spinner />
+					{ __( 'Loading Settings...', 'polished-content' ) }
 				</div>
 			);
 		}
 
-		const {
-			setAttributes,
-			attributes,
-		} = this.props;
+		const { setAttributes, attributes } = this.props;
 
-		return <Module setAttributes={ setAttributes } attributes={ attributes } />;
+		return (
+			<Module setAttributes={ setAttributes } attributes={ attributes } />
+		);
 	}
 }
 

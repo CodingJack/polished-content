@@ -3,14 +3,9 @@
  */
 const { __ } = wp.i18n;
 
-const {
-	Button,
-	Icon,
-} = wp.components;
+const { Button, Icon } = wp.components;
 
-const {
-	forwardRef,
-} = wp.element;
+const { forwardRef } = wp.element;
 
 /**
  * Internal dependencies.
@@ -22,40 +17,20 @@ import {
 	defaultValues,
 } from '../../../../../shared/js/data';
 
-import {
-	shouldAnimate,
-	getPrevNextSelection,
-} from '../utils';
+import { shouldAnimate, getPrevNextSelection } from '../utils';
 
 import MySavePresetControl from './my-save-preset-control';
 
-const {
-	isRtl,
-} = polishedContentGlobals; // eslint-disable-line no-undef
+const { isRtl } = polishedContentGlobals; // eslint-disable-line no-undef
 
 const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
-	const {
-		props,
-		state,
-		updateState,
-		updateFromPreset,
-	} = block;
+	const { props, state, updateState, updateFromPreset } = block;
 
-	const {
-		pcxMask,
-		pcxGrayscale,
-	} = props;
+	const { pcxMask, pcxGrayscale } = props;
 
-	const {
-		selectedPreset,
-		hideCreatePresetBtn,
-		showSavePresetModal,
-	} = state;
+	const { selectedPreset, hideCreatePresetBtn, showSavePresetModal } = state;
 
-	const {
-		el,
-		container,
-	} = animatedElements;
+	const { el, container } = animatedElements;
 
 	const { previewIsPlaying } = state;
 	const { pcxPresets } = selectOptions;
@@ -64,16 +39,29 @@ const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
 	const playPause = () => {
 		// if the preset dropdown is set to "Select a Preset", just play the next animateable preset
 		if ( selectedPreset === 'PcxDefaults' ) {
-			let selection = getPrevNextSelection( pcxPresets, values, 'PcxDefaults', true );
+			let selection = getPrevNextSelection(
+				pcxPresets,
+				values,
+				'PcxDefaults',
+				true
+			);
 
 			// the next preset could be "custom values", and there might not be anything to animate
 			// so just move on to the next default preset in that case which will have animateable values
 			if ( selection === 'PcxCustom' ) {
 				const { pcxAnimations } = selectOptions;
-				const newProps = { ...defaultValues, ...pcxAnimations[ selection ] };
+				const newProps = {
+					...defaultValues,
+					...pcxAnimations[ selection ],
+				};
 				const animate = shouldAnimate( { ...newProps } );
 				if ( ! animate ) {
-					selection = getPrevNextSelection( pcxPresets, values, selection, true );
+					selection = getPrevNextSelection(
+						pcxPresets,
+						values,
+						selection,
+						true
+					);
 				}
 			}
 
@@ -94,12 +82,21 @@ const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
 	};
 
 	const onClickPrev = () => {
-		const selection = getPrevNextSelection( pcxPresets, values, selectedPreset );
+		const selection = getPrevNextSelection(
+			pcxPresets,
+			values,
+			selectedPreset
+		);
 		updateFromPreset( selection );
 	};
 
 	const onClickNext = () => {
-		const selection = getPrevNextSelection( pcxPresets, values, selectedPreset, true );
+		const selection = getPrevNextSelection(
+			pcxPresets,
+			values,
+			selectedPreset,
+			true
+		);
 		updateFromPreset( selection );
 	};
 
@@ -107,7 +104,8 @@ const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
 	const isPlaying = previewIsPlaying ? ' is-playing' : '';
 	const grayscale = parseInt( pcxGrayscale, 10 ) > 0 ? ' pcx-grayscale' : '';
 
-	const playPauseDisabled = selectedPreset !== 'PcxDefaults' && ! shouldAnimate( { ...props } );
+	const playPauseDisabled =
+		selectedPreset !== 'PcxDefaults' && ! shouldAnimate( { ...props } );
 	const btnDisabled = showSavePresetModal || playPauseDisabled;
 
 	let iconLeft;
@@ -124,21 +122,64 @@ const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
 	return (
 		<>
 			<div className={ `${ namespace }-wrap` }>
-				<div className={ `${ namespace }-preview-wrap` } ref={ container } >
-					<div className={ `${ namespace }-preview-container${ maskEnabed }${ grayscale }` } >
-						<span className={ `${ namespace }-preview-el` } ref={ el } ><Icon icon="text" size="72" /></span>
+				<div
+					className={ `${ namespace }-preview-wrap` }
+					ref={ container }
+				>
+					<div
+						className={ `${ namespace }-preview-container${ maskEnabed }${ grayscale }` }
+					>
+						<span
+							className={ `${ namespace }-preview-el` }
+							ref={ el }
+						>
+							<Icon icon="text" size="72" />
+						</span>
 						{ grayscale && (
-							<svg className={ `${ namespace }-gradient` } xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 20 20">
+							<svg
+								className={ `${ namespace }-gradient` }
+								xmlns="http://www.w3.org/2000/svg"
+								width="72"
+								height="72"
+								viewBox="0 0 20 20"
+							>
 								<defs>
-									<linearGradient id={ `${ namespace }-linear` } x1="0" x2="0" y1="0" y2="1">
+									<linearGradient
+										id={ `${ namespace }-linear` }
+										x1="0"
+										x2="0"
+										y1="0"
+										y2="1"
+									>
 										<stop offset="0%" stopColor="#59253a" />
-										<stop offset="25%" stopColor="#59253a" />
-										<stop offset="25%" stopColor="#895061" />
-										<stop offset="50%" stopColor="#895061" />
-										<stop offset="50%" stopColor="#0677a1" />
-										<stop offset="75%" stopColor="#0677a1" />
-										<stop offset="75%" stopColor="#2d4159" />
-										<stop offset="100%" stopColor="#2d4159" />
+										<stop
+											offset="25%"
+											stopColor="#59253a"
+										/>
+										<stop
+											offset="25%"
+											stopColor="#895061"
+										/>
+										<stop
+											offset="50%"
+											stopColor="#895061"
+										/>
+										<stop
+											offset="50%"
+											stopColor="#0677a1"
+										/>
+										<stop
+											offset="75%"
+											stopColor="#0677a1"
+										/>
+										<stop
+											offset="75%"
+											stopColor="#2d4159"
+										/>
+										<stop
+											offset="100%"
+											stopColor="#2d4159"
+										/>
 									</linearGradient>
 								</defs>
 							</svg>
@@ -180,10 +221,12 @@ const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
 				className={ `${ namespace }-create-preset` }
 				onClick={ createPreset }
 				aria-disabled={ hideCreatePresetBtn || showSavePresetModal }
-			> { __( 'Create Preset', 'polished-content' ) }</Button>
+			>
+				{ ' ' }
+				{ __( 'Create Preset', 'polished-content' ) }
+			</Button>
 		</>
 	);
 } );
 
 export default MyPreviewControl;
-

@@ -3,9 +3,7 @@
  */
 const { __ } = wp.i18n;
 
-const {
-	PanelRow,
-} = wp.components;
+const { PanelRow } = wp.components;
 
 /**
  * Internal dependencies.
@@ -15,19 +13,12 @@ import MyPositionGridControl from '../components/my-position-grid-control';
 import MySelectControl from '../components/my-select-control';
 import MySelectWrapper from '../components/my-select-wrapper';
 
-import {
-	HelpSettingsLink,
-} from '../components/my-tab-title-labels';
+import { HelpSettingsLink } from '../components/my-tab-title-labels';
 
-import {
-	namespace,
-} from '../../../../../shared/js/data';
+import { namespace } from '../../../../../shared/js/data';
 
 const MyAdvancedPanel = ( { block } ) => {
-	const {
-		props,
-		updateProp,
-	} = block;
+	const { props, updateProp } = block;
 
 	const {
 		pcxLetterSpacing,
@@ -43,12 +34,15 @@ const MyAdvancedPanel = ( { block } ) => {
 
 	let letterSpacingHelp;
 	if ( pcxLetterSpacing > 0 ) {
-		letterSpacingHelp = __( 'Letter Spacing is only compatible with text that would normally always appear on a single line', 'polished-content' );
+		letterSpacingHelp = __(
+			'Letter Spacing is only compatible with text that would normally always appear on a single line',
+			'polished-content'
+		);
 	}
 
 	const perspective = pcxPerspective.toString().replace( 'vw', '' );
 	const perspectHelpStart = __( 'vw would equal', 'polished-content' );
-	const perspectHelpEnd = __( '% of the screen\'s width', 'polished-content' );
+	const perspectHelpEnd = __( "% of the screen's width", 'polished-content' );
 	const persepectiveHelp = `${ perspective }${ perspectHelpStart } ${ perspective }${ perspectHelpEnd }`;
 
 	return (
@@ -103,7 +97,10 @@ const MyAdvancedPanel = ( { block } ) => {
 				min={ -180 }
 				max={ 180 }
 			/>
-			<div id={ `${ namespace }-transform-origin-wrap` } className={ `${ namespace }-positions polished-content-position-first` }>
+			<div
+				id={ `${ namespace }-transform-origin-wrap` }
+				className={ `${ namespace }-positions polished-content-position-first` }
+			>
 				<PanelRow>
 					<MySelectControl
 						prop="pcxTransformOrigin"
@@ -121,7 +118,10 @@ const MyAdvancedPanel = ( { block } ) => {
 			<MySelectWrapper
 				prop="pcxPerspective"
 				label={ __( '3D Perspective', 'polished-content' ) }
-				customLabel={ __( 'Custom 3D Perspective', 'polished-content' ) }
+				customLabel={ __(
+					'Custom 3D Perspective',
+					'polished-content'
+				) }
 				value={ pcxPerspective }
 				callback={ updateProp }
 				custom="custom"
@@ -133,15 +133,26 @@ const MyAdvancedPanel = ( { block } ) => {
 			/>
 			<MySelectWrapper
 				prop="pcxTransformReset"
-				label={ __( 'Reset Transform Origin at...', 'polished-content' ) }
-				customLabel={ __( 'Transform Origin Reset Width', 'polished-content' ) }
+				label={ __(
+					'Reset Transform Origin at...',
+					'polished-content'
+				) }
+				customLabel={ __(
+					'Transform Origin Reset Width',
+					'polished-content'
+				) }
 				value={ pcxTransformReset }
 				callback={ updateProp }
 				custom="custom"
 				component="text"
-				help={ (
-					<HelpSettingsLink text={ __( 'Reset transform-origin to center at a certain screen width set in the ', 'polished-content' ) } />
-				) }
+				help={
+					<HelpSettingsLink
+						text={ __(
+							'Reset transform-origin to center at a certain screen width set in the ',
+							'polished-content'
+						) }
+					/>
+				}
 			/>
 		</>
 	);

@@ -4,31 +4,19 @@
  * WordPress dependencies.
  */
 
-const {
-	Button,
-	Icon,
-	BaseControl,
-} = wp.components;
+const { Button, Icon, BaseControl } = wp.components;
 
 /**
  * Internal dependencies.
  */
 
-import {
-	namespace,
-	selectOptions,
-} from '../../../../../shared/js/data';
+import { namespace, selectOptions } from '../../../../../shared/js/data';
 
-import {
-	getPrevNextSelection,
-} from '../utils';
+import { getPrevNextSelection } from '../utils';
 
-const {
-	isRtl,
-} = polishedContentGlobals; // eslint-disable-line no-undef
+const { isRtl } = polishedContentGlobals; // eslint-disable-line no-undef
 
 const MySelectControl = ( {
-
 	prop,
 	label,
 	value,
@@ -38,7 +26,6 @@ const MySelectControl = ( {
 	className,
 	instanceId,
 	buttons = true,
-
 } ) => {
 	const selectionOptions = options || selectOptions;
 	const values = selectionOptions[ prop ].map( ( option ) => option.value );
@@ -49,12 +36,21 @@ const MySelectControl = ( {
 	};
 
 	const onClickPrev = () => {
-		const selection = getPrevNextSelection( selectionOptions[ prop ], values, value );
+		const selection = getPrevNextSelection(
+			selectionOptions[ prop ],
+			values,
+			value
+		);
 		callback( selection, prop );
 	};
 
 	const onClickNext = () => {
-		const selection = getPrevNextSelection( selectionOptions[ prop ], values, value, true );
+		const selection = getPrevNextSelection(
+			selectionOptions[ prop ],
+			values,
+			value,
+			true
+		);
 		callback( selection, prop );
 	};
 
@@ -73,8 +69,16 @@ const MySelectControl = ( {
 
 	return (
 		<>
-			<div id={ `${ namespace }-${ prop }` } className={ `${ namespace }-wrapper ${ namespace }-select-wrap` }>
-				<BaseControl label={ label } id={ id } help={ help } className={ className }>
+			<div
+				id={ `${ namespace }-${ prop }` }
+				className={ `${ namespace }-wrapper ${ namespace }-select-wrap` }
+			>
+				<BaseControl
+					label={ label }
+					id={ id }
+					help={ help }
+					className={ className }
+				>
 					<select
 						value={ value }
 						className="components-select-control__input"
@@ -100,14 +104,20 @@ const MySelectControl = ( {
 							className={ `${ namespace }-iconbtn` }
 							onClick={ onClickPrev }
 						>
-							<Icon icon={ `arrow-${ iconLeft }-alt2` } size="12" />
+							<Icon
+								icon={ `arrow-${ iconLeft }-alt2` }
+								size="12"
+							/>
 						</Button>
 						<Button
 							isSmall
 							className={ `${ namespace }-iconbtn` }
 							onClick={ onClickNext }
 						>
-							<Icon icon={ `arrow-${ iconRight }-alt2` } size="12" />
+							<Icon
+								icon={ `arrow-${ iconRight }-alt2` }
+								size="12"
+							/>
 						</Button>
 					</div>
 				) }

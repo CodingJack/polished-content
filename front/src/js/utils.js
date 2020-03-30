@@ -1,11 +1,7 @@
 /**
  * External dependencies.
  */
-
-// sandboxing gsap
-import { gsap, gsapReset } from '../../../shared/js/sandbox-gsap';
-require( 'gsap/umd/TweenMax' );
-gsapReset();
+import { TweenMax } from 'gsap';
 
 /**
  * Internal dependencies.
@@ -17,9 +13,7 @@ import {
 	transformable,
 } from '../../../shared/js/data';
 
-import {
-	getMovements,
-} from './getters';
+import { getMovements } from './getters';
 
 /*
  * @desc converts property values taken from class names into primitive values
@@ -27,7 +21,7 @@ import {
  * @param string value - the animation property value
  * @returns string||number||boolean - animation value
  * @since 1.0.0
-*/
+ */
 export const formatValue = ( prop, value ) => {
 	const defaultOption = defaultData[ prop ];
 
@@ -47,11 +41,11 @@ export const formatValue = ( prop, value ) => {
 };
 
 /*
- * @desc creates an Object to be passed to gsap.set() which resets the CSS on an element
+ * @desc creates an Object to be passed to TweenMax.set() which resets the CSS on an element
  * @param object props - current animation properties
  * @returns object - CSS reset object
  * @since 1.0.0
-*/
+ */
 export const createCssReset = ( props, ieClip ) => {
 	const obj = {};
 
@@ -106,7 +100,7 @@ export const createCssReset = ( props, ieClip ) => {
  * @param HTMLElement el - the animated element
  * @param array classNames - the list of classes to add
  * @since 1.0.0
-*/
+ */
 export const addClasses = ( el, classNames ) => {
 	classNames.forEach( ( clas ) => el.classList.add( clas ) );
 };
@@ -115,9 +109,13 @@ export const addClasses = ( el, classNames ) => {
  * @desc removes all plugin classes from the element
  * @param HTMLElement el - the animated element
  * @since 1.0.0
-*/
+ */
 export const removeClasses = ( el ) => {
-	const classes = el.className.split( ' ' ).filter( ( c ) => ! c.startsWith( 'pcx' ) && ! c.startsWith( namespace ) );
+	const classes = el.className
+		.split( ' ' )
+		.filter(
+			( c ) => ! c.startsWith( 'pcx' ) && ! c.startsWith( namespace )
+		);
 	const newClasses = classes.join( ' ' ).trim();
 
 	if ( newClasses ) {
@@ -133,7 +131,7 @@ export const removeClasses = ( el ) => {
  * @param HTMLElement el - the animated element
  * @param object styles - CSS properties and values to reset
  * @since 1.0.0
-*/
+ */
 export const resetElement = ( el, styles ) => {
 	const css = { ...styles };
 	const { clip } = css;
@@ -144,7 +142,7 @@ export const resetElement = ( el, styles ) => {
 		delete css.clip;
 	}
 
-	gsap.TweenMax.set( el, css );
+	TweenMax.set( el, css );
 };
 
 /*
@@ -152,7 +150,7 @@ export const resetElement = ( el, styles ) => {
  * @param object props - the animation object
  * @returns boolean - animation value
  * @since 1.0.0
-*/
+ */
 export const checkOverflow = ( props ) => {
 	const len = transformable.length;
 
@@ -178,13 +176,9 @@ export const checkOverflow = ( props ) => {
  * @param boolean reverse - if the animation is setup for reverse movements
  * @returns object - animation position x/y values
  * @since 1.0.0
-*/
+ */
 export const newPositions = ( rect, props, reverse ) => {
-	const {
-		posX,
-		posY,
-		pcxStrength,
-	} = props;
+	const { posX, posY, pcxStrength } = props;
 
 	const positions = {};
 
@@ -207,7 +201,12 @@ export const newPositions = ( rect, props, reverse ) => {
 				revPosY = posY === 'top' ? 'bottom' : 'top';
 			}
 
-			positions.reversePos = getMovements( rect, revPosX, revPosY, pcxStrength );
+			positions.reversePos = getMovements(
+				rect,
+				revPosX,
+				revPosY,
+				pcxStrength
+			);
 		}
 	}
 
@@ -220,15 +219,11 @@ export const newPositions = ( rect, props, reverse ) => {
  * @param array viewportWidths - screen widths that act as CSS breakpoints for the enabledViews
  * @returns boolean - if the animation should happen or not
  * @since 1.0.0
-*/
+ */
 export const checkScreens = ( enabledViews, viewportWidths ) => {
-	const {
-		length,
-	} = viewportWidths;
+	const { length } = viewportWidths;
 
-	const {
-		innerWidth: width,
-	} = window;
+	const { innerWidth: width } = window;
 
 	let shouldAnimate;
 
@@ -252,7 +247,7 @@ export const checkScreens = ( enabledViews, viewportWidths ) => {
  * @param number breakValue - the screen width to break at
  * @returns boolean - if the animation props should be reset
  * @since 1.0.0
-*/
+ */
 export const checkScreenBreak = ( viewportWidths, breakValue ) => {
 	const viewWidths = viewportWidths.slice();
 	viewWidths.shift();
@@ -260,7 +255,8 @@ export const checkScreenBreak = ( viewportWidths, breakValue ) => {
 	const views = [ 'laptop', 'tablet', 'smartphone' ];
 	const index = views.indexOf( breakValue );
 
-	const viewWidth = index !== -1 ? viewWidths[ index ] : parseInt( breakValue, 10 );
+	const viewWidth =
+		index !== -1 ? viewWidths[ index ] : parseInt( breakValue, 10 );
 	return window.innerWidth <= viewWidth;
 };
 
@@ -268,17 +264,19 @@ export const checkScreenBreak = ( viewportWidths, breakValue ) => {
  * @desc see if we need to use the fall back "clip" for IE/Edge
  * @returns boolean - if CSS clip-path is supported
  * @since 1.0.0
-*/
+ */
 export const checkClipPath = () => {
 	const div = document.createElement( 'div' );
 	div.style.webkitClipPath = 'inset(25% 25% 25% 25%)';
 	div.style.clipPath = 'inset(25% 25% 25% 25%)';
 
-	const clipPath = div.style[ 'clip-path' ] && div.style[ 'clip-path' ] !== 'none';
-	const webkitClipPath = div.style[ '-webkit-clip-path' ] && div.style[ '-webkit-clip-path' ] !== 'none';
+	const clipPath =
+		div.style[ 'clip-path' ] && div.style[ 'clip-path' ] !== 'none';
+	const webkitClipPath =
+		div.style[ '-webkit-clip-path' ] &&
+		div.style[ '-webkit-clip-path' ] !== 'none';
 	return {
 		supportsClipPath: clipPath || webkitClipPath,
 		webkitClipPath: ! clipPath && webkitClipPath,
 	};
 };
-

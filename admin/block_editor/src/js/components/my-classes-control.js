@@ -3,31 +3,20 @@
  */
 const { __ } = wp.i18n;
 
-const {
-	TextControl,
-	ToggleControl,
-} = wp.components;
+const { TextControl, ToggleControl } = wp.components;
 
-const {
-	useState,
-} = wp.element;
+const { useState } = wp.element;
 
 /**
  * Internal dependencies.
  */
-import {
-	namespace,
-	defaultValues,
-} from '../../../../../shared/js/data';
+import { namespace, defaultValues } from '../../../../../shared/js/data';
 
 import { getClasses } from '../utils';
 import { HelpSettingsLink } from './my-tab-title-labels';
 
 const MyClassesControl = ( { block } ) => {
-	const [
-		enabled,
-		toggleEnabled,
-	] = useState( false );
+	const [ enabled, toggleEnabled ] = useState( false );
 
 	let currentClasses;
 	let enabledClass = '';
@@ -43,14 +32,11 @@ const MyClassesControl = ( { block } ) => {
 		} );
 
 		const settings = getClasses( curAnimation );
-		const {
-			classes,
-			animate,
-		} = settings;
+		const { classes, animate } = settings;
 
 		currentClasses = animate ? `polished-content${ classes }` : '';
 		enabledClass = ` ${ namespace }-classes-enabled`;
-		
+
 		onChange = () => {};
 		onFocus = ( e ) => e.target.select();
 	}
@@ -62,7 +48,10 @@ const MyClassesControl = ( { block } ) => {
 				className={ `${ namespace }-toggle-classes${ enabledClass }` }
 				checked={ enabled }
 				onChange={ ( checked ) => toggleEnabled( checked ) }
-				help={ __( 'Add these classes to any of your site\'s page/post content to animate it with the current settings', 'polished-content' ) }
+				help={ __(
+					"Add these classes to any of your site's page/post content to animate it with the current settings",
+					'polished-content'
+				) }
 			/>
 			{ enabled && (
 				<TextControl
@@ -71,9 +60,14 @@ const MyClassesControl = ( { block } ) => {
 					value={ currentClasses }
 					onChange={ onChange }
 					onFocus={ onFocus }
-					help={ (
-						<HelpSettingsLink text={ __( 'When adding animation classes to non-Block content the plugin\'s script can be loaded manually from the ', 'polished-content' ) } />
-					) }
+					help={
+						<HelpSettingsLink
+							text={ __(
+								"When adding animation classes to non-Block content the plugin's script can be loaded manually from the ",
+								'polished-content'
+							) }
+						/>
+					}
 				/>
 			) }
 		</>

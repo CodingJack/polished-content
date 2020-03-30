@@ -19,12 +19,20 @@ class ErrorBoundary extends Component {
 		if ( hasError ) {
 			return (
 				<p>
-					{ __( 'Something went wrong.  Please ', 'polished-content' ) }
+					{ __(
+						'Something went wrong.  Please ',
+						'polished-content'
+					) }
 					<br />
-					<a href="https://github.com/CodingJack/polished-content/issues/new">{ __( 'report', 'polished-content' ) }</a>
+					<a href="https://github.com/CodingJack/polished-content/issues/new">
+						{ __( 'report', 'polished-content' ) }
+					</a>
 					{ __( ' the error below.', 'polished-content' ) }
-					<br /><br />
-					<p style={ { fontStyle: 'italic' } }>{ hasError.toString() }</p>
+					<br />
+					<br />
+					<p style={ { fontStyle: 'italic' } }>
+						{ hasError.toString() }
+					</p>
 				</p>
 			);
 		}

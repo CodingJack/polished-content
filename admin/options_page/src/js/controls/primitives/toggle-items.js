@@ -24,7 +24,13 @@ const ToggleItems = ( { namespace, list, callback, prop, data } ) => {
 	};
 
 	return (
-		<button type="button" className={ `button ${ namespace }-toggle` } onClick={ onClick }>{ __( 'toggle', 'polished-content' ) }</button>
+		<button
+			type="button"
+			className={ `button ${ namespace }-toggle` }
+			onClick={ onClick }
+		>
+			{ __( 'toggle', 'polished-content' ) }
+		</button>
 	);
 };
 

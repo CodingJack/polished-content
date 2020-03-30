@@ -3,9 +3,7 @@
  */
 const { __ } = wp.i18n;
 
-const {
-	PanelRow,
-} = wp.components;
+const { PanelRow } = wp.components;
 
 /**
  * Internal dependencies.
@@ -15,19 +13,12 @@ import MySelectControl from '../components/my-select-control';
 import MyToggleControl from '../components/my-toggle-control';
 import MySelectWrapper from '../components/my-select-wrapper';
 
-import {
-	HelpSettingsLink,
-} from '../components/my-tab-title-labels';
+import { HelpSettingsLink } from '../components/my-tab-title-labels';
 
-import {
-	namespace,
-} from '../../../../../shared/js/data';
+import { namespace } from '../../../../../shared/js/data';
 
 const MyTimingPanel = ( { block } ) => {
-	const {
-		props,
-		updateProp,
-	} = block;
+	const { props, updateProp } = block;
 
 	const {
 		pcxReverse,
@@ -45,7 +36,10 @@ const MyTimingPanel = ( { block } ) => {
 	const easeCheck = pcxEasing === 'Back' || pcxEasing === 'Elastic';
 
 	if ( easeCheck && pcxReverse && pcxScrollType !== 'in' ) {
-		easingMessage = __( 'This easing function can be visually glitchy when combined with the "Auto Reverse" option', 'polished-content' );
+		easingMessage = __(
+			'This easing function can be visually glitchy when combined with the "Auto Reverse" option',
+			'polished-content'
+		);
 	}
 
 	return (
@@ -102,9 +96,14 @@ const MyTimingPanel = ( { block } ) => {
 				callback={ updateProp }
 				component="text"
 				custom="custom"
-				help={ (
-					<HelpSettingsLink text={ __( 'Remove delays at a certain viewport width set in the plugin\'s', 'polished-content' ) } />
-				) }
+				help={
+					<HelpSettingsLink
+						text={ __(
+							"Remove delays at a certain viewport width set in the plugin's",
+							'polished-content'
+						) }
+					/>
+				}
 			/>
 			{ pcxEaseDirection !== 'easeInOut' && (
 				<MyToggleControl
@@ -112,7 +111,10 @@ const MyTimingPanel = ( { block } ) => {
 					label={ __( 'Reverse Easing', 'polished-content' ) }
 					checked={ pcxEaseReverse }
 					callback={ updateProp }
-					help={ __( 'easeOut will become easeIn when animating out and vice versa', 'polished-content' ) }
+					help={ __(
+						'easeOut will become easeIn when animating out and vice versa',
+						'polished-content'
+					) }
 				/>
 			) }
 		</>

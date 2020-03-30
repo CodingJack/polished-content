@@ -5,19 +5,14 @@
 require( 'intersection-observer' );
 require( 'requestidlecallback' );
 
-// sandboxing gsap
-import { gsap, gsapReset } from '../../../shared/js/sandbox-gsap';
-require( 'gsap/umd/TweenMax' );
-gsapReset();
+import gsap from 'gsap';
 
 /**
  * Internal dependencies.
  */
 
-import {
-	namespace,
-	defaultValues,
-} from '../../../shared/js/data';
+import { namespace, defaultValues } from '../../../shared/js/data';
+import { easeLookup } from '../../../shared/js/migration';
 
 import {
 	addClasses,
@@ -31,10 +26,7 @@ import {
 	checkScreenBreak,
 } from './utils';
 
-import {
-	buildAnimation,
-	onUpdateTween,
-} from './animation';
+import { buildAnimation, onUpdateTween } from './animation';
 
 import {
 	setIeClip,
@@ -58,15 +50,12 @@ let resizeAdded;
 let overflowAdded;
 let cachedWindowWidth;
 
-const {
-	supportsClipPath,
-	webkitClipPath,
-} = checkClipPath();
+const { supportsClipPath, webkitClipPath } = checkClipPath();
 
 /*
  * @desc global window resize event
  * @since 1.0.0
-*/
+ */
 const onResizeEvent = () => {
 	// solves issue where resize can be triggered from scrolling on mobile
 	const winWidth = window.innerWidth;
@@ -86,7 +75,7 @@ const onResizeEvent = () => {
 /*
  * @desc adds global resize events after initial init
  * @since 1.0.0
-*/
+ */
 const addResizeEvents = () => {
 	cachedWindowWidth = window.innerWidth;
 	window.addEventListener( 'resize', onResizeEvent );
@@ -97,7 +86,7 @@ const addResizeEvents = () => {
  * @desc loop function for the IntersectionObserver entries
  * @param object entry - IntersectionObserver entry
  * @since 1.0.0
-*/
+ */
 const observeForEach = ( entry ) => {
 	const pcx = pcxs[ entry.target.dataset.pcx ];
 	if ( pcx ) {
@@ -109,7 +98,7 @@ const observeForEach = ( entry ) => {
  * @desc loop function for the IntersectionObserver "reverse" entries
  * @param object entry - IntersectionObserver entry
  * @since 1.0.0
-*/
+ */
 const observeForEachReverse = ( entry ) => {
 	const pcx = pcxs[ entry.target.dataset.pcx ];
 	if ( pcx ) {
@@ -121,7 +110,7 @@ const observeForEachReverse = ( entry ) => {
  * @desc the core observer event used for all animations
  * @param array entries - IntersectionObserver event entries
  * @since 1.0.0
-*/
+ */
 const observerEvent = ( entries ) => {
 	entries.forEach( observeForEach );
 };
@@ -129,13 +118,13 @@ const observerEvent = ( entries ) => {
 /*
  * Thresholds will always be the same for the main animation observer but margins can vary
  * so observers will be reused if possible and only created if a new margin is needed
-*/
+ */
 const threshold = [ ...Array( 101 ).keys() ].map( ( x ) => x * 0.01 );
 
 /*
  * @desc the initial observer used to lazy-load the real animation init for all animations
  * @since 1.0.0
-*/
+ */
 const rootObserver = new window.IntersectionObserver( observerEvent, {
 	rootMargin: '100% 0% 100% 0%',
 	threshold: 0.01,
@@ -145,13 +134,16 @@ const rootObserver = new window.IntersectionObserver( observerEvent, {
  * @desc global observer listening for when elements are truly off the screen
  *       used for elements that should only animate in, but also repeat
  * @since 1.0.0
-*/
+ */
 let reverseObserver;
 const createReverseObserver = () => {
 	if ( ! reverseObserver ) {
-		reverseObserver = new window.IntersectionObserver( ( entries ) => {
-			entries.forEach( observeForEachReverse );
-		}, { threshold: 0.01 } );
+		reverseObserver = new window.IntersectionObserver(
+			( entries ) => {
+				entries.forEach( observeForEachReverse );
+			},
+			{ threshold: 0.01 }
+		);
 	}
 };
 
@@ -160,7 +152,7 @@ const createReverseObserver = () => {
  * @param string observerKey - the ioObserver key in the global ioObservers Object
  * @param object ioObserver - the IntersectionObserver being used by the PolishedContent class instance
  * @since 1.0.0
-*/
+ */
 const cleanupObservers = ( observerKey, ioObserver ) => {
 	let observerNeeded;
 	const len = pcxs.length;
@@ -185,7 +177,7 @@ const cleanupObservers = ( observerKey, ioObserver ) => {
 /*
  * @desc cleans up all animation instances
  * @since 1.0.0
-*/
+ */
 const cleanUpPcxs = () => {
 	window.removeEventListener( 'resize', onResizeEvent );
 
@@ -207,7 +199,7 @@ const cleanUpPcxs = () => {
  * @desc checks if the animation has already been added to the element
  * @param HTMLElement el - the block element to animate
  * @since 1.0.0
-*/
+ */
 const hasPcx = ( el ) => {
 	const len = pcxs.length;
 
@@ -224,27 +216,33 @@ const hasPcx = ( el ) => {
 /*
  * @desc will be exposed as window.polishedContent
  * @since 1.0.0
-*/
+ */
 const polishedContent = {
 	/*
 	 * @desc optional API method that attaches animations to elements at run time
 	 * @param string/HTMLElement/NodeList/Object settings - selector or elements to add animation classes to
 	 * @param object classes - animation classes to add copied from the block editor
 	 * @since 1.0.0
-	*/
+	 */
 	add: ( selector, classes ) => {
 		if ( typeof classes !== 'string' ) {
 			return;
 		}
 
-		if ( typeof jQuery !== 'undefined' && selector instanceof jQuery ) { // eslint-disable-line no-undef
+		// eslint-disable-next-line no-undef
+		if ( typeof jQuery !== 'undefined' && selector instanceof jQuery ) {
 			selector.addClass( `${ namespace } ${ classes }` );
 		} else {
-			const classNames = classes.replace( /  +/g, ' ' ).trim().split( ' ' );
+			const classNames = classes
+				.replace( /  +/g, ' ' )
+				.trim()
+				.split( ' ' );
 			classNames.unshift( namespace );
 
 			if ( typeof selector === 'string' ) {
-				document.querySelectorAll( selector ).forEach( ( el ) => addClasses( el, classNames ) );
+				document
+					.querySelectorAll( selector )
+					.forEach( ( el ) => addClasses( el, classNames ) );
 			} else if ( 'length' in selector ) {
 				selector.forEach( ( el ) => addClasses( el, classNames ) );
 			} else {
@@ -256,11 +254,11 @@ const polishedContent = {
 	 * @desc called once from inline script when WP "the_content()" hits the page
 	 * @param object settings - global settings data {allowedBlocks:String}
 	 * @since 1.0.0
-	*/
+	 */
 	run: ( settings ) => {
 		/*
 		 * if "pcxs" exists here it means the page's content was replaced
-		*/
+		 */
 		if ( pcxs ) {
 			cleanUpPcxs();
 		}
@@ -270,12 +268,16 @@ const polishedContent = {
 		reverseObserver = null;
 
 		// loop through all blocks that should be animated
-		document.querySelectorAll( `[class*=${ namespace }]` ).forEach( ( el ) => {
-			// only create a new instance if it didn't previously exist
-			if ( ! hasPcx( el ) ) {
-				pcxs.push( new PolishedContentInit( el, pcxs.length, settings ) );
-			}
-		} );
+		document
+			.querySelectorAll( `[class*=${ namespace }]` )
+			.forEach( ( el ) => {
+				// only create a new instance if it didn't previously exist
+				if ( ! hasPcx( el ) ) {
+					pcxs.push(
+						new PolishedContentInit( el, pcxs.length, settings )
+					);
+				}
+			} );
 	},
 };
 
@@ -302,16 +304,9 @@ class PolishedContentInit {
 		// merge props with defaults
 		const mergedProps = { ...defaultValues, ...props };
 
-		const {
-			pcxDesktop,
-			pcxLaptop,
-			pcxTablet,
-			pcxSmartphone,
-		} = mergedProps;
+		const { pcxDesktop, pcxLaptop, pcxTablet, pcxSmartphone } = mergedProps;
 
-		const {
-			viewportWidths,
-		} = settings;
+		const { viewportWidths } = settings;
 
 		const enabledViews = [
 			pcxDesktop,
@@ -341,7 +336,10 @@ class PolishedContentInit {
 	}
 
 	onResize() {
-		const enabledView = checkScreens( this.enabledViews, this.viewportWidths );
+		const enabledView = checkScreens(
+			this.enabledViews,
+			this.viewportWidths
+		);
 
 		if ( enabledView ) {
 			if ( ! this.observing ) {
@@ -373,7 +371,7 @@ class PolishedContentInit {
 				this.attributes,
 				this.settings,
 				this.enabledViews,
-				this.viewportWidths,
+				this.viewportWidths
 			)
 		);
 
@@ -391,16 +389,21 @@ class PolishedContentInit {
  * @param number index - the animations index in the global "pcxs" Array
  * @param object settings - global settings data {allowedBlocks:String, viewportWidths:Array}
  * @since 1.0.0
-*/
+ */
 class PolishedContentAnimation {
-	constructor( el, index, props, attributes, settings, enabledViews, viewportWidths ) {
+	constructor(
+		el,
+		index,
+		props,
+		attributes,
+		settings,
+		enabledViews,
+		viewportWidths
+	) {
 		const wrap = document.createElement( `${ namespace }` );
 		const inner = document.createElement( `${ namespace }` );
 
-		const {
-			addOverflow,
-			inheritMargins,
-		} = settings;
+		const { addOverflow, inheritMargins } = settings;
 
 		const {
 			pcxMask,
@@ -411,9 +414,7 @@ class PolishedContentAnimation {
 			pcxLetterSpacing,
 		} = props;
 
-		let {
-			pcxInline,
-		} = props;
+		let { pcxInline } = props;
 
 		const inheritClass = inheritMargins || pcxInherit ? ' pcx-inherit' : '';
 		inner.className = `${ namespace } pcx-inner${ inheritClass }`;
@@ -452,10 +453,7 @@ class PolishedContentAnimation {
 
 		let ieClip;
 		if ( ! supportsClipPath ) {
-			const {
-				clipX,
-				clipY,
-			} = props;
+			const { clipX, clipY } = props;
 
 			ieClip = clipX !== 'center' || clipY !== 'center';
 		}
@@ -529,7 +527,8 @@ class PolishedContentAnimation {
 		this.reverseObserverNeeded = reverse && hasDelay;
 
 		const hasPosition = posX || posY || ieClip;
-		this.hasPixelPosition = ( hasPosition && pcxStrength === 'max' ) || ieClip;
+		this.hasPixelPosition =
+			( hasPosition && pcxStrength === 'max' ) || ieClip;
 
 		// the margin can't be "50%" or "0%" because then the observer event might not fire
 		this.originalMargin = Math.max( Math.min( pcxPercentageIn, 49 ), 1 );
@@ -537,13 +536,20 @@ class PolishedContentAnimation {
 		this.duration = pcxDuration;
 		this.endTime = pcxDuration * 2;
 
-		this.easing = pcxEasing;
-		this.easeReverse = easeReverse;
-		this.easingStagger = easingStagger;
+		const ease = easeLookup( pcxEasing );
+		const reverseEase = easeLookup( easeReverse );
 
+		this.easing = ease;
 		this.ieClip = ieClip;
+		this.easeReverse = reverseEase;
+		this.easingStagger = easingStagger;
 		this.hasPositionSetting = hasPosition;
-		this.animeParams = { ease: pcxEasing, overwrite: 'all' };
+
+		this.animeParams = {
+			ease,
+			overwrite: true,
+			duration: this.duration,
+		};
 
 		this.initScroll();
 		this.initTween();
@@ -559,19 +565,20 @@ class PolishedContentAnimation {
 	/*
 	 * @desc create an IntersectionObserver if needed and start observing the element
 	 * @since 1.0.0
-	*/
+	 */
 	initObserve() {
 		// observerKey is equal to the user's "percentage in view" margin
 		// then we have one observer per unique margin
-		const {
-			observerKey,
-		} = this;
+		const { observerKey } = this;
 
 		if ( ioObservers[ observerKey ] === undefined ) {
-			ioObservers[ observerKey ] = new window.IntersectionObserver( observerEvent, {
-				threshold,
-				rootMargin: `-${ observerKey }% 0% -${ observerKey }% 0%`,
-			} );
+			ioObservers[ observerKey ] = new window.IntersectionObserver(
+				observerEvent,
+				{
+					threshold,
+					rootMargin: `-${ observerKey }% 0% -${ observerKey }% 0%`,
+				}
+			);
 		}
 
 		ioObservers[ observerKey ].observe( this.wrap );
@@ -585,12 +592,9 @@ class PolishedContentAnimation {
 	/*
 	 * @desc observe event for elements are only supposed to animate in but also repeat
 	 * @since 1.0.0
-	*/
+	 */
 	observeReverse( entry ) {
-		const {
-			rootBounds,
-			isIntersecting,
-		} = entry;
+		const { rootBounds, isIntersecting } = entry;
 
 		// element has been removed from the DOM if rootBounds is null
 		if ( ! rootBounds ) {
@@ -602,7 +606,11 @@ class PolishedContentAnimation {
 			if ( this.repeat ) {
 				this.updateTimeline( this.point );
 				this.started = false;
-			} else if ( this.animeParams.delay && this.tween && ! this.tween.isActive() ) {
+			} else if (
+				this.animeParams.delay &&
+				this.tween &&
+				! this.tween.isActive()
+			) {
 				this.updateTimeline( this.point );
 			}
 		}
@@ -611,7 +619,7 @@ class PolishedContentAnimation {
 	/*
 	 * @desc prepare initial scroll values for the observe event
 	 * @since 1.0.0
-	*/
+	 */
 	initScroll() {
 		this.started = false;
 		this.scrolled = false;
@@ -619,17 +627,24 @@ class PolishedContentAnimation {
 		this.elRect = this.el.getBoundingClientRect();
 		this.wrapRect = this.wrap.getBoundingClientRect();
 		this.scrollDown = getAnimeDirection( this.elRect );
-		this.observerKey = getMaxObserverMargin( this.originalMargin, this.wrapRect );
+		this.observerKey = getMaxObserverMargin(
+			this.originalMargin,
+			this.wrapRect
+		);
 
 		if ( this.transOriginReset ) {
-			setTransformOrigin( this.inner, this.viewportWidths, this.transOriginReset );
+			setTransformOrigin(
+				this.inner,
+				this.viewportWidths,
+				this.transOriginReset
+			);
 		}
 	}
 
 	/*
 	 * @desc create a new TimelineMax and set its initial position
 	 * @since 1.0.0
-	*/
+	 */
 	initTween() {
 		this.createTimeline();
 
@@ -644,7 +659,7 @@ class PolishedContentAnimation {
 	/*
 	 * @desc cancel window resize throttle timers
 	 * @since 1.0.0
-	*/
+	 */
 	cancelTimers() {
 		window.cancelIdleCallback( this.idleCallback );
 		window.cancelAnimationFrame( this.requestCallback );
@@ -653,39 +668,47 @@ class PolishedContentAnimation {
 	/*
 	 * @desc window resize timer second throttle cycle
 	 * @since 1.0.0
-	*/
+	 */
 	onSecondRequestAnime = () => {
 		this.killTimeline();
 		// we have a new "point" from the observe event now so we can recreate the timeline
 		this.initTween();
-	}
+	};
 
 	/*
 	 * @desc window resize timer second throttle cycle
 	 * @since 1.0.0
-	*/
+	 */
 	onSecondIdleRequest = () => {
 		this.cancelTimers();
 
 		// a second throttle initiated from "onRequestAnime"
-		this.requestCallback = window.requestAnimationFrame( this.onSecondRequestAnime );
-	}
+		this.requestCallback = window.requestAnimationFrame(
+			this.onSecondRequestAnime
+		);
+	};
 
 	/*
 	 * @desc window resize timer throttling is complete or we may need a second cycle
 	 * @since 1.0.0
-	*/
+	 */
 	onRequestAnime = () => {
 		this.cancelTimers();
 		this.initScroll();
 
-		const enabledView = checkScreens( this.enabledViews, this.viewportWidths );
+		const enabledView = checkScreens(
+			this.enabledViews,
+			this.viewportWidths
+		);
 
 		if ( enabledView ) {
 			const observer = ioObservers[ this.observerKey ];
 
 			if ( this.delayBreak ) {
-				this.breakDelay = checkScreenBreak( this.viewportWidths, this.delayBreak );
+				this.breakDelay = checkScreenBreak(
+					this.viewportWidths,
+					this.delayBreak
+				);
 			}
 
 			if ( observer ) {
@@ -699,21 +722,25 @@ class PolishedContentAnimation {
 			if ( this.timeline && this.hasPixelPosition ) {
 				// a second round of throttling allows us to get a new observe event record before we recreate the timeline again
 				// as we need an accurate "point" (where the timline should be positioned)
-				this.idleCallback = window.requestIdleCallback( this.onSecondIdleRequest );
+				this.idleCallback = window.requestIdleCallback(
+					this.onSecondIdleRequest
+				);
 			}
 		} else if ( this.timeline ) {
 			this.timeline.seek( 'middle' );
 		}
-	}
+	};
 
 	/*
 	 * @desc window resize timer throttling
 	 * @since 1.0.0
-	*/
+	 */
 	onIdleRequest = () => {
 		this.cancelTimers();
-		this.requestCallback = window.requestAnimationFrame( this.onRequestAnime );
-	}
+		this.requestCallback = window.requestAnimationFrame(
+			this.onRequestAnime
+		);
+	};
 
 	/*
 	 * @desc called from global window resize event handler,
@@ -725,9 +752,7 @@ class PolishedContentAnimation {
 		if ( this.observerKey === undefined ) {
 			return;
 		}
-		const {
-			onComplete,
-		} = this.animeParams;
+		const { onComplete } = this.animeParams;
 
 		if ( onComplete ) {
 			this.destroy();
@@ -757,33 +782,47 @@ class PolishedContentAnimation {
 	/*
 	 * @desc create a new TimelineMax for the animation
 	 * @since 1.0.0
-	*/
+	 */
 	createTimeline() {
 		if ( this.has3D ) {
 			const { pcxPerspective } = this.props;
 			const isDefault = isNaN( pcxPerspective );
-			this.wrap.style.perspective = isDefault ? pcxPerspective : `${ pcxPerspective }px`;
+			this.wrap.style.perspective = isDefault
+				? pcxPerspective
+				: `${ pcxPerspective }px`;
 		}
 
 		// reset CSS on element
 		resetElement( this.inner, this.resetProps );
-		const positions = newPositions( this.wrapRect, this.props, this.reverseProps );
+		const positions = newPositions(
+			this.wrapRect,
+			this.props,
+			this.reverseProps
+		);
 
 		let clipRect;
 		if ( this.ieClip ) {
 			clipRect = this.elRect;
-			setIeClip( this.wrap, this.inner, this.el, clipRect, getIeStyle( this.el, this.wrap ) );
+			setIeClip(
+				this.wrap,
+				this.inner,
+				this.el,
+				clipRect,
+				getIeStyle( this.el, this.wrap )
+			);
 		}
 
 		const animeProps = { ...positions, ...this.props };
-		const animation = buildAnimation( this.inner, animeProps, this.reverseProps, this.observed, clipRect, webkitClipPath );
+		const animation = buildAnimation(
+			this.inner,
+			animeProps,
+			this.reverseProps,
+			this.observed,
+			clipRect,
+			webkitClipPath
+		);
 
-		const {
-			render,
-			timeline,
-			twObjects,
-			propsReversed,
-		} = animation;
+		const { render, timeline, twObjects, propsReversed } = animation;
 
 		this.render = render;
 		this.timeline = timeline;
@@ -799,18 +838,21 @@ class PolishedContentAnimation {
 	/*
 	 * @desc animation is no longer needed so kill the timeline and tweens
 	 * @since 1.0.0
-	*/
+	 */
 	killTimeline() {
 		if ( this.timeline ) {
 			this.timeline.kill();
-			gsap.TweenMax.killTweensOf( this.twObjects.concat( [ this.inner, this.timeline ] ) );
+			const { killTweensOf } = gsap;
+			killTweensOf(
+				this.twObjects.concat( [ this.inner, this.timeline ] )
+			);
 		}
 	}
 
 	/*
 	 * @desc animation is no longer needed to stop observing
 	 * @since 1.0.0
-	*/
+	 */
 	instanceEnd() {
 		const observer = ioObservers[ this.observerKey ];
 
@@ -842,9 +884,10 @@ class PolishedContentAnimation {
 	 * @desc kills running tweens and seeks the timeline to the pre-calculated point
 	 * @param number/string point - the point in the timeline to seek to
 	 * @since 1.0.0
-	*/
+	 */
 	seekTimeline( point ) {
-		gsap.TweenMax.killTweensOf( this.timeline );
+		const { killTweensOf } = gsap;
+		killTweensOf( this.timeline );
 		this.timeline.seek( point );
 	}
 
@@ -853,7 +896,7 @@ class PolishedContentAnimation {
 	 * @param number/string start - the timline's start time or start label
 	 * @param number/string end - the timline's end time or end label
 	 * @since 1.0.0
-	*/
+	 */
 	getDelay( start, end, point ) {
 		if ( this.delayBreak && this.breakDelay ) {
 			return 0;
@@ -868,7 +911,7 @@ class PolishedContentAnimation {
 	 * @desc sets the correct delay before a tween begins
 	 * @param number point - the point the timeline will be heading toward
 	 * @since 1.0.0
-	*/
+	 */
 	setEaseDelay( point, reverse ) {
 		if ( this.easeReverse ) {
 			if ( ! reverse ) {
@@ -882,22 +925,10 @@ class PolishedContentAnimation {
 	}
 
 	/*
-	 * @desc interpolate the tween's duration for smoothness on stagger scrolls
-	 * @param number point - the point the timeline will be heading toward
-	 * @since 1.0.0
-	*/
-	setDuration( point ) {
-		if ( this.point !== undefined ) {
-			const difTime = this.duration / Math.abs( this.point - point );
-			this.animeParams.duration = difTime * this.duration;
-		}
-	}
-
-	/*
 	 * @desc called from the core IntersectionObserver event
 	 * @param object entry - IntersectionObserver event entry
 	 * @since 1.0.0
-	*/
+	 */
 	observeEvt( entry ) {
 		const {
 			rootBounds,
@@ -931,10 +962,7 @@ class PolishedContentAnimation {
 			this.prevScrollRatio
 		);
 
-		const {
-			scrollingDown,
-			headedIn,
-		} = this.scrollState;
+		const { scrollingDown, headedIn } = this.scrollState;
 
 		let scrollDown;
 		let point;
@@ -944,7 +972,7 @@ class PolishedContentAnimation {
 		 * will be useless, as we have no previous scroll data to compare to.
 		 * In those cases we need to fall back to our pre-calculated value
 		 * which is manually calculated from how the element fits inside the window
-		*/
+		 */
 		if ( this.scrolled ) {
 			scrollDown = scrollingDown;
 		} else {
@@ -968,7 +996,9 @@ class PolishedContentAnimation {
 					// "isIdle" will be false if the user is resizing the window
 					if ( this.isIdle ) {
 						this.setEaseDelay( point );
-						this.tween = this.timeline.tweenTo( point, { ...this.animeParams } );
+						this.tween = this.timeline.tweenTo( point, {
+							...this.animeParams,
+						} );
 					} else {
 						this.seekTimeline( point );
 					}
@@ -982,7 +1012,9 @@ class PolishedContentAnimation {
 					// "isIdle" will be false if the user is resizing the window so we will only animate when idle
 					if ( this.isIdle ) {
 						this.setEaseDelay( point, true );
-						this.tween = this.timeline.tweenTo( point, { ...this.animeParams } );
+						this.tween = this.timeline.tweenTo( point, {
+							...this.animeParams,
+						} );
 					} else {
 						this.updateTimeline( point );
 					}
@@ -995,7 +1027,9 @@ class PolishedContentAnimation {
 				if ( headedIn || ! this.repeat ) {
 					const minRatio = Math.min( intersectRatio, 1 );
 					const forwardPoint = minRatio * this.duration;
-					const reversePoint = ! this.propsReversed ? forwardPoint : this.endTime - forwardPoint;
+					const reversePoint = ! this.propsReversed
+						? forwardPoint
+						: this.endTime - forwardPoint;
 
 					// if the user has scrolled at least once we can safely use our "setScrollState" data
 					// otherwise we use the precalculated data from "getAnimeDirection"
@@ -1012,14 +1046,17 @@ class PolishedContentAnimation {
 					}
 
 					// stop observing if we're only supposed to animate once
-					if ( ! this.reverse && ! this.repeat && point === this.duration ) {
+					if (
+						! this.reverse &&
+						! this.repeat &&
+						point === this.duration
+					) {
 						this.animeParams.onComplete = this.destroy;
 						this.instanceEnd();
 					}
 
 					// "isIdle" will be false if the user is resizing the window so we will only animate when idle
 					if ( this.isIdle ) {
-						this.setDuration( point );
 						this.timeline.tweenTo( point, { ...this.animeParams } );
 					} else {
 						this.seekTimeline( point );
@@ -1037,7 +1074,6 @@ class PolishedContentAnimation {
 				if ( this.reverse ) {
 					// "isIdle" will be false if the user is resizing the window so we will only animate when idle
 					if ( this.isIdle ) {
-						this.setDuration( point );
 						this.timeline.tweenTo( point, { ...this.animeParams } );
 					} else {
 						this.seekTimeline( point );
@@ -1065,7 +1101,7 @@ class PolishedContentAnimation {
 	 * @desc animation is no longer needed so do some garbage collection
 	 * @param boolean complete - cleanup coming from a page content refresh
 	 * @since 1.0.0
-	*/
+	 */
 	destroy = ( complete ) => {
 		this.cancelTimers();
 		const observer = ioObservers[ this.observerKey ];
@@ -1104,7 +1140,7 @@ class PolishedContentAnimation {
 		this.twObjects = null;
 		this.observerKey = null;
 		this.tween = null;
-	}
+	};
 }
 
 // exposing global variable to be called from inline WP script

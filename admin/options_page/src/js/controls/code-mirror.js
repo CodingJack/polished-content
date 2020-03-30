@@ -4,22 +4,14 @@
 
 import React from 'react';
 
-const {
-	Component,
-	createRef,
-} = React;
+const { Component, createRef } = React;
 
-const {
-	codeEditor,
-} = wp; // eslint-disable-line no-undef
+const { codeEditor } = wp; // eslint-disable-line no-undef
 
 /**
  * Internal dependencies.
  */
-const {
-	codeMirrorJS,
-	codeMirrorCSS,
-} = polishedContentGlobals; // eslint-disable-line no-undef
+const { codeMirrorJS, codeMirrorCSS } = polishedContentGlobals; // eslint-disable-line no-undef
 
 const stripDoubleLines = ( st ) => {
 	return st.replace( /\n\s*\n\s*\n/g, '\n\n' );
@@ -45,11 +37,7 @@ class CodeMirror extends Component {
 	onBlur = ( codemirror ) => {
 		codemirror.save();
 
-		const {
-			prop,
-			data,
-			callback,
-		} = this.props;
+		const { prop, data, callback } = this.props;
 
 		const value = stripDoubleLines( this.ref.current.value );
 		callback( prop, data, encodeURIComponent( value ) );
@@ -59,11 +47,7 @@ class CodeMirror extends Component {
 		this.codeMirror.save();
 		this.codeMirror.off( 'blur', this.onBlur );
 
-		const {
-			prop,
-			data,
-			callback,
-		} = this.props;
+		const { prop, data, callback } = this.props;
 
 		const value = stripDoubleLines( this.ref.current.value );
 		callback( prop, data, encodeURIComponent( value ) );

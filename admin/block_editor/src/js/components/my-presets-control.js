@@ -4,9 +4,7 @@
 
 const { __ } = wp.i18n;
 
-const {
-	IconButton,
-} = wp.components;
+const { IconButton } = wp.components;
 
 /**
  * External dependencies.
@@ -17,30 +15,18 @@ import qs from 'qs';
 /**
  * Internal dependencies.
  */
-import {
-	removePreset,
-} from '../utils';
+import { removePreset } from '../utils';
 
-import {
-	namespace,
-} from '../../../../../shared/js/data';
+import { namespace } from '../../../../../shared/js/data';
 
 import MySelectControl from './my-select-control';
 
-const {
-	ajaxNonce,
-} = polishedContentGlobals; // eslint-disable-line no-undef
+const { ajaxNonce } = polishedContentGlobals; // eslint-disable-line no-undef
 
 const MyPresetsControl = ( { block } ) => {
-	const {
-		state,
-		updateFromPreset,
-	} = block;
+	const { state, updateFromPreset } = block;
 
-	const {
-		hideDeleteBtn,
-		selectedPreset,
-	} = state;
+	const { hideDeleteBtn, selectedPreset } = state;
 
 	const style = { visibility: hideDeleteBtn ? 'hidden' : 'visible' };
 
@@ -48,7 +34,13 @@ const MyPresetsControl = ( { block } ) => {
 		if ( typeof ajaxurl === 'undefined' ) {
 			return;
 		}
-		if ( window.confirm( __( 'Delete this Custom Preset Option?', 'polished-content' ) ) ) { // eslint-disable-line no-alert
+		if (
+			/* eslint-disable */
+			window.confirm(
+				__( 'Delete this Custom Preset Option?', 'polished-content' )
+			)
+			/* eslint-enable */
+		) {
 			const { updateState } = block;
 
 			const releaseAjax = () => {
@@ -60,23 +52,36 @@ const MyPresetsControl = ( { block } ) => {
 
 			// guarantee that the settings panel has recieved the "ajax is loading" class
 			updateState( { ajaxLoading: true }, () => {
-				axios.post( ajaxurl, qs.stringify( { // eslint-disable-line no-undef
-					action: 'polished_content',
-					nonce: ajaxNonce,
-					addremove: 'remove',
-					name: selectedPreset,
-				} ) ).then( ( st ) => {
-					if ( st.data === 'success' ) {
-						const { props } = block;
-						removePreset( selectedPreset, { ...props } );
-					} else {
-						console.log( st ); // eslint-disable-line no-console
-					}
-					releaseAjax();
-				} ).catch( () => {
-					console.log( __( 'Polished Content Ajax Request Failed', 'polished-content' ) ); // eslint-disable-line no-console
-					releaseAjax();
-				} );
+				/* eslint-disable */
+				axios
+					.post(
+						ajaxurl,
+						qs.stringify( {
+							action: 'polished_content',
+							nonce: ajaxNonce,
+							addremove: 'remove',
+							name: selectedPreset,
+						} )
+					)
+					.then( ( st ) => {
+						if ( st.data === 'success' ) {
+							const { props } = block;
+							removePreset( selectedPreset, { ...props } );
+						} else {
+							console.log( st );
+						}
+						releaseAjax();
+					} )
+					.catch( () => {
+						console.log(
+							__(
+								'Polished Content Ajax Request Failed',
+								'polished-content'
+							)
+						);
+						releaseAjax();
+					} );
+				/* eslint-enable */
 			} );
 		}
 	};
@@ -103,4 +108,3 @@ const MyPresetsControl = ( { block } ) => {
 };
 
 export default MyPresetsControl;
-

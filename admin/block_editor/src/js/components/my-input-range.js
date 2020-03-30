@@ -2,29 +2,19 @@
  * WordPress dependencies.
  */
 
-const {
-	BaseControl,
-	Button,
-	Dashicon,
-} = wp.components;
+const { BaseControl, Button, Dashicon } = wp.components;
 
-const {
-	useState,
-} = wp.element;
+const { useState } = wp.element;
 
-const {
-	compose,
-	withInstanceId,
-} = wp.compose;
+const { compose, withInstanceId } = wp.compose;
 
 import classnames from 'classnames';
 
 /*
-* Modified from:
-* https://github.com/WordPress/gutenberg/blob/master/packages/components/src/range-control/index.js
-*/
+ * Modified from:
+ * https://github.com/WordPress/gutenberg/blob/master/packages/components/src/range-control/index.js
+ */
 const InputRange = ( {
-
 	className,
 	label,
 	value,
@@ -39,12 +29,8 @@ const InputRange = ( {
 	disabled,
 	help,
 	instanceId,
-
 } ) => {
-	const [
-		defaultValue,
-		setDefault,
-	] = useState( value );
+	const [ defaultValue, setDefault ] = useState( value );
 
 	const id = `inspector-range-control-${ instanceId }`;
 
@@ -97,7 +83,7 @@ const InputRange = ( {
 				max={ max }
 				step={ step }
 			/>
-			{ afterIcon && allowReset &&
+			{ afterIcon && allowReset && (
 				<Button
 					isSmall
 					className="polished-content-iconbtn"
@@ -106,7 +92,7 @@ const InputRange = ( {
 				>
 					<Dashicon icon={ afterIcon } />
 				</Button>
-			}
+			) }
 			<input
 				className="components-range-control__number"
 				type="number"
@@ -120,9 +106,6 @@ const InputRange = ( {
 	);
 };
 
-const MyInputRange = compose( [
-	withInstanceId,
-] )( InputRange );
+const MyInputRange = compose( [ withInstanceId ] )( InputRange );
 
 export default MyInputRange;
-

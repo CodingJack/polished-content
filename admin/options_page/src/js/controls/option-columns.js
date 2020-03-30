@@ -4,9 +4,7 @@
 
 import React from 'react';
 
-const {
-	Fragment,
-} = React;
+const { Fragment } = React;
 
 /**
  * Internal dependencies.
@@ -15,26 +13,15 @@ const {
 import OptionsList from './options-list';
 import ToggleItems from './primitives/toggle-items';
 
-const Wrapper = ( { wrapIt, wrapper, children } ) => wrapIt ? wrapper( children ) : children;
+const Wrapper = ( { wrapIt, wrapper, children } ) =>
+	wrapIt ? wrapper( children ) : children;
 
 const OptionColumns = ( { props, option, data, callback, description } ) => {
-	const {
-		namespace,
-		maxColumnItems,
-	} = props;
+	const { namespace, maxColumnItems } = props;
 
-	const {
-		prop,
-		type,
-		mode,
-		icons,
-		ranges,
-		subColumns,
-	} = option;
+	const { prop, type, mode, icons, ranges, subColumns } = option;
 
-	let {
-		list,
-	} = option;
+	let { list } = option;
 
 	if ( ! list ) {
 		list = {};
@@ -63,12 +50,19 @@ const OptionColumns = ( { props, option, data, callback, description } ) => {
 
 		return (
 			<Fragment key={ `${ prop }-${ iteration }` }>
-
 				<Wrapper
 					wrapIt={ wrapDiv }
-					wrapper={ ( children ) => <div className={ `${ namespace }-inner${ first } ${ marginRight }` }>{ children }</div> }
+					wrapper={ ( children ) => (
+						<div
+							className={ `${ namespace }-inner${ first } ${ marginRight }` }
+						>
+							{ children }
+						</div>
+					) }
 				>
-					<div className={ `${ namespace }-inner${ first } ${ marginRight }` }>
+					<div
+						className={ `${ namespace }-inner${ first } ${ marginRight }` }
+					>
 						<OptionsList
 							namespace={ namespace }
 							list={ list }

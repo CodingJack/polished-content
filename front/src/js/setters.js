@@ -1,28 +1,17 @@
 /**
- * External dependencies.
- */
-
-// sandboxing gsap
-import { gsap, gsapReset } from '../../../shared/js/sandbox-gsap';
-require( 'gsap/umd/TweenMax' );
-gsapReset();
-
-/**
  * Internal dependencies.
  */
-import {
-	defaultValues,
-} from '../../../shared/js/data';
+import { defaultValues } from '../../../shared/js/data';
 
-import {
-	checkScreenBreak,
-} from './utils';
+import { easeLookup } from '../../../shared/js/migration';
+
+import { checkScreenBreak } from './utils';
 
 /*
  * @desc prepares and formats animation values to be used by gsap
  * @param object props - the animation properties and their values
  * @since 1.0.0
-*/
+ */
 export const setAdjustProps = ( props ) => {
 	const {
 		pcxPosition,
@@ -33,20 +22,19 @@ export const setAdjustProps = ( props ) => {
 		pcxTransformOrigin,
 	} = props;
 
-	const {
-		pcxPosition: defaultPosition,
-	} = defaultValues;
+	const { pcxPosition: defaultPosition } = defaultValues;
 
 	props.pcxDelay *= 0.001;
 	props.pcxDuration *= 0.001;
 	props.pcxDelayReverse *= 0.001;
 	props.pcxTransformOrigin = pcxTransformOrigin.replace( '-', ' ' );
-	props.pcxEasing = gsap.EaseLookup.find( `${ pcxEasing }.${ pcxEaseDirection }` );
-	props.easingStagger = gsap.EaseLookup.find( `${ pcxEasing }.easeOut` );
+	props.pcxEasing = easeLookup( `${ pcxEasing }.${ pcxEaseDirection }` );
+	props.easingStagger = easeLookup( `${ pcxEasing }.easeOut` );
 
 	if ( pcxEaseReverse ) {
-		const reverseEase = pcxEaseDirection === 'easeOut' ? 'easeIn' : 'easeOut';
-		props.easeReverse = gsap.EaseLookup.find( `${ pcxEasing }.${ reverseEase }` );
+		const reverseEase =
+			pcxEaseDirection === 'easeOut' ? 'easeIn' : 'easeOut';
+		props.easeReverse = easeLookup( `${ pcxEasing }.${ reverseEase }` );
 	}
 
 	if ( pcxPosition !== defaultPosition ) {
@@ -78,11 +66,9 @@ export const setAdjustProps = ( props ) => {
  * @param object props - animation default settings
  * @param object settings - global settings data {overrides:JSON String}
  * @since 1.0.0
-*/
+ */
 export const setOverrides = ( props, settings ) => {
-	let {
-		overrides,
-	} = settings;
+	let { overrides } = settings;
 
 	if ( overrides ) {
 		try {
@@ -94,10 +80,7 @@ export const setOverrides = ( props, settings ) => {
 			for ( const [ key, value ] of Object.entries( overrides ) ) {
 				props[ key ] = value;
 			}
-			const {
-				pcxScrollStagger,
-				pcxPercentageInStagger,
-			} = props;
+			const { pcxScrollStagger, pcxPercentageInStagger } = props;
 
 			if ( pcxScrollStagger ) {
 				props.pcxPercentageIn = pcxPercentageInStagger;
@@ -112,7 +95,7 @@ export const setOverrides = ( props, settings ) => {
  * @param array viewportWidths - the list of viewport widths to check
  * @param number|string transOriginReset - the breakpoint for the reset
  * @since 1.0.0
-*/
+ */
 export const setTransformOrigin = ( el, viewportWidths, transOriginReset ) => {
 	const resetOrigin = checkScreenBreak( viewportWidths, transOriginReset );
 
@@ -143,14 +126,12 @@ export const setTransformOrigin = ( el, viewportWidths, transOriginReset ) => {
  * @since 1.0.0
 */
 export const setScrollState = (
-
 	scrollState,
 	isIntersecting,
 	curScrollY,
 	curScrollRatio,
 	prevScrollY,
 	prevScrollRatio
-
 ) => {
 	// when scrolling slowly on iOS the IntersectionObserver event can fire without the
 	// new "boundingClientRect.y" being different than its previously recorded value
@@ -158,12 +139,7 @@ export const setScrollState = (
 		return;
 	}
 
-	let {
-		scrollingDown,
-		headedIn,
-		started,
-		ended,
-	} = scrollState;
+	let { scrollingDown, headedIn, started, ended } = scrollState;
 
 	if ( isIntersecting ) {
 		scrollingDown = curScrollY < prevScrollY;
@@ -213,7 +189,7 @@ export const setScrollState = (
  * @param object margins - computed margins from the block element
  * @returns a great deal of pain
  * @since 1.0.0
-*/
+ */
 export const setIeClip = ( wrap, inner, el, rect, margins ) => {
 	const { style: wrapStyle } = wrap;
 	const { style: innerStyle } = inner;
@@ -222,17 +198,10 @@ export const setIeClip = ( wrap, inner, el, rect, margins ) => {
 	/*
 	 * if rect is true we're animating
 	 * if falsy, we're resetting on resize
-	*/
+	 */
 	if ( rect ) {
-		const {
-			width,
-			height,
-		} = rect;
-
-		const {
-			marginTop,
-			marginBottom,
-		} = margins;
+		const { width, height } = rect;
+		const { marginTop, marginBottom } = margins;
 
 		wrapStyle.position = 'relative';
 		wrapStyle.width = `${ width }px`;
@@ -256,4 +225,3 @@ export const setIeClip = ( wrap, inner, el, rect, margins ) => {
 		elStyle.marginBottom = null;
 	}
 };
-

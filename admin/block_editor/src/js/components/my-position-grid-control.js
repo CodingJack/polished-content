@@ -1,23 +1,15 @@
 /**
  * WordPress dependencies.
  */
-const {
-	ButtonGroup,
-	Button,
-} = wp.components;
+const { ButtonGroup, Button } = wp.components;
 
 /**
  * Internal dependencies.
  */
 
-import {
-	namespace,
-	selectOptions,
-} from '../../../../../shared/js/data';
+import { namespace, selectOptions } from '../../../../../shared/js/data';
 
-const {
-	pcxPosition,
-} = selectOptions;
+const { pcxPosition } = selectOptions;
 
 const MyPositionGridControl = ( { prop, value, callback } ) => {
 	return (

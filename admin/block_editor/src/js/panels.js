@@ -8,9 +8,7 @@ import MyTimingPanel from './panels/my-timing-panel';
 import MyFormattingPanel from './panels/my-formatting-panel';
 import MySettingsPanel from './panels/my-settings-panel';
 
-import {
-	namespace,
-} from '../../../../shared/js/data';
+import { namespace } from '../../../../shared/js/data';
 
 const tabs = [
 	{
@@ -45,7 +43,9 @@ const MyPanel = ( { slug, icon, component: Component }, block ) => {
 		name: `${ namespace }-${ slug }`,
 		className: `is-button is-default is-small dashicons dashicons-${ icon }`,
 		container: (
-			<div className={ `${ namespace }-tab ${ namespace }-${ slug }-tab` }>
+			<div
+				className={ `${ namespace }-tab ${ namespace }-${ slug }-tab` }
+			>
 				<Component block={ block } />
 			</div>
 		),
@@ -53,13 +53,10 @@ const MyPanel = ( { slug, icon, component: Component }, block ) => {
 };
 
 /*
-* Main settings oanel with all the controls
-*/
+ * Main settings oanel with all the controls
+ */
 const MyTabPanels = ( { block } ) => {
-	const {
-		currentTab,
-		updateState,
-	} = block;
+	const { currentTab, updateState } = block;
 
 	const onSelect = ( tabName ) => {
 		const selectedTab = tabName.replace( `${ namespace }-`, '' );
@@ -70,7 +67,8 @@ const MyTabPanels = ( { block } ) => {
 	};
 
 	return (
-		<MyTabPanelControl className={ `${ namespace }-tabs components-button-group` }
+		<MyTabPanelControl
+			className={ `${ namespace }-tabs components-button-group` }
 			activeClass="is-primary"
 			currentTab={ `${ namespace }-${ currentTab }` }
 			onSelect={ onSelect }

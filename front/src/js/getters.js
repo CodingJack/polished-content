@@ -1,12 +1,7 @@
-
 /**
  * Internal dependencies.
  */
-import {
-	threeD,
-	reversable,
-	defaultValues,
-} from '../../../shared/js/data';
+import { threeD, reversable, defaultValues } from '../../../shared/js/data';
 
 import { formatValue } from './utils';
 
@@ -15,7 +10,7 @@ import { formatValue } from './utils';
  * @param HTMLElement el - the animated element
  * @returns object||boolean - animation properties object or false if none exist
  * @since 1.0.0
-*/
+ */
 export const getProps = ( el ) => {
 	const props = {};
 	let valueFound;
@@ -43,21 +38,20 @@ export const getProps = ( el ) => {
  * @param object props - the original animation properties
  * @returns boolean - if any animation properties were reversed
  * @since 1.0.0
-*/
+ */
 export const getReversable = ( props ) => {
 	let reversed;
 	reversable.forEach( ( prop ) => {
-		if ( props[ prop ] !== undefined && props[ prop ] !== defaultValues[ prop ] ) {
+		if (
+			props[ prop ] !== undefined &&
+			props[ prop ] !== defaultValues[ prop ]
+		) {
 			props[ prop ] *= -1;
 			reversed = true;
 		}
 	} );
 
-	const {
-		clipX,
-		clipY,
-		pcxTransformOrigin,
-	} = props;
+	const { clipX, clipY, pcxTransformOrigin } = props;
 
 	const originReverse = pcxTransformOrigin.split( ' ' );
 	let originX = originReverse[ 0 ];
@@ -93,7 +87,7 @@ export const getReversable = ( props ) => {
  * @param object props - the animation's properties
  * @returns boolean - if the animation has 3D properties
  * @since 1.0.0
-*/
+ */
 export const getHas3D = ( props ) => {
 	const len = threeD.length;
 
@@ -114,7 +108,7 @@ export const getHas3D = ( props ) => {
  * @param string strength - "max" = full screen, "full" = content size, "short" = half content size
  * @returns object - the animation's translateX/Y values
  * @since 1.0.0
-*/
+ */
 export const getMovements = ( rect, curPosX, curPosY, strength ) => {
 	const pos = {
 		x: 0,
@@ -122,7 +116,8 @@ export const getMovements = ( rect, curPosX, curPosY, strength ) => {
 	};
 
 	if ( strength !== 'max' ) {
-		let x, y;
+		let x = 0,
+			y = 0;
 
 		if ( curPosX === 'left' ) {
 			x = -100;
@@ -139,20 +134,13 @@ export const getMovements = ( rect, curPosX, curPosY, strength ) => {
 			x *= 0.5;
 			y *= 0.5;
 		}
+
 		pos.x = `${ x }%`;
 		pos.y = `${ y }%`;
 	} else {
-		const {
-			innerWidth: winWidth,
-			innerHeight: winHeight,
-		} = window;
+		const { innerWidth: winWidth, innerHeight: winHeight } = window;
 
-		const {
-			left,
-			top,
-			width,
-			height,
-		} = rect;
+		const { left, top, width, height } = rect;
 
 		if ( curPosX === 'left' || curPosX === 'right' ) {
 			pos.x = curPosX === 'right' ? winWidth - left : -( width + left );
@@ -171,18 +159,13 @@ export const getMovements = ( rect, curPosX, curPosY, strength ) => {
  * @param object rect - the element's getBoundingClientRect()
  * @returns boolean - true: it's below, false: it's above
  * @since 1.0.0
-*/
+ */
 export const getAnimeDirection = ( rect ) => {
-	const {
-		top: elTop,
-		height: elHeight,
-	} = rect;
+	const { top: elTop, height: elHeight } = rect;
 
-	const {
-		innerHeight: winHeight,
-	} = window;
+	const { innerHeight: winHeight } = window;
 
-	return elTop + ( elHeight * 0.5 ) > winHeight * 0.5;
+	return elTop + elHeight * 0.5 > winHeight * 0.5;
 };
 
 /*
@@ -191,17 +174,11 @@ export const getAnimeDirection = ( rect ) => {
  * @param object wrapRect - the animated wrapper's getBoundingClientRect()
  * @returns boolean - the margin to apply to the IntersectionObserver
  * @since 1.0.0
-*/
+ */
 export const getMaxObserverMargin = ( observerMargin, wrapRect ) => {
-	const {
-		pageYOffset: scrollY,
-		innerHeight: winHeight,
-	} = window;
+	const { pageYOffset: scrollY, innerHeight: winHeight } = window;
 
-	const {
-		top: wrapRectTop,
-		height: wrapRectHeight,
-	} = wrapRect;
+	const { top: wrapRectTop, height: wrapRectHeight } = wrapRect;
 
 	const { body } = document;
 	const { clientHeight: pageHeight } = body;
@@ -213,7 +190,10 @@ export const getMaxObserverMargin = ( observerMargin, wrapRect ) => {
 	const minimumBottom = Math.round( ( wrapBottom / winHeight ) * 100 );
 
 	const minimumMargin = Math.min( minimumTop, minimumBottom );
-	const maximumMargin = Math.max( ( wrapRectHeight / winHeight ) * 100, minimumMargin );
+	const maximumMargin = Math.max(
+		( wrapRectHeight / winHeight ) * 100,
+		minimumMargin
+	);
 
 	return Math.min( observerMargin, maximumMargin );
 };
@@ -225,20 +205,31 @@ export const getMaxObserverMargin = ( observerMargin, wrapRect ) => {
  * @param HTMLElement wrap - the animated element's wrapper
  * @returns object - the new margins to apply to the wrapper
  * @since 1.0.0
-*/
+ */
 export const getIeStyle = ( el, wrap ) => {
 	const computedEl = window.getComputedStyle( el, null );
 	const computedWrap = window.getComputedStyle( wrap, null );
 
-	const elMarginTop = parseInt( computedEl.getPropertyValue( 'margin-top' ), 10 );
-	const elMarginBottom = parseInt( computedEl.getPropertyValue( 'margin-bottom' ), 10 );
+	const elMarginTop = parseInt(
+		computedEl.getPropertyValue( 'margin-top' ),
+		10
+	);
+	const elMarginBottom = parseInt(
+		computedEl.getPropertyValue( 'margin-bottom' ),
+		10
+	);
 
-	const wrapMarginTop = parseInt( computedWrap.getPropertyValue( 'margin-top' ), 10 );
-	const wrapMarginBottom = parseInt( computedWrap.getPropertyValue( 'margin-bottom' ), 10 );
+	const wrapMarginTop = parseInt(
+		computedWrap.getPropertyValue( 'margin-top' ),
+		10
+	);
+	const wrapMarginBottom = parseInt(
+		computedWrap.getPropertyValue( 'margin-bottom' ),
+		10
+	);
 
 	return {
 		marginTop: elMarginTop + wrapMarginTop,
 		marginBottom: elMarginBottom + wrapMarginBottom,
 	};
 };
-

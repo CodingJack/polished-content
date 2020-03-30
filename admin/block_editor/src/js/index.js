@@ -11,15 +11,9 @@ require( './sidebar.js' );
 import ErrorBoundary from './error';
 import Loader from './loader';
 
-import {
-	namespace,
-	defaultData,
-} from '../../../../shared/js/data';
+import { namespace, defaultData } from '../../../../shared/js/data';
 
-import {
-	getClasses,
-	verifyObjects,
-} from './utils';
+import { getClasses, verifyObjects } from './utils';
 
 /**
  * WordPress dependencies.
@@ -27,7 +21,7 @@ import {
 const { __ } = wp.i18n;
 const { PanelBody } = wp.components;
 const { createHigherOrderComponent } = wp.compose;
-const { InspectorControls } = wp.editor;
+const { InspectorControls } = wp.blockEditor;
 const { addFilter } = wp.hooks;
 const { hasBlockSupport } = wp.blocks;
 
@@ -39,7 +33,7 @@ let openPanel;
  * @param object block - the blocks core settings object
  * @returns object - the possibly modified block
  * @since 1.0.0
-*/
+ */
 const addAttributes = ( block ) => {
 	if ( ! verifyObjects( [ block ] ) ) {
 		return block;
@@ -52,9 +46,7 @@ const addAttributes = ( block ) => {
 		const supportsClass = hasBlockSupport( block, 'customClassName', true );
 
 		if ( supportsClass ) {
-			const {
-				attributes,
-			} = block;
+			const { attributes } = block;
 
 			if ( verifyObjects( [ attributes ] ) ) {
 				block.attributes = { ...defaultData, ...attributes };
@@ -72,7 +64,7 @@ const addAttributes = ( block ) => {
  * @param attributes block - the blocks current attributes
  * @returns object - the possibly modified extraProps
  * @since 1.0.0
-*/
+ */
 const addClasses = ( extraProps, block, attributes ) => {
 	if ( ! verifyObjects( [ extraProps, block, attributes ] ) ) {
 		return extraProps;
@@ -84,19 +76,23 @@ const addClasses = ( extraProps, block, attributes ) => {
 	}
 
 	const { pcxEnabled } = attributes;
-	const supportsClass = hasBlockSupport( extraProps, 'customClassName', true );
+	const supportsClass = hasBlockSupport(
+		extraProps,
+		'customClassName',
+		true
+	);
 
 	if ( pcxEnabled && supportsClass ) {
 		const settings = getClasses( { ...attributes } );
 
-		const {
-			animate,
-			classes,
-		} = settings;
+		const { animate, classes } = settings;
 
 		if ( animate && classes ) {
 			const blockName = name.replace( '/', '-' );
-			extraProps.className = classnames( extraProps.className, `${ namespace }_${ blockName }${ classes }` );
+			extraProps.className = classnames(
+				extraProps.className,
+				`${ namespace }_${ blockName }${ classes }`
+			);
 		}
 	}
 
@@ -111,11 +107,7 @@ const polishedContentControls = createHigherOrderComponent( ( BlockEdit ) => {
 			return <BlockEdit { ...props } />;
 		}
 
-		const {
-			setAttributes,
-			isSelected,
-			attributes,
-		} = props;
+		const { setAttributes, isSelected, attributes } = props;
 
 		if ( ! verifyObjects( [ setAttributes, attributes ] ) ) {
 			return <BlockEdit { ...props } />;
@@ -129,7 +121,10 @@ const polishedContentControls = createHigherOrderComponent( ( BlockEdit ) => {
 					<BlockEdit { ...props } />
 					<InspectorControls>
 						<PanelBody
-							title={ __( 'Polished Content', 'polished-content' ) }
+							title={ __(
+								'Polished Content',
+								'polished-content'
+							) }
 							className={ `${ namespace }` }
 							initialOpen={ openPanel }
 						>
@@ -153,17 +148,11 @@ const polishedContentControls = createHigherOrderComponent( ( BlockEdit ) => {
 }, 'polishedContentControls' );
 
 if ( typeof polishedContentGlobals !== 'undefined' ) {
-	const {
-		defaultSettings,
-		chunkDirectory,
-	} = polishedContentGlobals; // eslint-disable-line no-undef
+	const { defaultSettings, chunkDirectory } = polishedContentGlobals; // eslint-disable-line no-undef
 
 	__webpack_public_path__ = chunkDirectory; // eslint-disable-line no-undef, camelcase
 
-	const {
-		allowedBlocks,
-		panelOpen,
-	} = defaultSettings;
+	const { allowedBlocks, panelOpen } = defaultSettings;
 
 	supportedBlocks = allowedBlocks;
 	openPanel = panelOpen;
@@ -171,7 +160,7 @@ if ( typeof polishedContentGlobals !== 'undefined' ) {
 	addFilter(
 		'editor.BlockEdit',
 		`${ namespace }/polishedContentControls`,
-		polishedContentControls,
+		polishedContentControls
 	);
 	addFilter(
 		'blocks.registerBlockType',

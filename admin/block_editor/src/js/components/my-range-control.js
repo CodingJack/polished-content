@@ -1,17 +1,12 @@
-
 /**
  * Internal dependencies.
  */
 
 import MyInputRange from './my-input-range';
 
-import {
-	namespace,
-	defaultValues,
-} from '../../../../../shared/js/data';
+import { namespace, defaultValues } from '../../../../../shared/js/data';
 
 const MyRangeControl = ( {
-
 	prop,
 	label,
 	value,
@@ -22,7 +17,6 @@ const MyRangeControl = ( {
 	min = 0,
 	max = 100,
 	step = 5,
-
 } ) => {
 	const onChange = ( val ) => {
 		val = parseInt( val, 10 );

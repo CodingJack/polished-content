@@ -4,12 +4,9 @@
 
 import React from 'react';
 
-const {
-	useState,
-} = React;
+const { useState } = React;
 
 const NumberInput = ( {
-
 	namespace,
 	type,
 	prop,
@@ -20,12 +17,8 @@ const NumberInput = ( {
 	list,
 	callback,
 	index,
-
 } ) => {
-	const [
-		def,
-		setDefault,
-	] = useState( value );
+	const [ def, setDefault ] = useState( value );
 
 	const onChange = ( e ) => {
 		let val = e.target.value;
@@ -66,7 +59,16 @@ const NumberInput = ( {
 	);
 };
 
-const NumberInputs = ( { namespace, list, items, prop, data, type, icons, callback } ) => {
+const NumberInputs = ( {
+	namespace,
+	list,
+	items,
+	prop,
+	data,
+	type,
+	icons,
+	callback,
+} ) => {
 	return Object.keys( items ).map( ( key, index ) => {
 		const value = data[ index ];
 		const name = items[ key ];

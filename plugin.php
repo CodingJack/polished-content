@@ -5,7 +5,7 @@
  * Description: Add customized scroll-based animations to your Gutenberg Blocks 
  * Author: CodingJack
  * Author URI: http://www.codingjack.com
- * Version: 1.0.0
+ * Version: 1.1.0
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  */

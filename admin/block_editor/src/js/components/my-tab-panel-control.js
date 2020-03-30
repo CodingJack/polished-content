@@ -2,7 +2,7 @@
  * pretty much a clone from the original except the state has been lifted up
  * so the panels can be triggered from outside the component
  * https://github.com/WordPress/gutenberg/tree/master/packages/components/src/tab-panel
-*/
+ */
 
 /**
  * External dependencies
@@ -16,13 +16,11 @@ import { partial, noop, find } from 'lodash';
 const { Component } = wp.element;
 const { withInstanceId } = wp.compose;
 
-const {
-	Button,
-	NavigableMenu,
-} = wp.components;
+const { Button, NavigableMenu } = wp.components;
 
 const TabButton = ( { tabId, onClick, children, selected, ...rest } ) => (
-	<Button role="tab"
+	<Button
+		role="tab"
 		tabIndex={ selected ? null : -1 }
 		aria-selected={ selected }
 		id={ tabId }
@@ -72,9 +70,14 @@ class MyTabPanel extends Component {
 					className="components-tab-panel__tabs"
 				>
 					{ tabs.map( ( tab ) => (
-						<TabButton className={ classnames( tab.className, { [ activeClass ]: tab.name === currentTab } ) }
+						<TabButton
+							className={ classnames( tab.className, {
+								[ activeClass ]: tab.name === currentTab,
+							} ) }
 							tabId={ instanceId + '-' + tab.name }
-							aria-controls={ instanceId + '-' + tab.name + '-view' }
+							aria-controls={
+								instanceId + '-' + tab.name + '-view'
+							}
 							selected={ tab.name === currentTab }
 							key={ tab.name }
 							onClick={ partial( this.handleClick, tab.name ) }
@@ -84,7 +87,8 @@ class MyTabPanel extends Component {
 					) ) }
 				</NavigableMenu>
 				{ selectedTab && (
-					<div aria-labelledby={ selectedId }
+					<div
+						aria-labelledby={ selectedId }
 						role="tabpanel"
 						id={ selectedId + '-view' }
 						className="components-tab-panel__tab-content"

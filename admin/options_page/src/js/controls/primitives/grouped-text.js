@@ -4,9 +4,7 @@
 
 import React from 'react';
 
-const {
-	Fragment,
-} = React;
+const { Fragment } = React;
 
 /**
  * Internal dependencies.
@@ -14,13 +12,9 @@ const {
 import ParseHTML from './parse-html';
 
 const GroupedText = ( { namespace, paragraph, changePage, menuIndex } ) => {
-	const {
-		subheader,
-	} = paragraph;
+	const { subheader } = paragraph;
 
-	let {
-		content,
-	} = paragraph;
+	let { content } = paragraph;
 
 	if ( ! Array.isArray( content ) ) {
 		content = [ content ];
@@ -29,22 +23,20 @@ const GroupedText = ( { namespace, paragraph, changePage, menuIndex } ) => {
 	return (
 		<>
 			<span className={ `${ namespace }-subheader` }>{ subheader }</span>
-			{
-				content.map( ( text, index ) => {
-					return (
-						<Fragment key={ `${ namespace }-grouped-${ index }` }>
-							<span className={ `${ namespace }-paragraph` }>
-								<ParseHTML
-									namespace={ namespace }
-									text={ text }
-									changePage={ changePage }
-									menuIndex={ menuIndex }
-								/>
-							</span>
-						</Fragment>
-					);
-				} )
-			}
+			{ content.map( ( text, index ) => {
+				return (
+					<Fragment key={ `${ namespace }-grouped-${ index }` }>
+						<span className={ `${ namespace }-paragraph` }>
+							<ParseHTML
+								namespace={ namespace }
+								text={ text }
+								changePage={ changePage }
+								menuIndex={ menuIndex }
+							/>
+						</span>
+					</Fragment>
+				);
+			} ) }
 		</>
 	);
 };

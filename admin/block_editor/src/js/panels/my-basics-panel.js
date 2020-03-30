@@ -3,9 +3,7 @@
  */
 const { __ } = wp.i18n;
 
-const {
-	PanelRow,
-} = wp.components;
+const { PanelRow } = wp.components;
 
 /**
  * Internal dependencies.
@@ -15,15 +13,10 @@ import MySelectControl from '../components/my-select-control';
 import MyPositionGridControl from '../components/my-position-grid-control';
 import MyToggleControl from '../components/my-toggle-control';
 
-import {
-	namespace,
-} from '../../../../../shared/js/data';
+import { namespace } from '../../../../../shared/js/data';
 
 const MyBasicsPanel = ( { block } ) => {
-	const {
-		props,
-		updateProp,
-	} = block;
+	const { props, updateProp } = block;
 
 	const {
 		pcxOpacity,
@@ -65,7 +58,9 @@ const MyBasicsPanel = ( { block } ) => {
 				callback={ updateProp }
 				max={ 300 }
 			/>
-			<div className={ `${ namespace }-positions polished-content-position-first` }>
+			<div
+				className={ `${ namespace }-positions polished-content-position-first` }
+			>
 				<PanelRow>
 					<MySelectControl
 						prop="pcxStrength"
@@ -101,7 +96,10 @@ const MyBasicsPanel = ( { block } ) => {
 				label={ __( 'Content Mask', 'polished-content' ) }
 				checked={ pcxMask }
 				callback={ updateProp }
-				help={ __( 'Useful for Blur Filter and Movements without 3D Rotations but may impact collapsing margins', 'polished-content' ) }
+				help={ __(
+					'Useful for Blur Filter and Movements without 3D Rotations but may impact collapsing margins',
+					'polished-content'
+				) }
 			/>
 		</>
 	);

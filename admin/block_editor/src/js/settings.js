@@ -1,10 +1,7 @@
 /**
  * WordPress dependencies.
  */
-const {
-	dispatch,
-	withSelect,
-} = wp.data;
+const { dispatch, withSelect } = wp.data;
 
 /**
  * Internal dependencies.
@@ -28,12 +25,13 @@ let defaultSettings = {
 };
 
 coreDefaults.forEach( ( def ) => {
-	defaultSettings[ `${ prefix }${ def }` ] = defaultValues[ toConvertedProp( def ) ];
+	defaultSettings[ `${ prefix }${ def }` ] =
+		defaultValues[ toConvertedProp( def ) ];
 } );
 
 /*
  * global onchange for all settings
-*/
+ */
 const updateProp = ( value, prop ) => {
 	let val = value;
 	if ( val === undefined ) {
@@ -41,12 +39,14 @@ const updateProp = ( value, prop ) => {
 	}
 
 	defaultSettings[ `${ prefix }${ prop }` ] = val;
-	dispatch( 'core/editor' ).editPost( { meta: { [ `${ prefix }${ prop }` ]: val } } );
+	dispatch( 'core/editor' ).editPost( {
+		meta: { [ `${ prefix }${ prop }` ]: val },
+	} );
 };
 
 /*
  * oh the humanity to get default values into this..
-*/
+ */
 const PolishedContentSettings = withSelect( ( selector ) => {
 	const meta = selector( 'core/editor' ).getEditedPostAttribute( 'meta' );
 	const props = {
@@ -57,7 +57,9 @@ const PolishedContentSettings = withSelect( ( selector ) => {
 	if ( ! metaAdded ) {
 		metaAdded = true;
 		if ( ! meta[ `${ prefix }meta_added` ] ) {
-			dispatch( 'core/editor' ).editPost( { meta: { ...defaultSettings } } );
+			dispatch( 'core/editor' ).editPost( {
+				meta: { ...defaultSettings },
+			} );
 		} else {
 			defaultSettings = { ...meta };
 		}
@@ -69,4 +71,3 @@ const PolishedContentSettings = withSelect( ( selector ) => {
 } )( MySettingsPanel );
 
 export default PolishedContentSettings;
-

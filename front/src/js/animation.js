@@ -1,20 +1,12 @@
 /**
  * External dependencies.
  */
-
-// sandboxing gsap
-import { gsap, gsapReset } from '../../../shared/js/sandbox-gsap';
-require( 'gsap/umd/TweenMax' );
-gsapReset();
+import gsap from 'gsap';
 
 /**
  * Internal dependencies.
  */
-import {
-	defaultValues,
-	tweenables,
-	clipPoints,
-} from '../../../shared/js/data';
+import { defaultValues, tweenables, clipPoints } from '../../../shared/js/data';
 
 import { getReversable } from './getters';
 
@@ -27,8 +19,17 @@ import { getReversable } from './getters';
  * @param boolean updateClip - if the clip-path should be animated
  * @param array clips - an array of booleans that determine which clip points need to be animated
  * @since 1.0.0
-*/
-export const onUpdateTween = ( obj, el, updateBlur, updateGrayscale, updateChars, updateClip, clips, clipRect ) => {
+ */
+export const onUpdateTween = (
+	obj,
+	el,
+	updateBlur,
+	updateGrayscale,
+	updateChars,
+	updateClip,
+	clips,
+	clipRect
+) => {
 	if ( updateBlur || updateGrayscale ) {
 		let filter = '';
 		if ( updateBlur ) {
@@ -62,11 +63,8 @@ export const onUpdateTween = ( obj, el, updateBlur, updateGrayscale, updateChars
 		} else {
 			/*
 			 * IE/Edge Fallback
-			*/
-			const {
-				width,
-				height,
-			} = clipRect;
+			 */
+			const { width, height } = clipRect;
 
 			const neg = obj.clip * 0.01;
 			const pos = 1 - neg;
@@ -95,7 +93,7 @@ export const onUpdateTween = ( obj, el, updateBlur, updateGrayscale, updateChars
  * @param boolean reverse - if the timeline should be prepared for reverse animations
  * @returns boolean - true: it's below, false: it's above
  * @since 1.0.0
-*/
+ */
 const buildTweenObjects = ( el, props, reverse, clipRect, webkitClipPath ) => {
 	const {
 		clipX,
@@ -106,8 +104,8 @@ const buildTweenObjects = ( el, props, reverse, clipRect, webkitClipPath ) => {
 		pcxTransformOrigin,
 	} = props;
 
-	const twObj = { ease: gsap.Linear.easeNone, overwrite: 'concurrent' };
-	const elObj = { ease: gsap.Linear.easeNone, overwrite: 'concurrent' };
+	const twObj = { ease: 'none', overwrite: 'auto' };
+	const elObj = { ease: 'none', overwrite: 'auto' };
 
 	if ( ! reverse || ! props.reversePos ) {
 		elObj.x = props.forwardPos.x;
@@ -163,8 +161,26 @@ const buildTweenObjects = ( el, props, reverse, clipRect, webkitClipPath ) => {
 	if ( ! hasBlur && ! hasGrayscale && ! hasClip && ! pcxLetterSpacing ) {
 		specialObj = false;
 	} else {
-		render = [ twObj, el, hasBlur, hasGrayscale, pcxLetterSpacing, hasClip, clips, clipRect ];
-		twObj.onUpdateParams = [ specialObj, el, hasBlur, hasGrayscale, pcxLetterSpacing, hasClip, clips, clipRect ];
+		render = [
+			twObj,
+			el,
+			hasBlur,
+			hasGrayscale,
+			pcxLetterSpacing,
+			hasClip,
+			clips,
+			clipRect,
+		];
+		twObj.onUpdateParams = [
+			specialObj,
+			el,
+			hasBlur,
+			hasGrayscale,
+			pcxLetterSpacing,
+			hasClip,
+			clips,
+			clipRect,
+		];
 		twObj.onUpdate = onUpdateTween;
 	}
 
@@ -186,8 +202,15 @@ const buildTweenObjects = ( el, props, reverse, clipRect, webkitClipPath ) => {
  *   To accomplish this the timeline is duplicated and then extended with the starting values reversed.
  * @returns object - {TimelineMax:Object, propsReversed:Boolean, twObjects:Array}
  * @since 1.0.0
-*/
-export const buildAnimation = ( el, props, reverse, observed, clipRect, webkitClipPath ) => {
+ */
+export const buildAnimation = (
+	el,
+	props,
+	reverse,
+	observed,
+	clipRect,
+	webkitClipPath
+) => {
 	const propsTwo = { ...props };
 
 	let propsReversed;
@@ -195,10 +218,22 @@ export const buildAnimation = ( el, props, reverse, observed, clipRect, webkitCl
 		propsReversed = getReversable( propsTwo );
 	}
 
-	const tween = buildTweenObjects( el, props, false, clipRect, webkitClipPath );
-	const reverseTween = buildTweenObjects( el, propsTwo, reverse, clipRect, webkitClipPath );
+	const tween = buildTweenObjects(
+		el,
+		props,
+		false,
+		clipRect,
+		webkitClipPath
+	);
+	const reverseTween = buildTweenObjects(
+		el,
+		propsTwo,
+		reverse,
+		clipRect,
+		webkitClipPath
+	);
 
-	const timeline = new gsap.TimelineMax( { paused: true } );
+	const timeline = new gsap.timeline( { paused: true } );
 	const { pcxDuration: duration } = props;
 
 	timeline.addLabel( 'start', 0 );
@@ -217,7 +252,12 @@ export const buildAnimation = ( el, props, reverse, observed, clipRect, webkitCl
 
 	// extend the timeline if we should reverse
 	if ( reverseTween.specialObj ) {
-		timeline.to( reverseTween.specialObj, duration, reverseTween.twObj, duration );
+		timeline.to(
+			reverseTween.specialObj,
+			duration,
+			reverseTween.twObj,
+			duration
+		);
 	}
 	timeline.addLabel( 'end', duration * 2 );
 

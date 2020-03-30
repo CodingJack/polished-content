@@ -1,5 +1,5 @@
 # Polished Content
-WordPress Gutenberg Block Animation Builder w/ Intersection Observer
+WordPress Gutenberg Block Animation Builder
 
 [Demo Home Page](http://www.codingjack.com/polished-content/) | [Demo Blog Post](http://www.codingjack.com/polished-content/2018/12/21/how-you-can-also-be-a-billionaire/) | [Admin Screenshots](http://www.codingjack.com/polished-content-screenshots/)
 

@@ -2,26 +2,20 @@
  * WordPress dependencies.
  */
 
-const {
-	ToggleControl,
-} = wp.components;
+const { ToggleControl } = wp.components;
 
 /**
  * Internal dependencies.
  */
-import {
-	namespace,
-} from '../../../../../shared/js/data';
+import { namespace } from '../../../../../shared/js/data';
 
 const MyToggleControl = ( {
-
 	prop,
 	label,
 	checked,
 	callback,
 	className,
 	help,
-
 } ) => {
 	if ( ! className ) {
 		className = '';

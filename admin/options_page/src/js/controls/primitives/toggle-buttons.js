@@ -5,7 +5,6 @@
 import React from 'react';
 
 const ToggleButton = ( {
-
 	namespace,
 	prop,
 	data,
@@ -15,7 +14,6 @@ const ToggleButton = ( {
 	title,
 	icons,
 	index,
-
 } ) => {
 	const checked = value ? 'checked' : null;
 	const isChecked = checked ? ' is-checked' : '';
@@ -26,12 +24,20 @@ const ToggleButton = ( {
 
 	return (
 		<>
-			<span className={ `${ namespace }-input components-form-toggle${ isChecked }` }>
-				<input className="components-form-toggle__input" onChange={ onChange } type="checkbox" checked />
+			<span
+				className={ `${ namespace }-input components-form-toggle${ isChecked }` }
+			>
+				<input
+					className="components-form-toggle__input"
+					onChange={ onChange }
+					type="checkbox"
+					checked
+				/>
 				<span className="components-form-toggle__track"></span>
 				<span className="components-form-toggle__thumb"></span>
 				{ ! checked && (
-					<svg className="components-form-toggle__off"
+					<svg
+						className="components-form-toggle__off"
 						width="6"
 						height="6"
 						aria-hidden="true"
@@ -39,11 +45,13 @@ const ToggleButton = ( {
 						focusable="false"
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 6 6"
-					><path d="M3 1.5c.8 0 1.5.7 1.5 1.5S3.8 4.5 3 4.5 1.5 3.8 1.5 3 2.2 1.5 3 1.5M3 0C1.3 0 0 1.3 0 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"></path>
+					>
+						<path d="M3 1.5c.8 0 1.5.7 1.5 1.5S3.8 4.5 3 4.5 1.5 3.8 1.5 3 2.2 1.5 3 1.5M3 0C1.3 0 0 1.3 0 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"></path>
 					</svg>
 				) }
 				{ checked && (
-					<svg className="components-form-toggle__on"
+					<svg
+						className="components-form-toggle__on"
 						width="2"
 						height="6"
 						xmlns="http://www.w3.org/2000/svg"
@@ -51,28 +59,39 @@ const ToggleButton = ( {
 						role="img"
 						aria-hidden="true"
 						focusable="false"
-					><path d="M0 0h2v6H0z"></path>
+					>
+						<path d="M0 0h2v6H0z"></path>
 					</svg>
 				) }
 			</span>
 			{ icons && (
 				<span className={ `dashicons dashicons-${ name }` }></span>
 			) }
-			{ title && (
-				<span>{ title }</span>
-			) }
+			{ title && <span>{ title }</span> }
 		</>
 	);
 };
 
-const ToggleButtonColumn = ( { namespace, list, items, idx, prop, data, icons, callback } ) => {
+const ToggleButtonColumn = ( {
+	namespace,
+	list,
+	items,
+	idx,
+	prop,
+	data,
+	icons,
+	callback,
+} ) => {
 	return Object.keys( items ).map( ( key ) => {
 		const name = items[ key ];
 		const index = idx.i;
 		idx.i++;
 
 		return (
-			<div key={ `${ name }-${ index }` } className={ `${ namespace }-input ${ namespace }-input-flex ${ namespace }-input-toggle` }>
+			<div
+				key={ `${ name }-${ index }` }
+				className={ `${ namespace }-input ${ namespace }-input-flex ${ namespace }-input-toggle` }
+			>
 				<ToggleButton
 					namespace={ namespace }
 					prop={ prop }
@@ -89,7 +108,16 @@ const ToggleButtonColumn = ( { namespace, list, items, idx, prop, data, icons, c
 	} );
 };
 
-const ToggleButtons = ( { namespace, list, items, prop, data, icons, subColumns, callback } ) => {
+const ToggleButtons = ( {
+	namespace,
+	list,
+	items,
+	prop,
+	data,
+	icons,
+	subColumns,
+	callback,
+} ) => {
 	if ( items.length ) {
 		const maxColumns = subColumns;
 		const len = items.length;
@@ -108,7 +136,10 @@ const ToggleButtons = ( { namespace, list, items, prop, data, icons, subColumns,
 			} );
 
 			return (
-				<div key={ items[ i ] } className={ `${ namespace }-subcolumn` }>
+				<div
+					key={ items[ i ] }
+					className={ `${ namespace }-subcolumn` }
+				>
 					<ToggleButtonColumn
 						items={ subitems }
 						namespace={ namespace }

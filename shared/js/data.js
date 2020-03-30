@@ -1,21 +1,14 @@
 // the data is used on both the backend and frontend
 // but translations are only needed for the backend
-const { __ } = typeof wp !== 'undefined' && wp.i18n ? wp.i18n : { __: ( st ) => st };
+const { __ } =
+	typeof wp !== 'undefined' && wp.i18n ? wp.i18n : { __: ( st ) => st };
 
 const namespace = 'polished-content';
 const hasGlobals = typeof polishedContentGlobals !== 'undefined';
 
 const selectOptions = {
-	pcxAlign: [
-		'left',
-		'center',
-		'right',
-	],
-	pcxAlignRtl: [
-		'right',
-		'center',
-		'left',
-	],
+	pcxAlign: [ 'left', 'center', 'right' ],
+	pcxAlignRtl: [ 'right', 'center', 'left' ],
 	pcxPosition: [
 		'left-top',
 		'center-top',
@@ -516,11 +509,8 @@ const customPreset = {
 /*
  * these are always displayed
  * regardless of the user options
-*/
-const whitelisted = [
-	'PcxFade',
-	'PcxGaussianBlur',
-];
+ */
+const whitelisted = [ 'PcxFade', 'PcxGaussianBlur' ];
 
 const tweenables = {
 	pcxOpacity: {
@@ -553,32 +543,29 @@ const tweenables = {
 	},
 };
 
-const viewports = [
-	'pcxDesktop',
-	'pcxTablet',
-	'pcxLaptop',
-	'pcxSmartphone',
-];
+const viewports = [ 'pcxDesktop', 'pcxTablet', 'pcxLaptop', 'pcxSmartphone' ];
 
-const nonAnimatable = viewports.slice().concat( [
-	'pcxEnabled',
-	'pcxReverse',
-	'pcxFloat',
-	'pcxInherit',
-	'pcxInline',
-	'pcxAlign',
-	'pcxClass',
-	'pcxEaseReverse',
-	'pcxDelayReverse',
-	'pcxDelayBreak',
-	'pcxTransformReset',
-	'pcxPerspective',
-	'pcxScrollType',
-	'pcxPercentageIn',
-	'pcxScrollStagger',
-	'pcxLetterSpacing',
-	'pcxPercentageInStagger',
-] );
+const nonAnimatable = viewports
+	.slice()
+	.concat( [
+		'pcxEnabled',
+		'pcxReverse',
+		'pcxFloat',
+		'pcxInherit',
+		'pcxInline',
+		'pcxAlign',
+		'pcxClass',
+		'pcxEaseReverse',
+		'pcxDelayReverse',
+		'pcxDelayBreak',
+		'pcxTransformReset',
+		'pcxPerspective',
+		'pcxScrollType',
+		'pcxPercentageIn',
+		'pcxScrollStagger',
+		'pcxLetterSpacing',
+		'pcxPercentageInStagger',
+	] );
 
 const clipPoints = {
 	'center-top': [ 0, 0, 1, 0 ],
@@ -591,12 +578,7 @@ const clipPoints = {
 	'right-bottom': [ 1, 0, 0, 1 ],
 };
 
-const threeD = [
-	'pcxSkewX',
-	'pcxSkewY',
-	'pcxRotateX',
-	'pcxRotateY',
-];
+const threeD = [ 'pcxSkewX', 'pcxSkewY', 'pcxRotateX', 'pcxRotateY' ];
 
 const reversable = [
 	'pcxRotate',
@@ -606,10 +588,7 @@ const reversable = [
 	'pcxSkewY',
 ];
 
-const transformable = reversable.slice().concat( [
-	'pcxPosition',
-	'pcxZoom',
-] );
+const transformable = reversable.slice().concat( [ 'pcxPosition', 'pcxZoom' ] );
 
 const animationCore = [
 	'pcxOpacity',
@@ -656,7 +635,7 @@ const {
 /*
  * attributes pushed into blocks
  * editor options MUST match this list!
-*/
+ */
 const defaultData = {
 	pcxEnabled: {
 		type: 'boolean',
@@ -863,13 +842,7 @@ const rightClickItems = {
 
 // settings panels for right click menu
 const panelSettings = {};
-const panels = [
-	'basics',
-	'advanced',
-	'timing',
-	'formatting',
-	'settings',
-];
+const panels = [ 'basics', 'advanced', 'timing', 'formatting', 'settings' ];
 
 panels.forEach( ( panel ) => {
 	const settings = defaultData[ panel ];
@@ -886,20 +859,14 @@ panels.forEach( ( panel ) => {
 
 /*
  * push user preset settings into core preset settings
-*/
+ */
 if ( hasGlobals ) {
-	const {
-		defaultSettings,
-	} = polishedContentGlobals; // eslint-disable-line no-undef
+	const { defaultSettings } = polishedContentGlobals; // eslint-disable-line no-undef
 
 	if ( defaultSettings && ! Array.isArray( defaultSettings ) ) {
-		const {
-			viewportsEnabled,
-		} = defaultSettings;
+		const { viewportsEnabled } = defaultSettings;
 
-		const {
-			pcxAnimations,
-		} = selectOptions;
+		const { pcxAnimations } = selectOptions;
 
 		viewports.forEach( ( viewport, i ) => {
 			defaultSettings[ viewport ] = viewportsEnabled[ i ];
@@ -927,7 +894,7 @@ if ( hasGlobals ) {
  * allDataProps
  * originalPresets
  *
-*/
+ */
 const allDataProps = Object.keys( defaultData );
 const defaultValues = {};
 const animatable = [];
@@ -945,25 +912,18 @@ nonAnimatable.forEach( ( key ) => {
 
 const mainDefaults = { PcxDefaults: { ...defaultValues } };
 
-const {
-	pcxPresets,
-} = selectOptions;
+const { pcxPresets } = selectOptions;
 const originalPresets = [ ...pcxPresets ];
 
 /*
-* Push custom presets from database into preset select options
-* and modify default presets if user options exist
-*/
+ * Push custom presets from database into preset select options
+ * and modify default presets if user options exist
+ */
 if ( hasGlobals ) {
-	const {
-		customPresets,
-		defaultSettings,
-	} = polishedContentGlobals; // eslint-disable-line no-undef
+	const { customPresets, defaultSettings } = polishedContentGlobals; // eslint-disable-line no-undef
 
 	if ( defaultSettings && ! Array.isArray( defaultSettings ) ) {
-		const {
-			defaultPresets,
-		} = defaultSettings;
+		const { defaultPresets } = defaultSettings;
 
 		if ( Array.isArray( defaultPresets ) ) {
 			const presetDefaults = whitelisted.slice();
@@ -972,9 +932,7 @@ if ( hasGlobals ) {
 				presetDefaults.push( def );
 			} );
 
-			const {
-				pcxAnimations,
-			} = selectOptions;
+			const { pcxAnimations } = selectOptions;
 
 			Object.keys( pcxAnimations ).forEach( ( key ) => {
 				if ( presetDefaults.indexOf( key ) === -1 ) {
@@ -993,9 +951,7 @@ if ( hasGlobals ) {
 		}
 	}
 	if ( customPresets && ! Array.isArray( customPresets ) ) {
-		const {
-			pcxAnimations,
-		} = selectOptions;
+		const { pcxAnimations } = selectOptions;
 
 		pcxPresets.push( {
 			label: `*** ${ __( 'Custom Presets', 'polished-content' ) } ***`,
@@ -1036,4 +992,3 @@ export {
 	allDataProps,
 	threeD,
 };
-

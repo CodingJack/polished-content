@@ -4,24 +4,18 @@
 
 import React from 'react';
 
-const {
-	Fragment,
-} = React;
+const { Fragment } = React;
 
 /**
  * Internal dependencies.
  */
 import ParagraphContent from './paragraph-content';
 
-const Wrapper = ( { wrapIt, wrapper, children } ) => wrapIt ? wrapper( children ) : children;
+const Wrapper = ( { wrapIt, wrapper, children } ) =>
+	wrapIt ? wrapper( children ) : children;
 
 const HTMLContent = ( { namespace, html, changePage, menuIndex } ) => {
-	const {
-		header,
-		isList,
-		paragraphs,
-		className,
-	} = html;
+	const { header, isList, paragraphs, className } = html;
 
 	const cssClass = className ? `${ namespace }-html-${ className }` : '';
 
@@ -39,7 +33,13 @@ const HTMLContent = ( { namespace, html, changePage, menuIndex } ) => {
 						<Fragment key={ `${ namespace }-paragraph-${ i }` }>
 							<Wrapper
 								wrapIt={ isText }
-								wrapper={ ( children ) => ! isList ? <p>{ children }</p> : <li>{ children }</li> }
+								wrapper={ ( children ) =>
+									! isList ? (
+										<p>{ children }</p>
+									) : (
+										<li>{ children }</li>
+									)
+								}
 							>
 								<ParagraphContent
 									namespace={ namespace }

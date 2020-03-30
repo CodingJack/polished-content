@@ -12,13 +12,19 @@ const SelectBox = ( { namespace, list, type, prop, data, callback } ) => {
 	};
 
 	return (
-		<select className={ `${ namespace }-input components-select-control__input` } value={ data } onChange={ onChange }>
-			{
-				Object.keys( list ).map( ( key ) => {
-					const name = list[ key ];
-					return <option key={ `${ namespace }-${ key }` } value={ key }>{ name }</option>;
-				} )
-			}
+		<select
+			className={ `${ namespace }-input components-select-control__input` }
+			value={ data }
+			onChange={ onChange }
+		>
+			{ Object.keys( list ).map( ( key ) => {
+				const name = list[ key ];
+				return (
+					<option key={ `${ namespace }-${ key }` } value={ key }>
+						{ name }
+					</option>
+				);
+			} ) }
 		</select>
 	);
 };

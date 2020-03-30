@@ -1,29 +1,17 @@
 /**
  * WordPress dependencies.
  */
-const {
-	ButtonGroup,
-	Button,
-	Icon,
-} = wp.components;
+const { ButtonGroup, Button, Icon } = wp.components;
 
 /**
  * Internal dependencies.
  */
 
-import {
-	namespace,
-	selectOptions,
-} from '../../../../../shared/js/data';
+import { namespace, selectOptions } from '../../../../../shared/js/data';
 
-const {
-	isRtl,
-} = polishedContentGlobals; // eslint-disable-line no-undef
+const { isRtl } = polishedContentGlobals; // eslint-disable-line no-undef
 
-const {
-	pcxAlign,
-	pcxAlignRtl,
-} = selectOptions;
+const { pcxAlign, pcxAlignRtl } = selectOptions;
 
 const aligntButtons = ! isRtl ? pcxAlign : pcxAlignRtl;
 

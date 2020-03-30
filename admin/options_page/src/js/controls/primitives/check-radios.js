@@ -5,7 +5,6 @@
 import React from 'react';
 
 const CheckRadios = ( {
-
 	namespace,
 	items,
 	list,
@@ -13,7 +12,6 @@ const CheckRadios = ( {
 	data,
 	type,
 	callback,
-
 } ) => {
 	return Object.keys( items ).map( ( key, i ) => {
 		const name = items[ key ];
@@ -26,12 +24,26 @@ const CheckRadios = ( {
 		};
 
 		return (
-			<div key={ `${ name }-${ i }` } className={ `${ namespace }-input` }>
-				{ ( ! checked &&
-					<input type={ type } value={ name } name={ fieldName } onChange={ onChange } />
+			<div
+				key={ `${ name }-${ i }` }
+				className={ `${ namespace }-input` }
+			>
+				{ ! checked && (
+					<input
+						type={ type }
+						value={ name }
+						name={ fieldName }
+						onChange={ onChange }
+					/>
 				) }
-				{ ( checked &&
-					<input type={ type } value={ name } name={ fieldName } onChange={ onChange } checked />
+				{ checked && (
+					<input
+						type={ type }
+						value={ name }
+						name={ fieldName }
+						onChange={ onChange }
+						checked
+					/>
 				) }
 				{ list[ name ] }
 			</div>

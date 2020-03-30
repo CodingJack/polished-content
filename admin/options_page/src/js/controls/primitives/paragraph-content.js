@@ -10,11 +10,15 @@ import React from 'react';
 import GroupedText from './grouped-text';
 import ParseHTML from './parse-html';
 
-const {
-	screenshotsDirectory,
-} = polishedContentGlobals; // eslint-disable-line no-undef
+const { screenshotsDirectory } = polishedContentGlobals; // eslint-disable-line no-undef
 
-const ParagraphContent = ( { namespace, paragraph, isText, changePage, menuIndex } ) => {
+const ParagraphContent = ( {
+	namespace,
+	paragraph,
+	isText,
+	changePage,
+	menuIndex,
+} ) => {
 	if ( isText ) {
 		if ( typeof paragraph === 'object' ) {
 			return (
@@ -39,12 +43,15 @@ const ParagraphContent = ( { namespace, paragraph, isText, changePage, menuIndex
 
 	// content is an array of images
 	return paragraph.map( ( contentImage, index ) => {
-		const {
-			alt,
-			file,
-		} = contentImage;
+		const { alt, file } = contentImage;
 
-		return <img key={ `${ namespace }-image-${ index }` } alt={ alt } src={ `${ screenshotsDirectory }/img/${ file }` } />;
+		return (
+			<img
+				key={ `${ namespace }-image-${ index }` }
+				alt={ alt }
+				src={ `${ screenshotsDirectory }/img/${ file }` }
+			/>
+		);
 	} );
 };
 

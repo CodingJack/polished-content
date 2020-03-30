@@ -3,13 +3,9 @@
  */
 const { __ } = wp.i18n;
 
-const {
-	Button,
-} = wp.components;
+const { Button } = wp.components;
 
-import {
-	namespace,
-} from '../../../../../shared/js/data';
+import { namespace } from '../../../../../shared/js/data';
 
 const MyResetButtons = ( { onClear, onUndo, originalSettings } ) => {
 	const undoEvent = () => {
@@ -20,10 +16,16 @@ const MyResetButtons = ( { onClear, onUndo, originalSettings } ) => {
 		return (
 			<div className={ `${ namespace }-reset-btns` }>
 				{ onClear && (
-					<Button isSmall onClick={ onClear }> { __( 'Reset to Defaults', 'polished-content' ) }</Button>
+					<Button isSmall onClick={ onClear }>
+						{ ' ' }
+						{ __( 'Reset to Defaults', 'polished-content' ) }
+					</Button>
 				) }
 				{ onUndo && (
-					<Button isSmall onClick={ undoEvent }> { __( 'Undo All Changes', 'polished-content' ) }</Button>
+					<Button isSmall onClick={ undoEvent }>
+						{ ' ' }
+						{ __( 'Undo All Changes', 'polished-content' ) }
+					</Button>
 				) }
 			</div>
 		);

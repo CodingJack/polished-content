@@ -21,12 +21,15 @@ import {
  * @param object args - the array of arguments to verify
  * @returns boolean - if the arguments are what we expected
  * @since 1.0.0
-*/
+ */
 const verifyObjects = ( objects ) => {
 	const len = objects.length;
 
 	for ( let i = 0; i < len; i++ ) {
-		if ( typeof objects[ i ] !== 'object' && typeof objects[ i ] !== 'function' ) {
+		if (
+			typeof objects[ i ] !== 'object' &&
+			typeof objects[ i ] !== 'function'
+		) {
 			return false;
 		}
 	}
@@ -39,7 +42,7 @@ const verifyObjects = ( objects ) => {
  * @param object attrs - the block's current attributes
  * @returns object - if classes should be added and the list of classes to add
  * @since 1.0.0
-*/
+ */
 export const getClasses = ( attrs ) => {
 	let classes = '';
 
@@ -79,16 +82,17 @@ export const getClasses = ( attrs ) => {
 
 	for ( let i = 0; i < len; i++ ) {
 		const prop = transformable[ i ];
-		if ( attrs[ prop ] !== undefined && attrs[ prop ] !== defaultValues[ prop ] ) {
+		if (
+			attrs[ prop ] !== undefined &&
+			attrs[ prop ] !== defaultValues[ prop ]
+		) {
 			hasTransform = true;
 			break;
 		}
 	}
 
 	if ( hasTransform ) {
-		const {
-			pcxTransformOrigin: defTransformOrigin,
-		} = defaultValues;
+		const { pcxTransformOrigin: defTransformOrigin } = defaultValues;
 
 		if ( pcxTransformOrigin === defTransformOrigin ) {
 			delete attrs.pcxTransformReset;
@@ -124,7 +128,7 @@ export const getClasses = ( attrs ) => {
  * @param string strength - "max" = full screen, "full" = content size, "short" = half content size
  * @returns object - the animation's translateX/Y values
  * @since 1.0.0
-*/
+ */
 const getPositions = ( el, container, curPosX, curPosY, strength ) => {
 	const pos = { x: 0, y: 0 };
 	const { clientWidth, clientHeight } = el;
@@ -150,8 +154,8 @@ const getPositions = ( el, container, curPosX, curPosY, strength ) => {
 		const rect = container.getBoundingClientRect();
 		const { width, height } = rect;
 
-		const bottom = Math.ceil( ( height * 0.5 ) + ( clientHeight * 0.5 ) );
-		const right = Math.ceil( ( width * 0.5 ) + ( clientWidth * 0.5 ) );
+		const bottom = Math.ceil( height * 0.5 + clientHeight * 0.5 );
+		const right = Math.ceil( width * 0.5 + clientWidth * 0.5 );
 
 		if ( curPosX === 'left' ) {
 			pos.x = -right;
@@ -174,7 +178,7 @@ const getPositions = ( el, container, curPosX, curPosY, strength ) => {
  * @param object props - the current animation's properties
  * @returns - whether the user changed an animatable property or not
  * @since 1.0.0
-*/
+ */
 const shouldAnimate = ( props ) => {
 	const len = animationCore.length;
 	let animate;
@@ -195,7 +199,7 @@ const shouldAnimate = ( props ) => {
  * @param object props - the current animation's properties
  * @returns - whether or not the new set of props should be animated
  * @since 1.0.0
-*/
+ */
 const animatableProps = ( props ) => {
 	const keys = Object.keys( props );
 	const len = keys.length;
@@ -215,7 +219,7 @@ const animatableProps = ( props ) => {
  * @param object nextProps - the component's current props
  * @returns - whether or not the preview should animate
  * @since 1.0.0
-*/
+ */
 const compareProps = ( prevProps, nextProps ) => {
 	const len = animatable.length;
 
@@ -236,7 +240,7 @@ const compareProps = ( prevProps, nextProps ) => {
  * @param object objectB - second object to compare
  * @returns - whether or not the objects are equal
  * @since 1.0.0
-*/
+ */
 const objectValuesEqual = ( objectA, objectB, objectKeys ) => {
 	const keys = objectKeys || Object.keys( objectA );
 	const len = keys.length;
@@ -260,7 +264,7 @@ const objectValuesEqual = ( objectA, objectB, objectKeys ) => {
  * @param boolean next - whether the next or back button was clicked
  * @returns string - the new value to apply to the select dropdown
  * @since 1.0.0
-*/
+ */
 const getPrevNextSelection = ( options, values, value, next ) => {
 	const index = values.indexOf( value );
 	const len = values.length;
@@ -284,8 +288,8 @@ const getPrevNextSelection = ( options, values, value, next ) => {
 /*
  * @desc resets the initial tab when adding an animation for the first time
  * @since 1.0.0
-*/
-const checkInitialTab = ( enabled, selectedPreset, ) => {
+ */
+const checkInitialTab = ( enabled, selectedPreset ) => {
 	if ( ! enabled && selectedPreset === 'PcxDefaults' ) {
 		const { initialTab } = polishedContentGlobals; // eslint-disable-line no-undef
 		polishedContentGlobals.currentTab = initialTab; // eslint-disable-line no-undef
@@ -295,7 +299,7 @@ const checkInitialTab = ( enabled, selectedPreset, ) => {
 /*
  * @desc resets the custom preset selection when editing a new block
  * @since 1.0.0
-*/
+ */
 const resetCustomPreset = () => {
 	const { pcxPresets, pcxAnimations } = selectOptions;
 	const { PcxCustom } = pcxAnimations;
@@ -310,7 +314,7 @@ const resetCustomPreset = () => {
  * @desc sets the current preset selection to "Custom Values" and defines its values
  * @param object current - the current set of settings the user has applied
  * @since 1.0.0
-*/
+ */
 const setCustomPreset = ( current ) => {
 	const { pcxPresets, pcxAnimations } = selectOptions;
 	const { PcxCustom } = pcxAnimations;
@@ -321,7 +325,10 @@ const setCustomPreset = ( current ) => {
 
 	const obj = {};
 	Object.keys( defaultValues ).forEach( ( key ) => {
-		if ( current[ key ] !== undefined && current[ key ] !== defaultValues[ key ] ) {
+		if (
+			current[ key ] !== undefined &&
+			current[ key ] !== defaultValues[ key ]
+		) {
 			obj[ key ] = current[ key ];
 		}
 	} );
@@ -334,7 +341,7 @@ const setCustomPreset = ( current ) => {
  * @param object current - the current set of settings the user has applied
  * @returns object - {selectedPreset:String, hideCreatePresetBtn:Boolean, hideDeleteBtn:Boolean}
  * @since 1.0.0
-*/
+ */
 const getPresetSelection = ( props, resetCustom ) => {
 	if ( resetCustom ) {
 		resetCustomPreset();
@@ -399,7 +406,7 @@ const getPresetSelection = ( props, resetCustom ) => {
  * @param add boolean - whether the Custom Presets label should be added or removed
  * @returns boolean - if additional custom presets still exist after a removal
  * @since 1.0.0
-*/
+ */
 const addRemoveCustomLabel = ( add ) => {
 	const { pcxPresets } = selectOptions;
 	const len = pcxPresets.length - 1;
@@ -418,7 +425,10 @@ const addRemoveCustomLabel = ( add ) => {
 	if ( add ) {
 		if ( ! hasLabel ) {
 			pcxPresets.push( {
-				label: `*** ${ __( 'Custom Presets', 'polished-content' ) } ***`,
+				label: `*** ${ __(
+					'Custom Presets',
+					'polished-content'
+				) } ***`,
 				value: 'PcxCustomPresets',
 				disabled: true,
 			} );
@@ -447,7 +457,7 @@ const addRemoveCustomLabel = ( add ) => {
  * @param object settings - the settings belonging to the new custom preset
  * @returns string - the sanitized title for the preset
  * @since 1.0.0
-*/
+ */
 const addPreset = ( title, settings ) => {
 	const { pcxPresets, pcxAnimations } = selectOptions;
 	const key = title.trim();
@@ -483,7 +493,7 @@ const addPreset = ( title, settings ) => {
  * @param object defaults - the original defaalts to get the keys from
  * @returns boolean - whether or not the current settings match the defaalts
  * @since 1.0.0
-*/
+ */
 const checkChanges = ( original, current, defaults ) => {
 	const keys = Object.keys( defaults || original );
 	const len = keys.length;
@@ -520,7 +530,7 @@ const getOriginalSettings = ( attributes ) => {
  * @param object settings - the current user settings
  * @returns object - {selectedPreset:String, hideCreatePresetBtn:Boolean, hideDeleteBtn:Boolean}
  * @since 1.0.0
-*/
+ */
 const removePreset = ( key, settings ) => {
 	const { pcxPresets, pcxAnimations } = selectOptions;
 	const total = pcxPresets.length - 1;
@@ -547,9 +557,11 @@ const removePreset = ( key, settings ) => {
  * @param string prop - the prop name to convert
  * @returns string - the converted name
  * @since 1.0.0
-*/
+ */
 const toConvertedProp = ( prop ) => {
-	const name = prop.replace( /^\w/, ( c ) => c.toUpperCase() ).replace( /_([a-z])/g, ( c ) => c[ 1 ].toUpperCase() );
+	const name = prop
+		.replace( /^\w/, ( c ) => c.toUpperCase() )
+		.replace( /_([a-z])/g, ( c ) => c[ 1 ].toUpperCase() );
 	return `pcx${ name }`;
 };
 
@@ -569,4 +581,3 @@ export {
 	verifyObjects,
 	animatableProps,
 };
-

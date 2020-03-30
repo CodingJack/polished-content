@@ -3,17 +3,13 @@
 /**
  * WordPress dependencies.
  */
-const {
-	useState,
-} = wp.element;
+const { useState } = wp.element;
 
 /**
  * Internal dependencies.
  */
 
-import {
-	selectOptions,
-} from '../../../../../shared/js/data';
+import { selectOptions } from '../../../../../shared/js/data';
 
 import MySelectControl from './my-select-control';
 import MyTextControl from './my-text-control';
@@ -30,7 +26,6 @@ const components = {
 	All controlled by a single prop/value
 */
 const MySelectWrapper = ( {
-
 	prop,
 	label,
 	customLabel,
@@ -44,7 +39,6 @@ const MySelectWrapper = ( {
 	defValue = '1000',
 	component = 'text',
 	type = 'number',
-
 } ) => {
 	const Component = components[ component ];
 	const allValues = selectOptions[ prop ].map( ( itm ) => itm.value );
@@ -52,15 +46,9 @@ const MySelectWrapper = ( {
 	const selectValue = isSelection ? value : custom;
 	const textValue = ! isSelection ? value : defValue;
 
-	const [
-		customValue,
-		setCustomValue,
-	] = useState( textValue );
+	const [ customValue, setCustomValue ] = useState( textValue );
 
-	const [
-		customVisible,
-		setCustomVisible,
-	] = useState( ! isSelection );
+	const [ customVisible, setCustomVisible ] = useState( ! isSelection );
 
 	const onChange = ( entry ) => {
 		let val = entry.toString();

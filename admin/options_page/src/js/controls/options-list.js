@@ -26,9 +26,7 @@ const components = {
 };
 
 const OptionsList = ( props ) => {
-	const {
-		type,
-	} = props;
+	const { type } = props;
 
 	const Component = components[ type ];
 	return <Component { ...props } />;

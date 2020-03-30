@@ -1,9 +1,7 @@
 /**
  * WordPress dependencies.
  */
-const {
-	forwardRef,
-} = wp.element;
+const { forwardRef } = wp.element;
 
 /**
  * Internal dependencies.
@@ -21,4 +19,3 @@ const MyHeaderControl = forwardRef( ( { block }, animatedElements ) => {
 } );
 
 export default MyHeaderControl;
-

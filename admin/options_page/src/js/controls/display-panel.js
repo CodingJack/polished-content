@@ -11,18 +11,9 @@ import MainDisplay from './main-display';
 import OptionsComponent from './options-component';
 
 const DisplayPanel = ( { props, panel, type, changePage, menuIndex } ) => {
-	const {
-		namespace,
-	} = props;
+	const { namespace } = props;
 
-	const {
-		title,
-		icon,
-		pages,
-		options,
-		suffix,
-		subtype,
-	} = panel;
+	const { title, icon, pages, options, suffix, subtype } = panel;
 
 	const sufx = suffix || '';
 	const extraClass = subtype ? ` ${ namespace }-${ subtype }` : '';
@@ -30,8 +21,10 @@ const DisplayPanel = ( { props, panel, type, changePage, menuIndex } ) => {
 	return (
 		<div className={ `${ namespace }${ extraClass }` } data-type={ type }>
 			{ title && (
-				<h2 className={ `${ namespace }-colors` } >
-					{ `${ title.charAt( 0 ).toUpperCase() }${ title.slice( 1 ) }${ sufx }` }
+				<h2 className={ `${ namespace }-colors` }>
+					{ `${ title.charAt( 0 ).toUpperCase() }${ title.slice(
+						1
+					) }${ sufx }` }
 					<span className={ `dashicons dashicons-${ icon }` }></span>
 				</h2>
 			) }

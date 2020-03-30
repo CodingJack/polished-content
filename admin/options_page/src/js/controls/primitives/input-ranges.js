@@ -4,12 +4,9 @@
 
 import React from 'react';
 
-const {
-	useState,
-} = React;
+const { useState } = React;
 
 const InputRange = ( {
-
 	namespace,
 	type,
 	prop,
@@ -21,17 +18,10 @@ const InputRange = ( {
 	ranges,
 	callback,
 	index,
-
 } ) => {
-	const [
-		def,
-		setDefault,
-	] = useState( value );
+	const [ def, setDefault ] = useState( value );
 
-	const {
-		min,
-		max,
-	} = ranges;
+	const { min, max } = ranges;
 
 	const onChange = ( e ) => {
 		let val = e.target.value;
@@ -81,7 +71,17 @@ const InputRange = ( {
 	);
 };
 
-const InputRanges = ( { namespace, list, items, prop, data, type, icons, ranges, callback } ) => {
+const InputRanges = ( {
+	namespace,
+	list,
+	items,
+	prop,
+	data,
+	type,
+	icons,
+	ranges,
+	callback,
+} ) => {
 	return Object.keys( items ).map( ( key, index ) => {
 		const value = data[ index ] || data;
 		const name = items[ key ];

@@ -10,10 +10,7 @@ import {
 /**
  * WordPress dependencies.
  */
-const {
-	Component,
-	createRef,
-} = wp.element;
+const { Component, createRef } = wp.element;
 
 const writeSettings = ( key, attrs, settings ) => {
 	panelSettings[ key ].forEach( ( prop ) => {
@@ -21,11 +18,13 @@ const writeSettings = ( key, attrs, settings ) => {
 	} );
 };
 
-const RightClickItems = ( { attrs, hideRightClickMenu, updateState, updateBatchProps } ) => {
-	const {
-		copiedPanel,
-		copiedSettings,
-	} = polishedContentGlobals; // eslint-disable-line no-undef
+const RightClickItems = ( {
+	attrs,
+	hideRightClickMenu,
+	updateState,
+	updateBatchProps,
+} ) => {
+	const { copiedPanel, copiedSettings } = polishedContentGlobals; // eslint-disable-line no-undef
 
 	const rcItems = { ...rightClickItems };
 	if ( ! copiedSettings ) {
@@ -63,7 +62,9 @@ const RightClickItems = ( { attrs, hideRightClickMenu, updateState, updateBatchP
 
 			if ( settings ) {
 				polishedContentGlobals.copiedSettings = settings; // eslint-disable-line no-undef
-				polishedContentGlobals.copiedPanel = key !== 'all' && key !== 'paste' ? key : null; // eslint-disable-line no-undef
+				// eslint-disable-next-line no-undef
+				polishedContentGlobals.copiedPanel =
+					key !== 'all' && key !== 'paste' ? key : null;
 			}
 
 			hideRightClickMenu();
@@ -76,9 +77,18 @@ const RightClickItems = ( { attrs, hideRightClickMenu, updateState, updateBatchP
 		};
 
 		return (
-			<div role="button" tabIndex={ index } key={ `${ namespace }-rc-item-${ key }` } className={ `${ namespace }-rc-menu-itm` } onClick={ onClick } onKeyDown={ onKeyDown }>
+			<div
+				role="button"
+				tabIndex={ index }
+				key={ `${ namespace }-rc-item-${ key }` }
+				className={ `${ namespace }-rc-menu-itm` }
+				onClick={ onClick }
+				onKeyDown={ onKeyDown }
+			>
 				<span className={ `dashicons dashicons-${ itm.icon }` }></span>
-				<span className={ `${ namespace }-rc-menu-text` }>{ itm.text }</span>
+				<span className={ `${ namespace }-rc-menu-text` }>
+					{ itm.text }
+				</span>
 			</div>
 		);
 	} );
@@ -91,25 +101,15 @@ class MyRightClickMenu extends Component {
 	}
 
 	componentDidMount() {
-		const {
-			wrap,
-			rcEvent,
-			menuBuffer,
-		} = this.props;
+		const { wrap, rcEvent, menuBuffer } = this.props;
 
-		const {
-			clientX,
-			clientY,
-		} = rcEvent;
+		const { clientX, clientY } = rcEvent;
 
 		const el = this.ref.current;
 		const elRect = el.getBoundingClientRect();
 		const wrapRect = wrap.getBoundingClientRect();
 
-		const {
-			width: elWidth,
-			height: elHeight,
-		} = elRect;
+		const { width: elWidth, height: elHeight } = elRect;
 
 		const {
 			top: wrapTop,
@@ -121,7 +121,8 @@ class MyRightClickMenu extends Component {
 		const posX = clientX - wrapLeft;
 		const posY = clientY - wrapTop;
 
-		let posLeft = posX + elWidth < wrapWidth + menuBuffer ? posX : posX - elWidth;
+		let posLeft =
+			posX + elWidth < wrapWidth + menuBuffer ? posX : posX - elWidth;
 		let posTop = posY + elHeight < wrapHeight ? posY : posY - elHeight;
 
 		posLeft = Math.max( 0, posLeft );
@@ -149,4 +150,3 @@ class MyRightClickMenu extends Component {
 }
 
 export default MyRightClickMenu;
-

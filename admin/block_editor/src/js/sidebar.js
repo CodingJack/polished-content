@@ -10,10 +10,7 @@ import { namespace } from '../../../../shared/js/data';
 const { __ } = wp.i18n;
 const { registerPlugin } = wp.plugins;
 
-const {
-	PluginSidebar,
-	PluginSidebarMoreMenuItem,
-} = wp.editPost;
+const { PluginSidebar, PluginSidebarMoreMenuItem } = wp.editPost;
 
 const sidebar = `${ namespace }-sidebar`;
 
@@ -27,7 +24,10 @@ registerPlugin( sidebar, {
 				</PluginSidebarMoreMenuItem>
 				<PluginSidebar
 					name={ sidebar }
-					title={ __( 'Polished Content Settings', 'polished-content' ) }
+					title={ __(
+						'Polished Content Settings',
+						'polished-content'
+					) }
 				>
 					<PolishedContentSettings />
 				</PluginSidebar>

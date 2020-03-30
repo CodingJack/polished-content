@@ -4,9 +4,7 @@
 
 import React from 'react';
 
-const {
-	useState,
-} = React;
+const { useState } = React;
 
 /**
  * Internal dependencies.
@@ -14,13 +12,11 @@ const {
 import TabButtons from './tab-buttons';
 import DisplayPage from './display-page';
 
-const {
-	subMenus,
-} = polishedContentGlobals; // eslint-disable-line no-undef
+const { subMenus } = polishedContentGlobals; // eslint-disable-line no-undef
 
 /*
-* used for top level pages and also sub level pages.
-*/
+ * used for top level pages and also sub level pages.
+ */
 const MainDisplay = ( { props, pages, changePage: onChanges, menuIndex } ) => {
 	let currentIndex;
 
@@ -30,15 +26,11 @@ const MainDisplay = ( { props, pages, changePage: onChanges, menuIndex } ) => {
 		currentIndex = menuIndex + 1;
 	}
 
-	const [
-		currentPage,
-		changePage,
-	] = useState( subMenus[ currentIndex ] !== undefined ? subMenus[ currentIndex ] : 0 );
+	const [ currentPage, changePage ] = useState(
+		subMenus[ currentIndex ] !== undefined ? subMenus[ currentIndex ] : 0
+	);
 
-	const {
-		namespace,
-		activateScreenshots,
-	} = props;
+	const { namespace, activateScreenshots } = props;
 
 	let changePages = [ changePage ];
 	if ( onChanges ) {

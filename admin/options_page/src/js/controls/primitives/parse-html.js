@@ -4,32 +4,28 @@
 
 import React from 'react';
 
-const {
-	Fragment,
-} = React;
+const { Fragment } = React;
 
 /**
  * Internal dependencies.
  */
-const {
-	subMenus,
-} = polishedContentGlobals; // eslint-disable-line no-undef
+const { subMenus } = polishedContentGlobals; // eslint-disable-line no-undef
 
 /*
  * these functions are used to convert some strings to HTML
  * to avoid dangerouslySetInnerHTML, well, because it's dangerous :D
-*/
+ */
 
 /*
  * parses links embedded in strings with this format:
  * {{Link Text||http:www.site.com||target}}
-*/
+ */
 const ParseLinks = ( { text, changePage } ) => {
 	/*
-	* internal links with a structure of:
-	* {{Link Text||#menuIndex|menuItem}}
-	* this allows us to trigger any tab from any menu
-	*/
+	 * internal links with a structure of:
+	 * {{Link Text||#menuIndex|menuItem}}
+	 * this allows us to trigger any tab from any menu
+	 */
 	const onLinkClick = function( e ) {
 		const href = e.target.dataset.href.substring( 1 ).split( '|' );
 		if ( href.length < 2 ) {
@@ -56,11 +52,19 @@ const ParseLinks = ( { text, changePage } ) => {
 				if ( txt[ 0 ].search( /\|\|/ ) !== -1 ) {
 					const a = txt[ 0 ].split( '||' );
 					const target = a[ 2 ] ? `_${ a[ 2 ] }` : null;
-					const onClick = a[ 1 ].charAt( 0 ) === '#' ? onLinkClick : null;
+					const onClick =
+						a[ 1 ].charAt( 0 ) === '#' ? onLinkClick : null;
 
 					return (
 						<Fragment key={ index }>
-							<a href={ a[ 1 ] } target={ target } data-href={ a[ 1 ] } onClick={ onClick }>{ a[ 0 ] }</a>
+							<a
+								href={ a[ 1 ] }
+								target={ target }
+								data-href={ a[ 1 ] }
+								onClick={ onClick }
+							>
+								{ a[ 0 ] }
+							</a>
 							{ txt[ 1 ] }
 						</Fragment>
 					);
@@ -76,7 +80,7 @@ const ParseLinks = ( { text, changePage } ) => {
 /*
  * parses strings into span elements with a class from this format:
  * [[Text||className]]
-*/
+ */
 const ParseHTML = ( { namespace, text, changePage } ) => {
 	if ( /(?=.*\[\[)(?=.*\|\|)(?=.*\]\])/.test( text ) ) {
 		const str = unescape( text );
@@ -91,13 +95,24 @@ const ParseHTML = ( { namespace, text, changePage } ) => {
 
 					return (
 						<Fragment key={ `${ namespace }-span-${ index }` }>
-							<span className={ `${ namespace }-${ c[ 1 ] }` }>{ c[ 0 ] }</span>
-							<ParseLinks text={ txt[ 1 ] } changePage={ changePage } />
+							<span className={ `${ namespace }-${ c[ 1 ] }` }>
+								{ c[ 0 ] }
+							</span>
+							<ParseLinks
+								text={ txt[ 1 ] }
+								changePage={ changePage }
+							/>
 						</Fragment>
 					);
 				}
 			}
-			return <ParseLinks key={ `${ namespace }-span-${ index }` } text={ itm } changePage={ changePage } />;
+			return (
+				<ParseLinks
+					key={ `${ namespace }-span-${ index }` }
+					text={ itm }
+					changePage={ changePage }
+				/>
+			);
 		} );
 	}
 
@@ -105,4 +120,3 @@ const ParseHTML = ( { namespace, text, changePage } ) => {
 };
 
 export default ParseHTML;
-
