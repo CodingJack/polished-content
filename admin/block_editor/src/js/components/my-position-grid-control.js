@@ -19,6 +19,7 @@ const MyPositionGridControl = ( { prop, value, callback } ) => {
 					return (
 						<Button
 							isSmall
+							isSecondary
 							key={ val }
 							className={ `${ namespace }-position-btn` }
 							isPrimary={ value === val }

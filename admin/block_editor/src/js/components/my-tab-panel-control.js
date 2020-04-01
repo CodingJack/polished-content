@@ -21,6 +21,7 @@ const { Button, NavigableMenu } = wp.components;
 const TabButton = ( { tabId, onClick, children, selected, ...rest } ) => (
 	<Button
 		role="tab"
+		isSecondary
 		tabIndex={ selected ? null : -1 }
 		aria-selected={ selected }
 		id={ tabId }

@@ -24,6 +24,7 @@ const MyAlignButtons = ( { prop, value, callback } ) => {
 						<Button
 							key={ val }
 							className={ `${ namespace }-align-btn is-button is-default` }
+							isSecondary={ value !== val }
 							isPrimary={ value === val }
 							onClick={ () => callback( val, prop ) }
 						>

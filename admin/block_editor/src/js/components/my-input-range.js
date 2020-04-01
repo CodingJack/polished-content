@@ -86,6 +86,7 @@ const InputRange = ( {
 			{ afterIcon && allowReset && (
 				<Button
 					isSmall
+					isSecondary
 					className="polished-content-iconbtn"
 					disabled={ disabled }
 					onClick={ resetValue }

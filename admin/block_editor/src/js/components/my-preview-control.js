@@ -201,8 +201,9 @@ const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
 			<Button
 				isSmall
 				isPrimary={ ! btnDisabled }
+				isSecondary={ btnDisabled }
 				disabled={ btnDisabled }
-				className={ `${ namespace }-playpause ${ namespace }-iconbtn ${ isPlaying }` }
+				className={ `${ namespace }-playpause ${ namespace }-iconbtn${ isPlaying }` }
 				onClick={ playPause }
 			>
 				<Icon icon="controls-play" size="16" />
@@ -218,6 +219,7 @@ const MyPreviewControl = forwardRef( ( { block }, animatedElements ) => {
 			</Button>
 			<Button
 				isSmall
+				isSecondary
 				className={ `${ namespace }-create-preset` }
 				onClick={ createPreset }
 				aria-disabled={ hideCreatePresetBtn || showSavePresetModal }

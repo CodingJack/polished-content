@@ -101,6 +101,7 @@ const MySelectControl = ( {
 					<div className={ `${ namespace }-small-btns` }>
 						<Button
 							isSmall
+							isSecondary
 							className={ `${ namespace }-iconbtn` }
 							onClick={ onClickPrev }
 						>
@@ -111,6 +112,7 @@ const MySelectControl = ( {
 						</Button>
 						<Button
 							isSmall
+							isSecondary
 							className={ `${ namespace }-iconbtn` }
 							onClick={ onClickNext }
 						>

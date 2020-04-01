@@ -16,13 +16,13 @@ const MyResetButtons = ( { onClear, onUndo, originalSettings } ) => {
 		return (
 			<div className={ `${ namespace }-reset-btns` }>
 				{ onClear && (
-					<Button isSmall onClick={ onClear }>
+					<Button isSmall isSecondary onClick={ onClear }>
 						{ ' ' }
 						{ __( 'Reset to Defaults', 'polished-content' ) }
 					</Button>
 				) }
 				{ onUndo && (
-					<Button isSmall onClick={ undoEvent }>
+					<Button isSmall isSecondary onClick={ undoEvent }>
 						{ ' ' }
 						{ __( 'Undo All Changes', 'polished-content' ) }
 					</Button>

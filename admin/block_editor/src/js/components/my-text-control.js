@@ -97,6 +97,7 @@ const MyTextControl = ( {
 					<div className={ `${ namespace }-small-btns` }>
 						<Button
 							isSmall
+							isSecondary
 							className={ `${ namespace }-iconbtn` }
 							disabled={ disabled }
 							onClick={ undoEvent }
