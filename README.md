@@ -1,15 +1,13 @@
 # Polished Content
 WordPress Gutenberg Block Animation Builder
 
-[Demo Home Page](http://www.codingjack.com/polished-content/) | [Demo Blog Post](http://www.codingjack.com/polished-content/2018/12/21/how-you-can-also-be-a-billionaire/) | [Admin Screenshots](http://www.codingjack.com/polished-content-screenshots/)
-
 ![Screenshot of the Plugin's Animation Editor, editing a post in WordPress](/admin/screenshots/dist/img/git-screenshot.jpg)
 
 ## Description
 
 Polished Content is a WordPress Plugin that allows you to add robust animations to existing Gutenberg Blocks.  Animations will only ever occur when the content is in view, and can be repeated and reversed as the page scrolls.  The animations can then happen as smooth, "singular" animations or can be connected to the page's scroll position for a more dynamic experience.  
 
-In addition to the several standard animation options such as movements, zooms, blurs, you also have full control over duration, easing, scroll behavior, auto-reverse, and many more options to animate your content in different ways.  The plugin includes several built-in preset animations and you can also create your own.  And animations can also be copied and pasted into other blocks using the built-in right-click menu.  To get an idea of all the possibilities, check out the [Admin Screenshots](http://www.codingjack.com/polished-content-screenshots/).
+In addition to the several standard animation options such as movements, zooms, blurs, you also have full control over duration, easing, scroll behavior, auto-reverse, and many more options to animate your content in different ways.  The plugin includes several built-in preset animations and you can also create your own.  And animations can also be copied and pasted into other blocks using the built-in right-click menu.  
 
 Polished Content uses the HTML5 [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to help determine when and how content should be animated, and also includes an IE/Edge fallback for animating the CSS clip-path.  In addition, animations can be enabled/disabled individually on different screen widths.
 
@@ -24,7 +22,7 @@ Polished Content uses the HTML5 [Intersection Observer](https://developer.mozill
 
 ## Authors
 
-* **Jason McElwaine** - *Initial work* - [CodingJack](http://www.codingjack.com)
+* **Jason McElwaine** - *Initial work* 
 
 ## License
 
