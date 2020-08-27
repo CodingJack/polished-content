@@ -149,7 +149,7 @@ class Screenshots extends Component {
 					<MainImage imgPath={ imgPath } index={ index } preloaderRef={ this.preloaderRef } />
 				</div>
 				<div className="elements">
-					<a className="icon logo" target="_blank" href="http://www.codingjack.com/polished-content/">
+					<a className="icon logo" target="_blank" href="https://github.com/CodingJack/polished-content/blob/master/polished-content.zip">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
 							<path fill="none" d="M0 0h20v20H0z"/>
 							<path d="M18 3v2H2V3h16zm-6 4v2H2V7h10zm6 0v2h-4V7h4zM8 11v2H2v-2h6zm10 0v2h-8v-2h8zm-4 4v2H2v-2h12z"/>
