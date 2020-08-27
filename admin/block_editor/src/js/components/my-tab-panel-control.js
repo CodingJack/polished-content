@@ -75,6 +75,8 @@ class MyTabPanel extends Component {
 							className={ classnames( tab.className, {
 								[ activeClass ]: tab.name === currentTab,
 							} ) }
+							isSecondary={ tab.name !== currentTab }
+							isPrimary={ tab.name === currentTab }
 							tabId={ instanceId + '-' + tab.name }
 							aria-controls={
 								instanceId + '-' + tab.name + '-view'

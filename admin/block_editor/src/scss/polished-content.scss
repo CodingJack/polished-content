@@ -35,6 +35,8 @@ $rc-menu-box-shadow-clr: rgba(0, 0, 0, 0.2);
 	hr {margin: 24px 0 23px 0}
 	.components-base-control__help {font-size: $help-font-size}
 	.components-select-control__input {text-transform: none}
+	.components-range-control__number {width: 60px; float: right; margin-top: 5px}
+	.components-base-control__label {display: block}
 }
 
 /*
@@ -112,7 +114,7 @@ $rc-menu-box-shadow-clr: rgba(0, 0, 0, 0.2);
 	&-positions .#{$namespace}-select-wrap {width: calc(100% - 78px)}
 	&-positions:last-child {margin-bottom: 0}
 	&-position-btn {
-		float: left; padding: 0 10px !important; border-radius: 0 !important; margin: -2px 0 0 -1px !important; box-shadow: none !important;
+		float: left; padding: 0 10px !important; border-radius: 0 !important; margin: -1px 0 0 -1px !important;
 		&:nth-child(4),
 		&:nth-child(7) {clear: both}
 		&:nth-child(1) {border-radius: $position-btn-border-radius 0 0 0 !important}
@@ -143,7 +145,7 @@ $rc-menu-box-shadow-clr: rgba(0, 0, 0, 0.2);
 	.components {
 		&-base-control__field {margin-bottom: 10px}
 		&-base-control__label {margin-bottom: -6px}
-		&-range-control__slider {padding: 10px 0 5px 0; margin-left: 0 !important; cursor: pointer}
+		&-range-control__slider {margin-top: 10px; margin-left: 0 !important; cursor: pointer; transform: translate(0, 3px)}
 	}
 	.components-button.is-small {margin-left: 6px}
 	.dashicon {margin-right: 0 !important}
@@ -362,11 +364,12 @@ $rc-menu-box-shadow-clr: rgba(0, 0, 0, 0.2);
  * page settings sidebar
 */
 .#{$namespace}-sidebar {
-	padding: 0 16px; border: 0;
+	padding: 0; border: 0;
 	.#{$namespace}-settings {
 		border: 0;
 		.components-panel__body {
 			margin-top: 0 !important;
+			padding: 16px 0 !important;
 			&.is-opened > .components-panel__body-title {margin-bottom: 12px}
 			&:last-child {margin-bottom: 0}
 		}

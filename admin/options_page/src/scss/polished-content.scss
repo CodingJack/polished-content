@@ -53,6 +53,8 @@ html.wp-toolbar {background:#f1f1f1}
 	p {font-style: italic; margin-bottom: 20px; max-width: 410px}
 	.components-range-control__slider {margin-left: 0; width: 160px}
 	.components-form-toggle {float: left}
+	.components-form-toggle__off,
+	.components-form-toggle__on {display: none !important}
 	/*
 	* info page
 	*/
