@@ -23,7 +23,7 @@
   },
   "main": "admin/block_editor/src/js/index.js",
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "gsap": "^3.5.1",
     "https-proxy-agent": "^5.0.0",
