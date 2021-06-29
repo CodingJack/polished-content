@@ -21,69 +21,69 @@ import { getReversable } from './getters';
  * @since 1.0.0
  */
 export const onUpdateTween = (
-	obj,
-	el,
-	updateBlur,
-	updateGrayscale,
-	updateChars,
-	updateClip,
-	clips,
-	clipRect
+  obj,
+  el,
+  updateBlur,
+  updateGrayscale,
+  updateChars,
+  updateClip,
+  clips,
+  clipRect
 ) => {
-	if ( updateBlur || updateGrayscale ) {
-		let filter = '';
-		if ( updateBlur ) {
-			filter += `blur(${ obj.blur }px)`;
-		}
+  if ( updateBlur || updateGrayscale ) {
+    let filter = '';
+    if ( updateBlur ) {
+      filter += `blur(${ obj.blur }px)`;
+    }
 
-		if ( updateGrayscale ) {
-			if ( filter ) {
-				filter += ' ';
-			}
-			filter += `grayscale(${ obj.grayscale })`;
-		}
+    if ( updateGrayscale ) {
+      if ( filter ) {
+        filter += ' ';
+      }
+      filter += `grayscale(${ obj.grayscale })`;
+    }
 
-		el.style[ '-webkit-filter' ] = filter;
-		el.style.filter = filter;
-	}
+    el.style[ '-webkit-filter' ] = filter;
+    el.style.filter = filter;
+  }
 
-	if ( updateChars ) {
-		el.style.letterSpacing = `${ obj.letterSpacing }px`;
-	}
+  if ( updateChars ) {
+    el.style.letterSpacing = `${ obj.letterSpacing }px`;
+  }
 
-	if ( updateClip ) {
-		if ( ! clipRect ) {
-			let st = 'inset(';
+  if ( updateClip ) {
+    if ( ! clipRect ) {
+      let st = 'inset(';
 
-			for ( let i = 0; i < 4; i++ ) {
-				st += ! clips[ i ] ? '0 ' : `${ obj.clip }% `;
-			}
-			el.style.webkitClipPath = `${ st.slice( 0, -1 ) })`;
-			el.style.clipPath = `${ st.slice( 0, -1 ) })`;
-		} else {
-			/*
-			 * IE/Edge Fallback
-			 */
-			const { width, height } = clipRect;
+      for ( let i = 0; i < 4; i++ ) {
+        st += ! clips[ i ] ? '0 ' : `${ obj.clip }% `;
+      }
+      el.style.webkitClipPath = `${ st.slice( 0, -1 ) })`;
+      el.style.clipPath = `${ st.slice( 0, -1 ) })`;
+    } else {
+      /*
+       * IE/Edge Fallback
+       */
+      const { width, height } = clipRect;
 
-			const neg = obj.clip * 0.01;
-			const pos = 1 - neg;
+      const neg = obj.clip * 0.01;
+      const pos = 1 - neg;
 
-			const ieCalc = [
-				clips[ 0 ] ? height * neg : 0,
-				clips[ 1 ] ? width * pos : width,
-				clips[ 2 ] ? height * pos : height,
-				clips[ 3 ] ? width * neg : 0,
-			];
+      const ieCalc = [
+        clips[ 0 ] ? height * neg : 0,
+        clips[ 1 ] ? width * pos : width,
+        clips[ 2 ] ? height * pos : height,
+        clips[ 3 ] ? width * neg : 0,
+      ];
 
-			let st = 'rect(';
-			for ( let i = 0; i < 4; i++ ) {
-				st += `${ ieCalc[ i ] }px,`;
-			}
+      let st = 'rect(';
+      for ( let i = 0; i < 4; i++ ) {
+        st += `${ ieCalc[ i ] }px,`;
+      }
 
-			el.style.clip = `${ st.slice( 0, -1 ) })`;
-		}
-	}
+      el.style.clip = `${ st.slice( 0, -1 ) })`;
+    }
+  }
 };
 
 /*
@@ -95,101 +95,101 @@ export const onUpdateTween = (
  * @since 1.0.0
  */
 const buildTweenObjects = ( el, props, reverse, clipRect, webkitClipPath ) => {
-	const {
-		clipX,
-		clipY,
-		pcxBlur,
-		pcxGrayscale,
-		pcxLetterSpacing,
-		pcxTransformOrigin,
-	} = props;
+  const {
+    clipX,
+    clipY,
+    pcxBlur,
+    pcxGrayscale,
+    pcxLetterSpacing,
+    pcxTransformOrigin,
+  } = props;
 
-	const twObj = { ease: 'none', overwrite: 'auto' };
-	const elObj = { ease: 'none', overwrite: 'auto' };
+  const twObj = { ease: 'none', overwrite: 'auto' };
+  const elObj = { ease: 'none', overwrite: 'auto' };
 
-	if ( ! reverse || ! props.reversePos ) {
-		elObj.x = props.forwardPos.x;
-		elObj.y = props.forwardPos.y;
-	} else {
-		elObj.x = props.reversePos.x;
-		elObj.y = props.reversePos.y;
-	}
+  if ( ! reverse || ! props.reversePos ) {
+    elObj.x = props.forwardPos.x;
+    elObj.y = props.forwardPos.y;
+  } else {
+    elObj.x = props.reversePos.x;
+    elObj.y = props.reversePos.y;
+  }
 
-	let clips;
-	let specialObj = {};
-	let render;
+  let clips;
+  let specialObj = {};
+  let render;
 
-	const hasBlur = pcxBlur !== defaultValues.pcxBlur;
-	const hasGrayscale = pcxGrayscale !== defaultValues.pcxGrayscale;
-	const hasClip = clipX !== 'center' || clipY !== 'center';
+  const hasBlur = pcxBlur !== defaultValues.pcxBlur;
+  const hasGrayscale = pcxGrayscale !== defaultValues.pcxGrayscale;
+  const hasClip = clipX !== 'center' || clipY !== 'center';
 
-	for ( const [ key, value ] of Object.entries( tweenables ) ) {
-		const { prop, times } = value;
-		elObj[ prop ] = props[ key ] * times;
-	}
+  for ( const [ key, value ] of Object.entries( tweenables ) ) {
+    const { prop, times } = value;
+    elObj[ prop ] = props[ key ] * times;
+  }
 
-	if ( pcxTransformOrigin ) {
-		elObj.transformOrigin = pcxTransformOrigin;
-	}
+  if ( pcxTransformOrigin ) {
+    elObj.transformOrigin = pcxTransformOrigin;
+  }
 
-	if ( hasBlur ) {
-		twObj.blur = pcxBlur;
-		specialObj.blur = 0;
-	}
+  if ( hasBlur ) {
+    twObj.blur = pcxBlur;
+    specialObj.blur = 0;
+  }
 
-	if ( hasGrayscale ) {
-		twObj.grayscale = pcxGrayscale * 0.01;
-		specialObj.grayscale = 0;
-	}
+  if ( hasGrayscale ) {
+    twObj.grayscale = pcxGrayscale * 0.01;
+    specialObj.grayscale = 0;
+  }
 
-	if ( pcxLetterSpacing ) {
-		twObj.letterSpacing = pcxLetterSpacing;
-		specialObj.letterSpacing = 0;
-	}
+  if ( pcxLetterSpacing ) {
+    twObj.letterSpacing = pcxLetterSpacing;
+    specialObj.letterSpacing = 0;
+  }
 
-	if ( hasClip ) {
-		clips = clipPoints[ `${ clipX }-${ clipY }` ];
-		twObj.clip = 100;
-		specialObj.clip = 0;
-	}
+  if ( hasClip ) {
+    clips = clipPoints[ `${ clipX }-${ clipY }` ];
+    twObj.clip = 100;
+    specialObj.clip = 0;
+  }
 
-	// safari hack
-	if ( webkitClipPath ) {
-		elObj.z = 0.00001;
-	}
+  // safari hack
+  if ( webkitClipPath ) {
+    elObj.z = 0.00001;
+  }
 
-	if ( ! hasBlur && ! hasGrayscale && ! hasClip && ! pcxLetterSpacing ) {
-		specialObj = false;
-	} else {
-		render = [
-			twObj,
-			el,
-			hasBlur,
-			hasGrayscale,
-			pcxLetterSpacing,
-			hasClip,
-			clips,
-			clipRect,
-		];
-		twObj.onUpdateParams = [
-			specialObj,
-			el,
-			hasBlur,
-			hasGrayscale,
-			pcxLetterSpacing,
-			hasClip,
-			clips,
-			clipRect,
-		];
-		twObj.onUpdate = onUpdateTween;
-	}
+  if ( ! hasBlur && ! hasGrayscale && ! hasClip && ! pcxLetterSpacing ) {
+    specialObj = false;
+  } else {
+    render = [
+      twObj,
+      el,
+      hasBlur,
+      hasGrayscale,
+      pcxLetterSpacing,
+      hasClip,
+      clips,
+      clipRect,
+    ];
+    twObj.onUpdateParams = [
+      specialObj,
+      el,
+      hasBlur,
+      hasGrayscale,
+      pcxLetterSpacing,
+      hasClip,
+      clips,
+      clipRect,
+    ];
+    twObj.onUpdate = onUpdateTween;
+  }
 
-	return {
-		elObj,
-		twObj,
-		render,
-		specialObj,
-	};
+  return {
+    elObj,
+    twObj,
+    render,
+    specialObj,
+  };
 };
 
 /*
@@ -204,67 +204,67 @@ const buildTweenObjects = ( el, props, reverse, clipRect, webkitClipPath ) => {
  * @since 1.0.0
  */
 export const buildAnimation = (
-	el,
-	props,
-	reverse,
-	observed,
-	clipRect,
-	webkitClipPath
+  el,
+  props,
+  reverse,
+  observed,
+  clipRect,
+  webkitClipPath
 ) => {
-	const propsTwo = { ...props };
+  const propsTwo = { ...props };
 
-	let propsReversed;
-	if ( reverse ) {
-		propsReversed = getReversable( propsTwo );
-	}
+  let propsReversed;
+  if ( reverse ) {
+    propsReversed = getReversable( propsTwo );
+  }
 
-	const tween = buildTweenObjects(
-		el,
-		props,
-		false,
-		clipRect,
-		webkitClipPath
-	);
-	const reverseTween = buildTweenObjects(
-		el,
-		propsTwo,
-		reverse,
-		clipRect,
-		webkitClipPath
-	);
+  const tween = buildTweenObjects(
+    el,
+    props,
+    false,
+    clipRect,
+    webkitClipPath
+  );
+  const reverseTween = buildTweenObjects(
+    el,
+    propsTwo,
+    reverse,
+    clipRect,
+    webkitClipPath
+  );
 
-	const timeline = new gsap.timeline( { paused: true } );
-	const { pcxDuration: duration } = props;
+  const timeline = new gsap.timeline( { paused: true } );
+  const { pcxDuration: duration } = props;
 
-	timeline.addLabel( 'start', 0 );
-	timeline.from( el, duration, tween.elObj );
+  timeline.addLabel( 'start', 0 );
+  timeline.from( el, duration, tween.elObj );
 
-	if ( tween.specialObj ) {
-		// call onUpdate function once to render blur/grayscale/clip-path
-		if ( ! observed ) {
-			onUpdateTween( ...tween.render );
-		}
-		timeline.from( tween.specialObj, duration, tween.twObj, 0 );
-	}
+  if ( tween.specialObj ) {
+    // call onUpdate function once to render blur/grayscale/clip-path
+    if ( ! observed ) {
+      onUpdateTween( ...tween.render );
+    }
+    timeline.from( tween.specialObj, duration, tween.twObj, 0 );
+  }
 
-	timeline.addLabel( 'middle', duration );
-	timeline.to( el, duration, reverseTween.elObj );
+  timeline.addLabel( 'middle', duration );
+  timeline.to( el, duration, reverseTween.elObj );
 
-	// extend the timeline if we should reverse
-	if ( reverseTween.specialObj ) {
-		timeline.to(
-			reverseTween.specialObj,
-			duration,
-			reverseTween.twObj,
-			duration
-		);
-	}
-	timeline.addLabel( 'end', duration * 2 );
+  // extend the timeline if we should reverse
+  if ( reverseTween.specialObj ) {
+    timeline.to(
+      reverseTween.specialObj,
+      duration,
+      reverseTween.twObj,
+      duration
+    );
+  }
+  timeline.addLabel( 'end', duration * 2 );
 
-	return {
-		timeline,
-		propsReversed,
-		render: tween.render,
-		twObjects: [ tween.specialObj, reverseTween.specialObj ],
-	};
+  return {
+    timeline,
+    propsReversed,
+    render: tween.render,
+    twObjects: [ tween.specialObj, reverseTween.specialObj ],
+  };
 };

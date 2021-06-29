@@ -15,7 +15,7 @@ $button-font-size: 11px;
 $tabs-panel-btn-width: 36px;
 $tabs-panel-btn-height: 36px;
 $tabs-border-radius: 50%;
-$mini-delete-icon-size: 18px;
+$mini-delete-icon-size: 20px;
 $mini-delete-svg-size: 12px;
 $mini-delete-border-radius: 3px;
 $mini-icon-hover-opacity: 0.75;
@@ -73,7 +73,15 @@ $rc-menu-box-shadow-clr: rgba(0, 0, 0, 0.2);
 			}
 		}
 	}
-	&-preview-el {display: block; width: $preview-el-size; height: $preview-el-size}
+	&-preview-el {
+		display: block; width: $preview-el-size; height: $preview-el-size;
+		.dashicon {
+			width: 100%;
+			height: 100%;
+			font-size: 80px;
+			line-height: 80px;
+		}
+	}
 }
 
 /* 
@@ -84,7 +92,9 @@ $rc-menu-box-shadow-clr: rgba(0, 0, 0, 0.2);
 		padding: 0 4px; margin-right: 5px; align-items: center;
 		/* svg {position: relative; top: 1px} */
 	}
-	.components-button.is-small {font-size: $play-pause-font-size}
+	.components-button.is-small {
+		font-size: $play-pause-font-size;
+	}
 }
 .#{$namespace} {
 	&-create-preset {float: right}
@@ -147,7 +157,12 @@ $rc-menu-box-shadow-clr: rgba(0, 0, 0, 0.2);
 		&-base-control__label {margin-bottom: -6px}
 		&-range-control__slider {margin-top: 10px; margin-left: 0 !important; cursor: pointer; transform: translate(0, 3px)}
 	}
-	.components-button.is-small {margin-left: 6px}
+	.components-button.is-small {
+		margin-left: 6px;
+		padding: 5px 0;
+		position: relative;
+		top: 5px;
+	}
 	.dashicon {margin-right: 0 !important}
 }
 
@@ -199,7 +214,13 @@ $rc-menu-box-shadow-clr: rgba(0, 0, 0, 0.2);
 /* 
  * <SelectControl> 
  */
-.#{$namespace}-wrapper {position: relative}
+.#{$namespace}-wrapper {
+	position: relative;
+	label {
+		margin-bottom: 5px;
+	}
+
+}
 .#{$namespace}-select-wrap {
 	.components-panel__row label {max-width: 100%}
 	.components-base-control__label {margin-bottom: 5px}
@@ -216,7 +237,21 @@ $rc-menu-box-shadow-clr: rgba(0, 0, 0, 0.2);
 }
 .#{$namespace}-small-btns .components-button.is-small,
 .#{$namespace}-ranges .components-button.is-small,
-.#{$namespace}-presets .components-button.is-small {height: $mini-delete-icon-size; line-height: $mini-delete-icon-size; padding: 0 2px 1px}
+.#{$namespace}-presets .components-button.is-small {
+	height: $mini-delete-icon-size; 
+	line-height: $mini-delete-icon-size; 
+}
+.#{$namespace}-small-btns .components-button.is-small {
+	padding: 0 2px;
+	height: 18px;
+	line-height: 18px;
+	.dashicon {
+		width: 16px;
+		height: 16px;
+		font-size: 16px;
+	}
+}
+
 .#{$namespace}-text-input .#{$namespace}-iconbtn {border-radius: $mini-delete-border-radius !important}
 
 /*

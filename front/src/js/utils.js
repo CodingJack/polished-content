@@ -7,10 +7,10 @@ import { TweenMax } from 'gsap';
  * Internal dependencies.
  */
 import {
-	namespace,
-	defaultData,
-	defaultValues,
-	transformable,
+  namespace,
+  defaultData,
+  defaultValues,
+  transformable,
 } from '../../../shared/js/data';
 
 import { getMovements } from './getters';
@@ -23,21 +23,21 @@ import { getMovements } from './getters';
  * @since 1.0.0
  */
 export const formatValue = ( prop, value ) => {
-	const defaultOption = defaultData[ prop ];
+  const defaultOption = defaultData[ prop ];
 
-	if ( defaultOption ) {
-		const { type } = defaultOption;
+  if ( defaultOption ) {
+    const { type } = defaultOption;
 
-		if ( type === 'number' ) {
-			return parseInt( value, 10 );
-		} else if ( type === 'boolean' ) {
-			return value === 'true' || value === '1';
-		}
+    if ( type === 'number' ) {
+      return parseInt( value, 10 );
+    } else if ( type === 'boolean' ) {
+      return value === 'true' || value === '1';
+    }
 
-		return value;
-	}
+    return value;
+  }
 
-	return 'pcx';
+  return 'pcx';
 };
 
 /*
@@ -47,52 +47,52 @@ export const formatValue = ( prop, value ) => {
  * @since 1.0.0
  */
 export const createCssReset = ( props, ieClip ) => {
-	const obj = {};
+  const obj = {};
 
-	const {
-		pcxClip,
-		pcxBlur,
-		pcxOpacity,
-		pcxGrayscale,
-		pcxLetterSpacing,
-		pcxTransformOrigin,
-	} = props;
+  const {
+    pcxClip,
+    pcxBlur,
+    pcxOpacity,
+    pcxGrayscale,
+    pcxLetterSpacing,
+    pcxTransformOrigin,
+  } = props;
 
-	if ( pcxOpacity !== undefined ) {
-		obj.opacity = 1;
-	}
+  if ( pcxOpacity !== undefined ) {
+    obj.opacity = 1;
+  }
 
-	if ( pcxClip ) {
-		if ( ! ieClip ) {
-			obj[ 'clip-path' ] = 'none';
-		} else {
-			obj.clip = 'auto';
-		}
-	}
+  if ( pcxClip ) {
+    if ( ! ieClip ) {
+      obj[ 'clip-path' ] = 'none';
+    } else {
+      obj.clip = 'auto';
+    }
+  }
 
-	if ( pcxLetterSpacing ) {
-		obj.letterSpacing = 0;
-	}
+  if ( pcxLetterSpacing ) {
+    obj.letterSpacing = 0;
+  }
 
-	if ( pcxBlur || pcxGrayscale ) {
-		obj[ '-webkit-filter' ] = 'none';
-		obj.filter = 'none';
-	}
+  if ( pcxBlur || pcxGrayscale ) {
+    obj[ '-webkit-filter' ] = 'none';
+    obj.filter = 'none';
+  }
 
-	const len = transformable.length;
-	for ( let i = 0; i < len; i++ ) {
-		const prop = transformable[ i ];
+  const len = transformable.length;
+  for ( let i = 0; i < len; i++ ) {
+    const prop = transformable[ i ];
 
-		if ( props[ prop ] !== undefined ) {
-			obj.transform = 'none';
-			if ( pcxTransformOrigin ) {
-				obj.transformOrigin = pcxTransformOrigin.replace( '-', ' ' );
-			}
-			break;
-		}
-	}
+    if ( props[ prop ] !== undefined ) {
+      obj.transform = 'none';
+      if ( pcxTransformOrigin ) {
+        obj.transformOrigin = pcxTransformOrigin.replace( '-', ' ' );
+      }
+      break;
+    }
+  }
 
-	return obj;
+  return obj;
 };
 
 /*
@@ -102,7 +102,7 @@ export const createCssReset = ( props, ieClip ) => {
  * @since 1.0.0
  */
 export const addClasses = ( el, classNames ) => {
-	classNames.forEach( ( clas ) => el.classList.add( clas ) );
+  classNames.forEach( ( clas ) => el.classList.add( clas ) );
 };
 
 /*
@@ -111,19 +111,19 @@ export const addClasses = ( el, classNames ) => {
  * @since 1.0.0
  */
 export const removeClasses = ( el ) => {
-	const classes = el.className
-		.split( ' ' )
-		.filter(
-			( c ) => ! c.startsWith( 'pcx' ) && ! c.startsWith( namespace )
-		);
-	const newClasses = classes.join( ' ' ).trim();
+  const classes = el.className
+    .split( ' ' )
+    .filter(
+      ( c ) => ! c.startsWith( 'pcx' ) && ! c.startsWith( namespace )
+    );
+  const newClasses = classes.join( ' ' ).trim();
 
-	if ( newClasses ) {
-		el.className = classes.join( ' ' ).trim();
-	} else {
-		el.removeAttribute( 'class' );
-	}
-	el.style.visibility = 'visible';
+  if ( newClasses ) {
+    el.className = classes.join( ' ' ).trim();
+  } else {
+    el.removeAttribute( 'class' );
+  }
+  el.style.visibility = 'visible';
 };
 
 /*
@@ -133,16 +133,16 @@ export const removeClasses = ( el ) => {
  * @since 1.0.0
  */
 export const resetElement = ( el, styles ) => {
-	const css = { ...styles };
-	const { clip } = css;
+  const css = { ...styles };
+  const { clip } = css;
 
-	// gsap sets "clip: auto" to "clip: rect(0,0,0,0)" (needed for IE fallback)
-	if ( clip ) {
-		el.style.clip = clip;
-		delete css.clip;
-	}
+  // gsap sets "clip: auto" to "clip: rect(0,0,0,0)" (needed for IE fallback)
+  if ( clip ) {
+    el.style.clip = clip;
+    delete css.clip;
+  }
 
-	TweenMax.set( el, css );
+  TweenMax.set( el, css );
 };
 
 /*
@@ -152,21 +152,21 @@ export const resetElement = ( el, styles ) => {
  * @since 1.0.0
  */
 export const checkOverflow = ( props ) => {
-	const len = transformable.length;
+  const len = transformable.length;
 
-	for ( let i = 0; i < len; i++ ) {
-		const prop = transformable[ i ];
+  for ( let i = 0; i < len; i++ ) {
+    const prop = transformable[ i ];
 
-		if ( props[ prop ] !== defaultValues[ prop ] ) {
-			const root = document.getElementsByTagName( 'html' );
-			if ( root.length ) {
-				root[ 0 ].classList.add( 'pcx-overflow' );
-			}
+    if ( props[ prop ] !== defaultValues[ prop ] ) {
+      const root = document.getElementsByTagName( 'html' );
+      if ( root.length ) {
+        root[ 0 ].classList.add( 'pcx-overflow' );
+      }
 
-			return true;
-		}
-	}
-	return false;
+      return true;
+    }
+  }
+  return false;
 };
 
 /*
@@ -178,39 +178,39 @@ export const checkOverflow = ( props ) => {
  * @since 1.0.0
  */
 export const newPositions = ( rect, props, reverse ) => {
-	const { posX, posY, pcxStrength } = props;
+  const { posX, posY, pcxStrength } = props;
 
-	const positions = {};
+  const positions = {};
 
-	if ( ! posX && ! posY ) {
-		positions.forwardPos = { x: 0, y: 0 };
-		if ( reverse ) {
-			positions.reversePos = { x: 0, y: 0 };
-		}
-	} else {
-		positions.forwardPos = getMovements( rect, posX, posY, pcxStrength );
+  if ( ! posX && ! posY ) {
+    positions.forwardPos = { x: 0, y: 0 };
+    if ( reverse ) {
+      positions.reversePos = { x: 0, y: 0 };
+    }
+  } else {
+    positions.forwardPos = getMovements( rect, posX, posY, pcxStrength );
 
-		if ( reverse ) {
-			let revPosX;
-			let revPosY;
+    if ( reverse ) {
+      let revPosX;
+      let revPosY;
 
-			if ( posX && posX !== 'center' ) {
-				revPosX = posX === 'left' ? 'right' : 'left';
-			}
-			if ( posY && posY !== 'center' ) {
-				revPosY = posY === 'top' ? 'bottom' : 'top';
-			}
+      if ( posX && posX !== 'center' ) {
+        revPosX = posX === 'left' ? 'right' : 'left';
+      }
+      if ( posY && posY !== 'center' ) {
+        revPosY = posY === 'top' ? 'bottom' : 'top';
+      }
 
-			positions.reversePos = getMovements(
-				rect,
-				revPosX,
-				revPosY,
-				pcxStrength
-			);
-		}
-	}
+      positions.reversePos = getMovements(
+        rect,
+        revPosX,
+        revPosY,
+        pcxStrength
+      );
+    }
+  }
 
-	return positions;
+  return positions;
 };
 
 /*
@@ -221,24 +221,24 @@ export const newPositions = ( rect, props, reverse ) => {
  * @since 1.0.0
  */
 export const checkScreens = ( enabledViews, viewportWidths ) => {
-	const { length } = viewportWidths;
+  const { length } = viewportWidths;
 
-	const { innerWidth: width } = window;
+  const { innerWidth: width } = window;
 
-	let shouldAnimate;
+  let shouldAnimate;
 
-	for ( let i = 0; i < length; i++ ) {
-		if ( i < 3 ) {
-			if ( width >= viewportWidths[ i ] ) {
-				shouldAnimate = enabledViews[ i ];
-				break;
-			}
-		} else if ( width < viewportWidths[ i - 1 ] ) {
-			shouldAnimate = enabledViews[ i ];
-		}
-	}
+  for ( let i = 0; i < length; i++ ) {
+    if ( i < 3 ) {
+      if ( width >= viewportWidths[ i ] ) {
+        shouldAnimate = enabledViews[ i ];
+        break;
+      }
+    } else if ( width < viewportWidths[ i - 1 ] ) {
+      shouldAnimate = enabledViews[ i ];
+    }
+  }
 
-	return shouldAnimate;
+  return shouldAnimate;
 };
 
 /*
@@ -249,15 +249,15 @@ export const checkScreens = ( enabledViews, viewportWidths ) => {
  * @since 1.0.0
  */
 export const checkScreenBreak = ( viewportWidths, breakValue ) => {
-	const viewWidths = viewportWidths.slice();
-	viewWidths.shift();
+  const viewWidths = viewportWidths.slice();
+  viewWidths.shift();
 
-	const views = [ 'laptop', 'tablet', 'smartphone' ];
-	const index = views.indexOf( breakValue );
+  const views = [ 'laptop', 'tablet', 'smartphone' ];
+  const index = views.indexOf( breakValue );
 
-	const viewWidth =
-		index !== -1 ? viewWidths[ index ] : parseInt( breakValue, 10 );
-	return window.innerWidth <= viewWidth;
+  const viewWidth =
+    index !== -1 ? viewWidths[ index ] : parseInt( breakValue, 10 );
+  return window.innerWidth <= viewWidth;
 };
 
 /*
@@ -266,17 +266,17 @@ export const checkScreenBreak = ( viewportWidths, breakValue ) => {
  * @since 1.0.0
  */
 export const checkClipPath = () => {
-	const div = document.createElement( 'div' );
-	div.style.webkitClipPath = 'inset(25% 25% 25% 25%)';
-	div.style.clipPath = 'inset(25% 25% 25% 25%)';
+  const div = document.createElement( 'div' );
+  div.style.webkitClipPath = 'inset(25% 25% 25% 25%)';
+  div.style.clipPath = 'inset(25% 25% 25% 25%)';
 
-	const clipPath =
-		div.style[ 'clip-path' ] && div.style[ 'clip-path' ] !== 'none';
-	const webkitClipPath =
-		div.style[ '-webkit-clip-path' ] &&
-		div.style[ '-webkit-clip-path' ] !== 'none';
-	return {
-		supportsClipPath: clipPath || webkitClipPath,
-		webkitClipPath: ! clipPath && webkitClipPath,
-	};
+  const clipPath =
+    div.style[ 'clip-path' ] && div.style[ 'clip-path' ] !== 'none';
+  const webkitClipPath =
+    div.style[ '-webkit-clip-path' ] &&
+    div.style[ '-webkit-clip-path' ] !== 'none';
+  return {
+    supportsClipPath: clipPath || webkitClipPath,
+    webkitClipPath: ! clipPath && webkitClipPath,
+  };
 };

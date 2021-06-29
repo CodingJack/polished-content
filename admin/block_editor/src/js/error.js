@@ -1,4 +1,9 @@
 /**
+ * External dependencies.
+ */
+import React from 'react';
+
+/**
  * WordPress dependencies.
  */
 const { __ } = wp.i18n;

@@ -7,26 +7,26 @@
 import React from 'react';
 
 const SelectBox = ( { namespace, list, type, prop, data, callback } ) => {
-	const onChange = ( e ) => {
-		callback( prop, data, e.target.value, type );
-	};
+  const onChange = ( e ) => {
+    callback( prop, data, e.target.value, type );
+  };
 
-	return (
-		<select
-			className={ `${ namespace }-input components-select-control__input` }
-			value={ data }
-			onChange={ onChange }
-		>
-			{ Object.keys( list ).map( ( key ) => {
-				const name = list[ key ];
-				return (
-					<option key={ `${ namespace }-${ key }` } value={ key }>
-						{ name }
-					</option>
-				);
-			} ) }
-		</select>
-	);
+  return (
+    <select
+      className={ `${ namespace }-input components-select-control__input` }
+      value={ data }
+      onChange={ onChange }
+    >
+      { Object.keys( list ).map( ( key ) => {
+        const name = list[ key ];
+        return (
+          <option key={ `${ namespace }-${ key }` } value={ key }>
+            { name }
+          </option>
+        );
+      } ) }
+    </select>
+  );
 };
 
 export default SelectBox;

@@ -1,3 +1,8 @@
+/**
+ * External dependencies.
+ */
+ import React from 'react';
+
 /*
  * this is the main entry point for the lazy-loaded chunk
  */

@@ -1,6 +1,9 @@
+require('../scss/polished-content.scss');
+
 /**
  * External dependencies.
  */
+import React from 'react';
 import classnames from 'classnames';
 
 /**

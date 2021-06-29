@@ -12,25 +12,25 @@ import { formatValue } from './utils';
  * @since 1.0.0
  */
 export const getProps = ( el ) => {
-	const props = {};
-	let valueFound;
+  const props = {};
+  let valueFound;
 
-	el.classList.forEach( ( className ) => {
-		if ( className.search( 'pcx' ) !== -1 ) {
-			const clas = className.split( '_' );
-			if ( clas.length === 2 ) {
-				const prop = clas[ 0 ];
-				const value = formatValue( prop, clas[ 1 ] );
+  el.classList.forEach( ( className ) => {
+    if ( className.search( 'pcx' ) !== -1 ) {
+      const clas = className.split( '_' );
+      if ( clas.length === 2 ) {
+        const prop = clas[ 0 ];
+        const value = formatValue( prop, clas[ 1 ] );
 
-				if ( value !== 'pcx' ) {
-					props[ prop ] = value;
-					valueFound = true;
-				}
-			}
-		}
-	} );
+        if ( value !== 'pcx' ) {
+          props[ prop ] = value;
+          valueFound = true;
+        }
+      }
+    }
+  } );
 
-	return valueFound ? props : false;
+  return valueFound ? props : false;
 };
 
 /*
@@ -40,46 +40,46 @@ export const getProps = ( el ) => {
  * @since 1.0.0
  */
 export const getReversable = ( props ) => {
-	let reversed;
-	reversable.forEach( ( prop ) => {
-		if (
-			props[ prop ] !== undefined &&
-			props[ prop ] !== defaultValues[ prop ]
-		) {
-			props[ prop ] *= -1;
-			reversed = true;
-		}
-	} );
+  let reversed;
+  reversable.forEach( ( prop ) => {
+    if (
+      props[ prop ] !== undefined &&
+      props[ prop ] !== defaultValues[ prop ]
+    ) {
+      props[ prop ] *= -1;
+      reversed = true;
+    }
+  } );
 
-	const { clipX, clipY, pcxTransformOrigin } = props;
+  const { clipX, clipY, pcxTransformOrigin } = props;
 
-	const originReverse = pcxTransformOrigin.split( ' ' );
-	let originX = originReverse[ 0 ];
-	let originY = originReverse[ 1 ];
-	let originReversed;
+  const originReverse = pcxTransformOrigin.split( ' ' );
+  let originX = originReverse[ 0 ];
+  let originY = originReverse[ 1 ];
+  let originReversed;
 
-	if ( clipX !== 'center' ) {
-		props.clipX = clipX === 'left' ? 'right' : 'left';
-		reversed = true;
-	}
-	if ( clipY !== 'center' ) {
-		props.clipY = clipY === 'top' ? 'bottom' : 'top';
-		reversed = true;
-	}
-	if ( originX !== 'center' ) {
-		originX = originX === 'left' ? 'right' : 'left';
-		originReversed = true;
-	}
-	if ( originY !== 'center' ) {
-		originY = originY === 'top' ? 'bottom' : 'top';
-		originReversed = true;
-	}
-	if ( originReversed ) {
-		props.pcxTransformOrigin = `${ originX } ${ originY }`;
-		reversed = true;
-	}
+  if ( clipX !== 'center' ) {
+    props.clipX = clipX === 'left' ? 'right' : 'left';
+    reversed = true;
+  }
+  if ( clipY !== 'center' ) {
+    props.clipY = clipY === 'top' ? 'bottom' : 'top';
+    reversed = true;
+  }
+  if ( originX !== 'center' ) {
+    originX = originX === 'left' ? 'right' : 'left';
+    originReversed = true;
+  }
+  if ( originY !== 'center' ) {
+    originY = originY === 'top' ? 'bottom' : 'top';
+    originReversed = true;
+  }
+  if ( originReversed ) {
+    props.pcxTransformOrigin = `${ originX } ${ originY }`;
+    reversed = true;
+  }
 
-	return reversed;
+  return reversed;
 };
 
 /*
@@ -89,15 +89,15 @@ export const getReversable = ( props ) => {
  * @since 1.0.0
  */
 export const getHas3D = ( props ) => {
-	const len = threeD.length;
+  const len = threeD.length;
 
-	for ( let i = 0; i < len; i++ ) {
-		if ( props[ threeD[ i ] ] !== defaultValues[ threeD[ i ] ] ) {
-			return true;
-		}
-	}
+  for ( let i = 0; i < len; i++ ) {
+    if ( props[ threeD[ i ] ] !== defaultValues[ threeD[ i ] ] ) {
+      return true;
+    }
+  }
 
-	return false;
+  return false;
 };
 
 /*
@@ -110,48 +110,48 @@ export const getHas3D = ( props ) => {
  * @since 1.0.0
  */
 export const getMovements = ( rect, curPosX, curPosY, strength ) => {
-	const pos = {
-		x: 0,
-		y: 0,
-	};
+  const pos = {
+    x: 0,
+    y: 0,
+  };
 
-	if ( strength !== 'max' ) {
-		let x = 0,
-			y = 0;
+  if ( strength !== 'max' ) {
+    let x = 0,
+      y = 0;
 
-		if ( curPosX === 'left' ) {
-			x = -100;
-		} else if ( curPosX === 'right' ) {
-			x = 100;
-		}
-		if ( curPosY === 'top' ) {
-			y = -100;
-		} else if ( curPosY === 'bottom' ) {
-			y = 100;
-		}
+    if ( curPosX === 'left' ) {
+      x = -100;
+    } else if ( curPosX === 'right' ) {
+      x = 100;
+    }
+    if ( curPosY === 'top' ) {
+      y = -100;
+    } else if ( curPosY === 'bottom' ) {
+      y = 100;
+    }
 
-		if ( strength === 'short' ) {
-			x *= 0.5;
-			y *= 0.5;
-		}
+    if ( strength === 'short' ) {
+      x *= 0.5;
+      y *= 0.5;
+    }
 
-		pos.x = `${ x }%`;
-		pos.y = `${ y }%`;
-	} else {
-		const { innerWidth: winWidth, innerHeight: winHeight } = window;
+    pos.x = `${ x }%`;
+    pos.y = `${ y }%`;
+  } else {
+    const { innerWidth: winWidth, innerHeight: winHeight } = window;
 
-		const { left, top, width, height } = rect;
+    const { left, top, width, height } = rect;
 
-		if ( curPosX === 'left' || curPosX === 'right' ) {
-			pos.x = curPosX === 'right' ? winWidth - left : -( width + left );
-		}
+    if ( curPosX === 'left' || curPosX === 'right' ) {
+      pos.x = curPosX === 'right' ? winWidth - left : -( width + left );
+    }
 
-		if ( curPosY === 'top' || curPosY === 'bottom' ) {
-			pos.y = curPosY === 'bottom' ? winHeight - top : -( height + top );
-		}
-	}
+    if ( curPosY === 'top' || curPosY === 'bottom' ) {
+      pos.y = curPosY === 'bottom' ? winHeight - top : -( height + top );
+    }
+  }
 
-	return pos;
+  return pos;
 };
 
 /*
@@ -161,11 +161,11 @@ export const getMovements = ( rect, curPosX, curPosY, strength ) => {
  * @since 1.0.0
  */
 export const getAnimeDirection = ( rect ) => {
-	const { top: elTop, height: elHeight } = rect;
+  const { top: elTop, height: elHeight } = rect;
 
-	const { innerHeight: winHeight } = window;
+  const { innerHeight: winHeight } = window;
 
-	return elTop + elHeight * 0.5 > winHeight * 0.5;
+  return elTop + elHeight * 0.5 > winHeight * 0.5;
 };
 
 /*
@@ -176,26 +176,26 @@ export const getAnimeDirection = ( rect ) => {
  * @since 1.0.0
  */
 export const getMaxObserverMargin = ( observerMargin, wrapRect ) => {
-	const { pageYOffset: scrollY, innerHeight: winHeight } = window;
+  const { pageYOffset: scrollY, innerHeight: winHeight } = window;
 
-	const { top: wrapRectTop, height: wrapRectHeight } = wrapRect;
+  const { top: wrapRectTop, height: wrapRectHeight } = wrapRect;
 
-	const { body } = document;
-	const { clientHeight: pageHeight } = body;
+  const { body } = document;
+  const { clientHeight: pageHeight } = body;
 
-	const wrapTop = wrapRectTop + scrollY;
-	const wrapBottom = pageHeight - wrapTop;
+  const wrapTop = wrapRectTop + scrollY;
+  const wrapBottom = pageHeight - wrapTop;
 
-	const minimumTop = Math.round( ( wrapTop / winHeight ) * 100 );
-	const minimumBottom = Math.round( ( wrapBottom / winHeight ) * 100 );
+  const minimumTop = Math.round( ( wrapTop / winHeight ) * 100 );
+  const minimumBottom = Math.round( ( wrapBottom / winHeight ) * 100 );
 
-	const minimumMargin = Math.min( minimumTop, minimumBottom );
-	const maximumMargin = Math.max(
-		( wrapRectHeight / winHeight ) * 100,
-		minimumMargin
-	);
+  const minimumMargin = Math.min( minimumTop, minimumBottom );
+  const maximumMargin = Math.max(
+    ( wrapRectHeight / winHeight ) * 100,
+    minimumMargin
+  );
 
-	return Math.min( observerMargin, maximumMargin );
+  return Math.min( observerMargin, maximumMargin );
 };
 
 /*
@@ -207,29 +207,29 @@ export const getMaxObserverMargin = ( observerMargin, wrapRect ) => {
  * @since 1.0.0
  */
 export const getIeStyle = ( el, wrap ) => {
-	const computedEl = window.getComputedStyle( el, null );
-	const computedWrap = window.getComputedStyle( wrap, null );
+  const computedEl = window.getComputedStyle( el, null );
+  const computedWrap = window.getComputedStyle( wrap, null );
 
-	const elMarginTop = parseInt(
-		computedEl.getPropertyValue( 'margin-top' ),
-		10
-	);
-	const elMarginBottom = parseInt(
-		computedEl.getPropertyValue( 'margin-bottom' ),
-		10
-	);
+  const elMarginTop = parseInt(
+    computedEl.getPropertyValue( 'margin-top' ),
+    10
+  );
+  const elMarginBottom = parseInt(
+    computedEl.getPropertyValue( 'margin-bottom' ),
+    10
+  );
 
-	const wrapMarginTop = parseInt(
-		computedWrap.getPropertyValue( 'margin-top' ),
-		10
-	);
-	const wrapMarginBottom = parseInt(
-		computedWrap.getPropertyValue( 'margin-bottom' ),
-		10
-	);
+  const wrapMarginTop = parseInt(
+    computedWrap.getPropertyValue( 'margin-top' ),
+    10
+  );
+  const wrapMarginBottom = parseInt(
+    computedWrap.getPropertyValue( 'margin-bottom' ),
+    10
+  );
 
-	return {
-		marginTop: elMarginTop + wrapMarginTop,
-		marginBottom: elMarginBottom + wrapMarginBottom,
-	};
+  return {
+    marginTop: elMarginTop + wrapMarginTop,
+    marginBottom: elMarginBottom + wrapMarginBottom,
+  };
 };

@@ -1,4 +1,9 @@
 /**
+ * External dependencies.
+ */
+import React from 'react';
+
+/**
  * WordPress dependencies.
  */
 const { __ } = wp.i18n;
@@ -16,62 +21,62 @@ import { getClasses } from '../utils';
 import { HelpSettingsLink } from './my-tab-title-labels';
 
 const MyClassesControl = ( { block } ) => {
-	const [ enabled, toggleEnabled ] = useState( false );
+  const [ enabled, toggleEnabled ] = useState( false );
 
-	let currentClasses;
-	let enabledClass = '';
-	let onChange;
-	let onFocus;
+  let currentClasses;
+  let enabledClass = '';
+  let onChange;
+  let onFocus;
 
-	if ( enabled ) {
-		const { props: attrs } = block;
-		const curAnimation = {};
+  if ( enabled ) {
+    const { props: attrs } = block;
+    const curAnimation = {};
 
-		Object.keys( defaultValues ).forEach( ( key ) => {
-			curAnimation[ key ] = attrs[ key ];
-		} );
+    Object.keys( defaultValues ).forEach( ( key ) => {
+      curAnimation[ key ] = attrs[ key ];
+    } );
 
-		const settings = getClasses( curAnimation );
-		const { classes, animate } = settings;
+    const settings = getClasses( curAnimation );
+    const { classes, animate } = settings;
 
-		currentClasses = animate ? `polished-content${ classes }` : '';
-		enabledClass = ` ${ namespace }-classes-enabled`;
+    currentClasses = animate ? `polished-content${ classes }` : '';
+    enabledClass = ` ${ namespace }-classes-enabled`;
 
-		onChange = () => {};
-		onFocus = ( e ) => e.target.select();
-	}
+    onChange = () => {};
+    onFocus = ( e ) => e.target.select();
+  }
 
-	return (
-		<>
-			<ToggleControl
-				label={ __( 'Copy Animation Classes', 'polished-content' ) }
-				className={ `${ namespace }-toggle-classes${ enabledClass }` }
-				checked={ enabled }
-				onChange={ ( checked ) => toggleEnabled( checked ) }
-				help={ __(
-					"Add these classes to any of your site's page/post content to animate it with the current settings",
-					'polished-content'
-				) }
-			/>
-			{ enabled && (
-				<TextControl
-					label="Current Animation Classes"
-					className={ `${ namespace }-text-input` }
-					value={ currentClasses }
-					onChange={ onChange }
-					onFocus={ onFocus }
-					help={
-						<HelpSettingsLink
-							text={ __(
-								"When adding animation classes to non-Block content the plugin's script can be loaded manually from the ",
-								'polished-content'
-							) }
-						/>
-					}
-				/>
-			) }
-		</>
-	);
+  return (
+    <>
+      <ToggleControl
+        label={ __( 'Copy Animation Classes', 'polished-content' ) }
+        className={ `${ namespace }-toggle-classes${ enabledClass }` }
+        checked={ enabled }
+        onChange={ ( checked ) => toggleEnabled( checked ) }
+        help={ __(
+          "Add these classes to any of your site's page/post content to animate it with the current settings",
+          'polished-content'
+        ) }
+      />
+      { enabled && (
+        <TextControl
+          label="Current Animation Classes"
+          className={ `${ namespace }-text-input` }
+          value={ currentClasses }
+          onChange={ onChange }
+          onFocus={ onFocus }
+          help={
+            <HelpSettingsLink
+              text={ __(
+                "When adding animation classes to non-Block content the plugin's script can be loaded manually from the ",
+                'polished-content'
+              ) }
+            />
+          }
+        />
+      ) }
+    </>
+  );
 };
 
 export default MyClassesControl;

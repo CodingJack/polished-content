@@ -1,4 +1,9 @@
 /**
+ * External dependencies.
+ */
+import React from 'react';
+
+/**
  * WordPress dependencies.
  */
 const { ButtonGroup, Button, Icon } = wp.components;
@@ -16,25 +21,25 @@ const { pcxAlign, pcxAlignRtl } = selectOptions;
 const aligntButtons = ! isRtl ? pcxAlign : pcxAlignRtl;
 
 const MyAlignButtons = ( { prop, value, callback } ) => {
-	return (
-		<div className={ `${ namespace }-align-btns` }>
-			<ButtonGroup>
-				{ aligntButtons.map( ( val ) => {
-					return (
-						<Button
-							key={ val }
-							className={ `${ namespace }-align-btn is-button is-default` }
-							isSecondary={ value !== val }
-							isPrimary={ value === val }
-							onClick={ () => callback( val, prop ) }
-						>
-							<Icon icon={ `editor-align${ val }` } size="20" />
-						</Button>
-					);
-				} ) }
-			</ButtonGroup>
-		</div>
-	);
+  return (
+    <div className={ `${ namespace }-align-btns` }>
+      <ButtonGroup>
+        { aligntButtons.map( ( val ) => {
+          return (
+            <Button
+              key={ val }
+              className={ `${ namespace }-align-btn is-button is-default` }
+              isSecondary={ value !== val }
+              isPrimary={ value === val }
+              onClick={ () => callback( val, prop ) }
+            >
+              <Icon icon={ `editor-align${ val }` } size="20" />
+            </Button>
+          );
+        } ) }
+      </ButtonGroup>
+    </div>
+  );
 };
 
 export default MyAlignButtons;

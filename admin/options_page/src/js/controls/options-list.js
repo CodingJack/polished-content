@@ -16,20 +16,20 @@ import ToggleButtons from './primitives/toggle-buttons';
 import CodeMirror from './code-mirror';
 
 const components = {
-	number: NumberInputs,
-	radio: CheckRadios,
-	checkbox: CheckRadios,
-	select: SelectBox,
-	range: InputRanges,
-	toggle: ToggleButtons,
-	codemirror: CodeMirror,
+  number: NumberInputs,
+  radio: CheckRadios,
+  checkbox: CheckRadios,
+  select: SelectBox,
+  range: InputRanges,
+  toggle: ToggleButtons,
+  codemirror: CodeMirror,
 };
 
 const OptionsList = ( props ) => {
-	const { type } = props;
+  const { type } = props;
 
-	const Component = components[ type ];
-	return <Component { ...props } />;
+  const Component = components[ type ];
+  return <Component { ...props } />;
 };
 
 export default OptionsList;
