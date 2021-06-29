@@ -7,7 +7,7 @@ $icon-size: 64px;
 $git-icon-size: 54px;
 
 @mixin size($property) {
-	#{$property}: calc(100% - 100px)
+  #{$property}: calc(100% - 100px)
 }
 
 body {margin:0; color: $text-color}
@@ -20,9 +20,9 @@ img[class^='fade'] {visibility: visible}
 .fade-in {visibility: visible; animation-name: animate}
 
 .icon {
-	display: inline-block; transition: all 0.2s ease-out;
-	> * {display: inline-block}
-	&:hover {opacity: $hover-opacity}
+  display: inline-block; transition: all 0.2s ease-out;
+  > * {display: inline-block}
+  &:hover {opacity: $hover-opacity}
 }
 
 .arrow {cursor: pointer; position: absolute; top: 50%; z-index: 99; transform: translateY(-50%); user-select: none}
@@ -41,39 +41,39 @@ a:visited {color: $text-color}
 @keyframes reset{to {width: auto}}
 
 .preloader {
-	display: inline-block;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin: -23px 0 0 -23px;
-	opacity: 0;
-	visibility: hidden;
-	transition: all 0.3s ease-out;
-	transition-property: opacity, visibility;
-	animation: preloading 1.2s linear infinite;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -23px 0 0 -23px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-out;
+  transition-property: opacity, visibility;
+  animation: preloading 1.2s linear infinite;
 }
 .preloader:after {
-	content: " ";
-	display: block;
-	width: 46px;
-	height: 46px;
-	border-radius: 50%;
-	border: 5px solid #fff;
-	border-color: #fff transparent #fff transparent;
+  content: " ";
+  display: block;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  border-color: #fff transparent #fff transparent;
 }
 .preloader.active {
-	opacity: 1;
-	visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 @keyframes preloading {
-	0% {transform: rotate(0deg)}
-	100% {transform: rotate(360deg)}
+  0% {transform: rotate(0deg)}
+  100% {transform: rotate(360deg)}
 }
 
 @media screen and (max-width: 1280px) {
-	.icon {background: rgba(0, 0, 0, $hover-opacity)}
-	.arrow {border-radius: 50%}
-	.git {padding: 5px}
-	.icon:hover {opacity: 1; background: #000}
+  .icon {background: rgba(0, 0, 0, $hover-opacity)}
+  .arrow {border-radius: 50%}
+  .git {padding: 5px}
+  .icon:hover {opacity: 1; background: #000}
 }
