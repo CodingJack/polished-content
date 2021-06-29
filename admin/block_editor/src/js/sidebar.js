@@ -20,23 +20,23 @@ const { PluginSidebar, PluginSidebarMoreMenuItem } = wp.editPost;
 const sidebar = `${ namespace }-sidebar`;
 
 registerPlugin( sidebar, {
-	icon: 'text',
-	render: () => {
-		return (
-			<>
-				<PluginSidebarMoreMenuItem target={ sidebar }>
-					{ __( 'Polished Content Settings', 'polished-content' ) }
-				</PluginSidebarMoreMenuItem>
-				<PluginSidebar
-					name={ sidebar }
-					title={ __(
-						'Polished Content Settings',
-						'polished-content'
-					) }
-				>
-					<PolishedContentSettings />
-				</PluginSidebar>
-			</>
-		);
-	},
+  icon: 'text',
+  render: () => {
+    return (
+      <>
+        <PluginSidebarMoreMenuItem target={ sidebar }>
+          { __( 'Polished Content Settings', 'polished-content' ) }
+        </PluginSidebarMoreMenuItem>
+        <PluginSidebar
+          name={ sidebar }
+          title={ __(
+            'Polished Content Settings',
+            'polished-content'
+          ) }
+        >
+          <PolishedContentSettings />
+        </PluginSidebar>
+      </>
+    );
+  },
 } );

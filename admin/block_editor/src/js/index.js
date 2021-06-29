@@ -38,26 +38,26 @@ let openPanel;
  * @since 1.0.0
  */
 const addAttributes = ( block ) => {
-	if ( ! verifyObjects( [ block ] ) ) {
-		return block;
-	}
+  if ( ! verifyObjects( [ block ] ) ) {
+    return block;
+  }
 
-	const { name } = block;
-	const supportedBlock = supportedBlocks.indexOf( name ) !== -1;
+  const { name } = block;
+  const supportedBlock = supportedBlocks.indexOf( name ) !== -1;
 
-	if ( supportedBlock ) {
-		const supportsClass = hasBlockSupport( block, 'customClassName', true );
+  if ( supportedBlock ) {
+    const supportsClass = hasBlockSupport( block, 'customClassName', true );
 
-		if ( supportsClass ) {
-			const { attributes } = block;
+    if ( supportsClass ) {
+      const { attributes } = block;
 
-			if ( verifyObjects( [ attributes ] ) ) {
-				block.attributes = { ...defaultData, ...attributes };
-			}
-		}
-	}
+      if ( verifyObjects( [ attributes ] ) ) {
+        block.attributes = { ...defaultData, ...attributes };
+      }
+    }
+  }
 
-	return block;
+  return block;
 };
 
 /*
@@ -69,111 +69,111 @@ const addAttributes = ( block ) => {
  * @since 1.0.0
  */
 const addClasses = ( extraProps, block, attributes ) => {
-	if ( ! verifyObjects( [ extraProps, block, attributes ] ) ) {
-		return extraProps;
-	}
+  if ( ! verifyObjects( [ extraProps, block, attributes ] ) ) {
+    return extraProps;
+  }
 
-	const { name } = block;
-	if ( supportedBlocks.indexOf( name ) === -1 ) {
-		return extraProps;
-	}
+  const { name } = block;
+  if ( supportedBlocks.indexOf( name ) === -1 ) {
+    return extraProps;
+  }
 
-	const { pcxEnabled } = attributes;
-	const supportsClass = hasBlockSupport(
-		extraProps,
-		'customClassName',
-		true
-	);
+  const { pcxEnabled } = attributes;
+  const supportsClass = hasBlockSupport(
+    extraProps,
+    'customClassName',
+    true
+  );
 
-	if ( pcxEnabled && supportsClass ) {
-		const settings = getClasses( { ...attributes } );
+  if ( pcxEnabled && supportsClass ) {
+    const settings = getClasses( { ...attributes } );
 
-		const { animate, classes } = settings;
+    const { animate, classes } = settings;
 
-		if ( animate && classes ) {
-			const blockName = name.replace( '/', '-' );
-			extraProps.className = classnames(
-				extraProps.className,
-				`${ namespace }_${ blockName }${ classes }`
-			);
-		}
-	}
+    if ( animate && classes ) {
+      const blockName = name.replace( '/', '-' );
+      extraProps.className = classnames(
+        extraProps.className,
+        `${ namespace }_${ blockName }${ classes }`
+      );
+    }
+  }
 
-	return extraProps;
+  return extraProps;
 };
 
 const polishedContentControls = createHigherOrderComponent( ( BlockEdit ) => {
-	return ( props ) => {
-		const { name } = props;
+  return ( props ) => {
+    const { name } = props;
 
-		if ( supportedBlocks.indexOf( name ) === -1 ) {
-			return <BlockEdit { ...props } />;
-		}
+    if ( supportedBlocks.indexOf( name ) === -1 ) {
+      return <BlockEdit { ...props } />;
+    }
 
-		const { setAttributes, isSelected, attributes } = props;
+    const { setAttributes, isSelected, attributes } = props;
 
-		if ( ! verifyObjects( [ setAttributes, attributes ] ) ) {
-			return <BlockEdit { ...props } />;
-		}
+    if ( ! verifyObjects( [ setAttributes, attributes ] ) ) {
+      return <BlockEdit { ...props } />;
+    }
 
-		const { pcxEnabled } = attributes;
+    const { pcxEnabled } = attributes;
 
-		if ( pcxEnabled !== undefined && isSelected ) {
-			return (
-				<>
-					<BlockEdit { ...props } />
-					<InspectorControls>
-						<PanelBody
-							title={ __(
-								'Polished Content',
-								'polished-content'
-							) }
-							className={ `${ namespace }` }
-							initialOpen={ openPanel }
-						>
-							<ErrorBoundary>
-								<Loader
-									bufferTime={ 250 }
-									namespace={ namespace }
-									resolve={ () => import( './module' ) }
-									setAttributes={ setAttributes }
-									attributes={ attributes }
-								/>
-							</ErrorBoundary>
-						</PanelBody>
-					</InspectorControls>
-				</>
-			);
-		}
+    if ( pcxEnabled !== undefined && isSelected ) {
+      return (
+        <>
+          <BlockEdit { ...props } />
+          <InspectorControls>
+            <PanelBody
+              title={ __(
+                'Polished Content',
+                'polished-content'
+              ) }
+              className={ `${ namespace }` }
+              initialOpen={ openPanel }
+            >
+              <ErrorBoundary>
+                <Loader
+                  bufferTime={ 250 }
+                  namespace={ namespace }
+                  resolve={ () => import( './module' ) }
+                  setAttributes={ setAttributes }
+                  attributes={ attributes }
+                />
+              </ErrorBoundary>
+            </PanelBody>
+          </InspectorControls>
+        </>
+      );
+    }
 
-		return <BlockEdit { ...props } />;
-	};
+    return <BlockEdit { ...props } />;
+  };
 }, 'polishedContentControls' );
 
 if ( typeof polishedContentGlobals !== 'undefined' ) {
-	const { defaultSettings, chunkDirectory } = polishedContentGlobals; // eslint-disable-line no-undef
+  const { defaultSettings, chunkDirectory } = polishedContentGlobals; // eslint-disable-line no-undef
 
-	__webpack_public_path__ = chunkDirectory; // eslint-disable-line no-undef, camelcase
+  __webpack_public_path__ = chunkDirectory; // eslint-disable-line no-undef, camelcase
 
-	const { allowedBlocks, panelOpen } = defaultSettings;
+  const { allowedBlocks, panelOpen } = defaultSettings;
 
-	supportedBlocks = allowedBlocks;
-	openPanel = panelOpen;
+  supportedBlocks = allowedBlocks;
+  openPanel = panelOpen;
 
-	addFilter(
-		'editor.BlockEdit',
-		`${ namespace }/polishedContentControls`,
-		polishedContentControls
-	);
-	addFilter(
-		'blocks.registerBlockType',
-		`${ namespace }/addAttributes`,
-		addAttributes
-	);
+  addFilter(
+    'editor.BlockEdit',
+    `${ namespace }/polishedContentControls`,
+    polishedContentControls
+  );
+  addFilter(
+    'blocks.registerBlockType',
+    `${ namespace }/addAttributes`,
+    addAttributes
+  );
 
-	addFilter(
-		'blocks.getSaveContent.extraProps',
-		`${ namespace }/addClasses`,
-		addClasses
-	);
+  addFilter(
+    'blocks.getSaveContent.extraProps',
+    `${ namespace }/addClasses`,
+    addClasses
+  );
 }

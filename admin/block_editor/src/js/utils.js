@@ -7,13 +7,13 @@ const { __ } = wp.i18n;
  * Internal dependencies.
  */
 import {
-	selectOptions,
-	mainDefaults,
-	defaultValues,
-	animatable,
-	customPreset,
-	animationCore,
-	transformable,
+  selectOptions,
+  mainDefaults,
+  defaultValues,
+  animatable,
+  customPreset,
+  animationCore,
+  transformable,
 } from '../../../../shared/js/data';
 
 /*
@@ -23,18 +23,18 @@ import {
  * @since 1.0.0
  */
 const verifyObjects = ( objects ) => {
-	const len = objects.length;
+  const len = objects.length;
 
-	for ( let i = 0; i < len; i++ ) {
-		if (
-			typeof objects[ i ] !== 'object' &&
-			typeof objects[ i ] !== 'function'
-		) {
-			return false;
-		}
-	}
+  for ( let i = 0; i < len; i++ ) {
+    if (
+      typeof objects[ i ] !== 'object' &&
+      typeof objects[ i ] !== 'function'
+    ) {
+      return false;
+    }
+  }
 
-	return true;
+  return true;
 };
 
 /*
@@ -44,79 +44,79 @@ const verifyObjects = ( objects ) => {
  * @since 1.0.0
  */
 export const getClasses = ( attrs ) => {
-	let classes = '';
+  let classes = '';
 
-	const {
-		pcxDelay,
-		pcxInline,
-		pcxClass,
-		pcxPosition,
-		pcxScrollType,
-		pcxScrollStagger,
-		pcxTransformOrigin,
-		pcxPercentageInStagger,
-	} = attrs;
+  const {
+    pcxDelay,
+    pcxInline,
+    pcxClass,
+    pcxPosition,
+    pcxScrollType,
+    pcxScrollStagger,
+    pcxTransformOrigin,
+    pcxPercentageInStagger,
+  } = attrs;
 
-	if ( pcxScrollStagger ) {
-		attrs.pcxPercentageIn = pcxPercentageInStagger;
-	}
-	if ( pcxPosition === 'center-center' ) {
-		delete attrs.pcxStrength;
-	}
-	if ( ! pcxInline ) {
-		delete attrs.pcxAlign;
-	}
-	if ( pcxScrollType === 'in' ) {
-		delete attrs.pcxReverse;
-		delete attrs.pcxDelayReverse;
-	}
-	if ( ! pcxDelay && ! attrs.pcxDelayReverse ) {
-		delete attrs.pcxDelayBreak;
-	}
-	if ( pcxClass ) {
-		attrs.pcxClass = pcxClass.replace( ' ', '-pcx-' ).trim();
-	}
+  if ( pcxScrollStagger ) {
+    attrs.pcxPercentageIn = pcxPercentageInStagger;
+  }
+  if ( pcxPosition === 'center-center' ) {
+    delete attrs.pcxStrength;
+  }
+  if ( ! pcxInline ) {
+    delete attrs.pcxAlign;
+  }
+  if ( pcxScrollType === 'in' ) {
+    delete attrs.pcxReverse;
+    delete attrs.pcxDelayReverse;
+  }
+  if ( ! pcxDelay && ! attrs.pcxDelayReverse ) {
+    delete attrs.pcxDelayBreak;
+  }
+  if ( pcxClass ) {
+    attrs.pcxClass = pcxClass.replace( ' ', '-pcx-' ).trim();
+  }
 
-	const len = transformable.length;
-	let hasTransform;
+  const len = transformable.length;
+  let hasTransform;
 
-	for ( let i = 0; i < len; i++ ) {
-		const prop = transformable[ i ];
-		if (
-			attrs[ prop ] !== undefined &&
-			attrs[ prop ] !== defaultValues[ prop ]
-		) {
-			hasTransform = true;
-			break;
-		}
-	}
+  for ( let i = 0; i < len; i++ ) {
+    const prop = transformable[ i ];
+    if (
+      attrs[ prop ] !== undefined &&
+      attrs[ prop ] !== defaultValues[ prop ]
+    ) {
+      hasTransform = true;
+      break;
+    }
+  }
 
-	if ( hasTransform ) {
-		const { pcxTransformOrigin: defTransformOrigin } = defaultValues;
+  if ( hasTransform ) {
+    const { pcxTransformOrigin: defTransformOrigin } = defaultValues;
 
-		if ( pcxTransformOrigin === defTransformOrigin ) {
-			delete attrs.pcxTransformReset;
-		}
-	} else {
-		delete attrs.pcxPerspective;
-		delete attrs.pcxTransformOrigin;
-		delete attrs.pcxTransformReset;
-	}
+    if ( pcxTransformOrigin === defTransformOrigin ) {
+      delete attrs.pcxTransformReset;
+    }
+  } else {
+    delete attrs.pcxPerspective;
+    delete attrs.pcxTransformOrigin;
+    delete attrs.pcxTransformReset;
+  }
 
-	delete attrs.pcxEnabled;
-	delete attrs.pcxPercentageInStagger;
+  delete attrs.pcxEnabled;
+  delete attrs.pcxPercentageInStagger;
 
-	let animate;
-	for ( const [ key, defValue ] of Object.entries( defaultValues ) ) {
-		if ( attrs[ key ] !== undefined && attrs[ key ] !== defValue ) {
-			if ( ! animate ) {
-				animate = animationCore.indexOf( key ) !== -1;
-			}
-			classes += ` ${ key }_${ attrs[ key ] }`;
-		}
-	}
+  let animate;
+  for ( const [ key, defValue ] of Object.entries( defaultValues ) ) {
+    if ( attrs[ key ] !== undefined && attrs[ key ] !== defValue ) {
+      if ( ! animate ) {
+        animate = animationCore.indexOf( key ) !== -1;
+      }
+      classes += ` ${ key }_${ attrs[ key ] }`;
+    }
+  }
 
-	return { animate, classes };
+  return { animate, classes };
 };
 
 /*
@@ -130,47 +130,47 @@ export const getClasses = ( attrs ) => {
  * @since 1.0.0
  */
 const getPositions = ( el, container, curPosX, curPosY, strength ) => {
-	const pos = { x: 0, y: 0 };
-	const { clientWidth, clientHeight } = el;
+  const pos = { x: 0, y: 0 };
+  const { clientWidth, clientHeight } = el;
 
-	if ( strength !== 'max' ) {
-		if ( curPosX === 'left' ) {
-			pos.x = -clientWidth;
-		} else if ( curPosX === 'right' ) {
-			pos.x = clientWidth;
-		}
+  if ( strength !== 'max' ) {
+    if ( curPosX === 'left' ) {
+      pos.x = -clientWidth;
+    } else if ( curPosX === 'right' ) {
+      pos.x = clientWidth;
+    }
 
-		if ( curPosY === 'top' ) {
-			pos.y = -clientHeight;
-		} else if ( curPosY === 'bottom' ) {
-			pos.y = clientHeight;
-		}
+    if ( curPosY === 'top' ) {
+      pos.y = -clientHeight;
+    } else if ( curPosY === 'bottom' ) {
+      pos.y = clientHeight;
+    }
 
-		if ( strength === 'short' ) {
-			pos.x *= 0.5;
-			pos.y *= 0.5;
-		}
-	} else {
-		const rect = container.getBoundingClientRect();
-		const { width, height } = rect;
+    if ( strength === 'short' ) {
+      pos.x *= 0.5;
+      pos.y *= 0.5;
+    }
+  } else {
+    const rect = container.getBoundingClientRect();
+    const { width, height } = rect;
 
-		const bottom = Math.ceil( height * 0.5 + clientHeight * 0.5 );
-		const right = Math.ceil( width * 0.5 + clientWidth * 0.5 );
+    const bottom = Math.ceil( height * 0.5 + clientHeight * 0.5 );
+    const right = Math.ceil( width * 0.5 + clientWidth * 0.5 );
 
-		if ( curPosX === 'left' ) {
-			pos.x = -right;
-		} else if ( curPosX === 'right' ) {
-			pos.x = right;
-		}
+    if ( curPosX === 'left' ) {
+      pos.x = -right;
+    } else if ( curPosX === 'right' ) {
+      pos.x = right;
+    }
 
-		if ( curPosY === 'top' ) {
-			pos.y = -bottom;
-		} else if ( curPosY === 'bottom' ) {
-			pos.y = bottom;
-		}
-	}
+    if ( curPosY === 'top' ) {
+      pos.y = -bottom;
+    } else if ( curPosY === 'bottom' ) {
+      pos.y = bottom;
+    }
+  }
 
-	return pos;
+  return pos;
 };
 
 /*
@@ -180,18 +180,18 @@ const getPositions = ( el, container, curPosX, curPosY, strength ) => {
  * @since 1.0.0
  */
 const shouldAnimate = ( props ) => {
-	const len = animationCore.length;
-	let animate;
+  const len = animationCore.length;
+  let animate;
 
-	for ( let i = 0; i < len; i++ ) {
-		const key = animationCore[ i ];
-		if ( props[ key ] !== defaultValues[ key ] ) {
-			animate = true;
-			break;
-		}
-	}
+  for ( let i = 0; i < len; i++ ) {
+    const key = animationCore[ i ];
+    if ( props[ key ] !== defaultValues[ key ] ) {
+      animate = true;
+      break;
+    }
+  }
 
-	return animate;
+  return animate;
 };
 
 /*
@@ -201,16 +201,16 @@ const shouldAnimate = ( props ) => {
  * @since 1.0.0
  */
 const animatableProps = ( props ) => {
-	const keys = Object.keys( props );
-	const len = keys.length;
+  const keys = Object.keys( props );
+  const len = keys.length;
 
-	for ( let i = 0; i < len; i++ ) {
-		if ( animatable.indexOf( keys[ i ] ) !== -1 ) {
-			return true;
-		}
-	}
+  for ( let i = 0; i < len; i++ ) {
+    if ( animatable.indexOf( keys[ i ] ) !== -1 ) {
+      return true;
+    }
+  }
 
-	return false;
+  return false;
 };
 
 /*
@@ -221,17 +221,17 @@ const animatableProps = ( props ) => {
  * @since 1.0.0
  */
 const compareProps = ( prevProps, nextProps ) => {
-	const len = animatable.length;
+  const len = animatable.length;
 
-	for ( let i = 0; i < len; i++ ) {
-		const key = animatable[ i ];
+  for ( let i = 0; i < len; i++ ) {
+    const key = animatable[ i ];
 
-		if ( prevProps[ key ] !== nextProps[ key ] ) {
-			return shouldAnimate( nextProps );
-		}
-	}
+    if ( prevProps[ key ] !== nextProps[ key ] ) {
+      return shouldAnimate( nextProps );
+    }
+  }
 
-	return false;
+  return false;
 };
 
 /*
@@ -242,18 +242,18 @@ const compareProps = ( prevProps, nextProps ) => {
  * @since 1.0.0
  */
 const objectValuesEqual = ( objectA, objectB, objectKeys ) => {
-	const keys = objectKeys || Object.keys( objectA );
-	const len = keys.length;
+  const keys = objectKeys || Object.keys( objectA );
+  const len = keys.length;
 
-	for ( let i = 0; i < len; i++ ) {
-		const key = keys[ i ];
+  for ( let i = 0; i < len; i++ ) {
+    const key = keys[ i ];
 
-		if ( objectA[ key ] !== objectB[ key ] ) {
-			return false;
-		}
-	}
+    if ( objectA[ key ] !== objectB[ key ] ) {
+      return false;
+    }
+  }
 
-	return true;
+  return true;
 };
 
 /*
@@ -266,23 +266,23 @@ const objectValuesEqual = ( objectA, objectB, objectKeys ) => {
  * @since 1.0.0
  */
 const getPrevNextSelection = ( options, values, value, next ) => {
-	const index = values.indexOf( value );
-	const len = values.length;
-	let selection;
+  const index = values.indexOf( value );
+  const len = values.length;
+  let selection;
 
-	if ( next ) {
-		selection = index < len - 1 ? index + 1 : 0;
-		while ( options[ selection ].disabled ) {
-			selection = selection < len - 1 ? selection + 1 : 0;
-		}
-	} else {
-		selection = index > 0 ? index - 1 : len - 1;
-		while ( options[ selection ].disabled ) {
-			selection = selection > 0 ? selection - 1 : len - 1;
-		}
-	}
+  if ( next ) {
+    selection = index < len - 1 ? index + 1 : 0;
+    while ( options[ selection ].disabled ) {
+      selection = selection < len - 1 ? selection + 1 : 0;
+    }
+  } else {
+    selection = index > 0 ? index - 1 : len - 1;
+    while ( options[ selection ].disabled ) {
+      selection = selection > 0 ? selection - 1 : len - 1;
+    }
+  }
 
-	return values[ selection ];
+  return values[ selection ];
 };
 
 /*
@@ -290,10 +290,10 @@ const getPrevNextSelection = ( options, values, value, next ) => {
  * @since 1.0.0
  */
 const checkInitialTab = ( enabled, selectedPreset ) => {
-	if ( ! enabled && selectedPreset === 'PcxDefaults' ) {
-		const { initialTab } = polishedContentGlobals; // eslint-disable-line no-undef
-		polishedContentGlobals.currentTab = initialTab; // eslint-disable-line no-undef
-	}
+  if ( ! enabled && selectedPreset === 'PcxDefaults' ) {
+    const { initialTab } = polishedContentGlobals; // eslint-disable-line no-undef
+    polishedContentGlobals.currentTab = initialTab; // eslint-disable-line no-undef
+  }
 };
 
 /*
@@ -301,13 +301,13 @@ const checkInitialTab = ( enabled, selectedPreset ) => {
  * @since 1.0.0
  */
 const resetCustomPreset = () => {
-	const { pcxPresets, pcxAnimations } = selectOptions;
-	const { PcxCustom } = pcxAnimations;
+  const { pcxPresets, pcxAnimations } = selectOptions;
+  const { PcxCustom } = pcxAnimations;
 
-	if ( PcxCustom ) {
-		pcxPresets.splice( 1, 1 );
-		delete pcxAnimations.PcxCustom;
-	}
+  if ( PcxCustom ) {
+    pcxPresets.splice( 1, 1 );
+    delete pcxAnimations.PcxCustom;
+  }
 };
 
 /*
@@ -316,24 +316,24 @@ const resetCustomPreset = () => {
  * @since 1.0.0
  */
 const setCustomPreset = ( current ) => {
-	const { pcxPresets, pcxAnimations } = selectOptions;
-	const { PcxCustom } = pcxAnimations;
+  const { pcxPresets, pcxAnimations } = selectOptions;
+  const { PcxCustom } = pcxAnimations;
 
-	if ( ! PcxCustom ) {
-		pcxPresets.splice( 1, 0, customPreset );
-	}
+  if ( ! PcxCustom ) {
+    pcxPresets.splice( 1, 0, customPreset );
+  }
 
-	const obj = {};
-	Object.keys( defaultValues ).forEach( ( key ) => {
-		if (
-			current[ key ] !== undefined &&
-			current[ key ] !== defaultValues[ key ]
-		) {
-			obj[ key ] = current[ key ];
-		}
-	} );
+  const obj = {};
+  Object.keys( defaultValues ).forEach( ( key ) => {
+    if (
+      current[ key ] !== undefined &&
+      current[ key ] !== defaultValues[ key ]
+    ) {
+      obj[ key ] = current[ key ];
+    }
+  } );
 
-	pcxAnimations.PcxCustom = obj;
+  pcxAnimations.PcxCustom = obj;
 };
 
 /*
@@ -343,62 +343,62 @@ const setCustomPreset = ( current ) => {
  * @since 1.0.0
  */
 const getPresetSelection = ( props, resetCustom ) => {
-	if ( resetCustom ) {
-		resetCustomPreset();
-	}
+  if ( resetCustom ) {
+    resetCustomPreset();
+  }
 
-	const current = { ...props };
-	delete current.pcxEnabled;
+  const current = { ...props };
+  delete current.pcxEnabled;
 
-	const defs = { ...mainDefaults };
-	const { pcxAnimations } = selectOptions;
-	const animations = { ...defs, ...pcxAnimations };
+  const defs = { ...mainDefaults };
+  const { pcxAnimations } = selectOptions;
+  const animations = { ...defs, ...pcxAnimations };
 
-	let hideCreatePresetBtn = true;
-	let hideDeleteBtn = true;
-	let selectedPreset;
-	let presetFound;
+  let hideCreatePresetBtn = true;
+  let hideDeleteBtn = true;
+  let selectedPreset;
+  let presetFound;
 
-	delete animations.PcxCustom;
+  delete animations.PcxCustom;
 
-	for ( const [ key, preset ] of Object.entries( animations ) ) {
-		const thePreset = { ...defaultValues, ...preset };
-		delete thePreset.pcxEnabled;
+  for ( const [ key, preset ] of Object.entries( animations ) ) {
+    const thePreset = { ...defaultValues, ...preset };
+    delete thePreset.pcxEnabled;
 
-		let isDefault = true;
-		const keys = Object.keys( thePreset );
-		const len = keys.length;
+    let isDefault = true;
+    const keys = Object.keys( thePreset );
+    const len = keys.length;
 
-		for ( let i = 0; i < len; i++ ) {
-			if ( current[ keys[ i ] ] !== thePreset[ keys[ i ] ] ) {
-				isDefault = false;
-				break;
-			}
-		}
+    for ( let i = 0; i < len; i++ ) {
+      if ( current[ keys[ i ] ] !== thePreset[ keys[ i ] ] ) {
+        isDefault = false;
+        break;
+      }
+    }
 
-		if ( isDefault ) {
-			if ( key === 'PcxDefaults' ) {
-				selectedPreset = 'PcxDefaults';
-			} else {
-				hideDeleteBtn = /^[A-Z]/.test( key );
-				selectedPreset = key;
-			}
-			presetFound = true;
-			break;
-		}
-	}
+    if ( isDefault ) {
+      if ( key === 'PcxDefaults' ) {
+        selectedPreset = 'PcxDefaults';
+      } else {
+        hideDeleteBtn = /^[A-Z]/.test( key );
+        selectedPreset = key;
+      }
+      presetFound = true;
+      break;
+    }
+  }
 
-	if ( ! presetFound ) {
-		setCustomPreset( current );
-		selectedPreset = 'PcxCustom';
-		hideCreatePresetBtn = false;
-	}
+  if ( ! presetFound ) {
+    setCustomPreset( current );
+    selectedPreset = 'PcxCustom';
+    hideCreatePresetBtn = false;
+  }
 
-	return {
-		selectedPreset,
-		hideCreatePresetBtn,
-		hideDeleteBtn,
-	};
+  return {
+    selectedPreset,
+    hideCreatePresetBtn,
+    hideDeleteBtn,
+  };
 };
 
 /*
@@ -408,47 +408,47 @@ const getPresetSelection = ( props, resetCustom ) => {
  * @since 1.0.0
  */
 const addRemoveCustomLabel = ( add ) => {
-	const { pcxPresets } = selectOptions;
-	const len = pcxPresets.length - 1;
+  const { pcxPresets } = selectOptions;
+  const len = pcxPresets.length - 1;
 
-	let hasLabel;
-	let index;
+  let hasLabel;
+  let index;
 
-	for ( let i = len; i > 0; i-- ) {
-		if ( pcxPresets[ i ].value === 'PcxCustomPresets' ) {
-			hasLabel = true;
-			index = i;
-			break;
-		}
-	}
+  for ( let i = len; i > 0; i-- ) {
+    if ( pcxPresets[ i ].value === 'PcxCustomPresets' ) {
+      hasLabel = true;
+      index = i;
+      break;
+    }
+  }
 
-	if ( add ) {
-		if ( ! hasLabel ) {
-			pcxPresets.push( {
-				label: `*** ${ __(
-					'Custom Presets',
-					'polished-content'
-				) } ***`,
-				value: 'PcxCustomPresets',
-				disabled: true,
-			} );
-		}
-	} else {
-		let hasCustom;
-		for ( let i = len; i > 0; i-- ) {
-			if ( /^[A-Z]/.test( pcxPresets[ i ].value ) === false ) {
-				hasCustom = true;
-				break;
-			}
-		}
+  if ( add ) {
+    if ( ! hasLabel ) {
+      pcxPresets.push( {
+        label: `*** ${ __(
+          'Custom Presets',
+          'polished-content'
+        ) } ***`,
+        value: 'PcxCustomPresets',
+        disabled: true,
+      } );
+    }
+  } else {
+    let hasCustom;
+    for ( let i = len; i > 0; i-- ) {
+      if ( /^[A-Z]/.test( pcxPresets[ i ].value ) === false ) {
+        hasCustom = true;
+        break;
+      }
+    }
 
-		if ( ! hasCustom ) {
-			pcxPresets.splice( index, 1 );
-			return true;
-		}
+    if ( ! hasCustom ) {
+      pcxPresets.splice( index, 1 );
+      return true;
+    }
 
-		return false;
-	}
+    return false;
+  }
 };
 
 /*
@@ -459,31 +459,31 @@ const addRemoveCustomLabel = ( add ) => {
  * @since 1.0.0
  */
 const addPreset = ( title, settings ) => {
-	const { pcxPresets, pcxAnimations } = selectOptions;
-	const key = title.trim();
+  const { pcxPresets, pcxAnimations } = selectOptions;
+  const key = title.trim();
 
-	addRemoveCustomLabel( true );
-	pcxAnimations[ key ] = settings;
+  addRemoveCustomLabel( true );
+  pcxAnimations[ key ] = settings;
 
-	pcxPresets.push( {
-		label: title,
-		value: key,
-	} );
+  pcxPresets.push( {
+    label: title,
+    value: key,
+  } );
 
-	delete pcxAnimations.PcxCustom;
-	const len = pcxPresets.length;
+  delete pcxAnimations.PcxCustom;
+  const len = pcxPresets.length;
 
-	for ( let i = 0; i < len; i++ ) {
-		const preset = pcxPresets[ i ];
-		const { value } = preset;
+  for ( let i = 0; i < len; i++ ) {
+    const preset = pcxPresets[ i ];
+    const { value } = preset;
 
-		if ( value === 'PcxCustom' ) {
-			pcxPresets.splice( i, 1 );
-			break;
-		}
-	}
+    if ( value === 'PcxCustom' ) {
+      pcxPresets.splice( i, 1 );
+      break;
+    }
+  }
 
-	return key;
+  return key;
 };
 
 /*
@@ -495,16 +495,16 @@ const addPreset = ( title, settings ) => {
  * @since 1.0.0
  */
 const checkChanges = ( original, current, defaults ) => {
-	const keys = Object.keys( defaults || original );
-	const len = keys.length;
+  const keys = Object.keys( defaults || original );
+  const len = keys.length;
 
-	for ( let i = 0; i < len; i++ ) {
-		const key = keys[ i ];
-		if ( original[ key ] !== current[ key ] ) {
-			return true;
-		}
-	}
-	return false;
+  for ( let i = 0; i < len; i++ ) {
+    const key = keys[ i ];
+    if ( original[ key ] !== current[ key ] ) {
+      return true;
+    }
+  }
+  return false;
 };
 
 /*
@@ -515,13 +515,13 @@ const checkChanges = ( original, current, defaults ) => {
  * @since 1.0.0
 */
 const getOriginalSettings = ( attributes ) => {
-	const original = {};
-	Object.keys( defaultValues ).forEach( ( key ) => {
-		original[ key ] = attributes[ key ];
-	} );
+  const original = {};
+  Object.keys( defaultValues ).forEach( ( key ) => {
+    original[ key ] = attributes[ key ];
+  } );
 
-	delete original.pcxEnabled;
-	return original;
+  delete original.pcxEnabled;
+  return original;
 };
 
 /*
@@ -532,24 +532,24 @@ const getOriginalSettings = ( attributes ) => {
  * @since 1.0.0
  */
 const removePreset = ( key, settings ) => {
-	const { pcxPresets, pcxAnimations } = selectOptions;
-	const total = pcxPresets.length - 1;
+  const { pcxPresets, pcxAnimations } = selectOptions;
+  const total = pcxPresets.length - 1;
 
-	delete pcxAnimations[ key ];
+  delete pcxAnimations[ key ];
 
-	for ( let i = total; i > 0; i-- ) {
-		if ( pcxPresets[ i ].value === key ) {
-			pcxPresets.splice( i, 1 );
-			break;
-		}
-	}
+  for ( let i = total; i > 0; i-- ) {
+    if ( pcxPresets[ i ].value === key ) {
+      pcxPresets.splice( i, 1 );
+      break;
+    }
+  }
 
-	addRemoveCustomLabel();
+  addRemoveCustomLabel();
 
-	const nextPreset = getPresetSelection( settings );
-	const { selectedPreset } = nextPreset;
+  const nextPreset = getPresetSelection( settings );
+  const { selectedPreset } = nextPreset;
 
-	return selectedPreset;
+  return selectedPreset;
 };
 
 /*
@@ -559,25 +559,25 @@ const removePreset = ( key, settings ) => {
  * @since 1.0.0
  */
 const toConvertedProp = ( prop ) => {
-	const name = prop
-		.replace( /^\w/, ( c ) => c.toUpperCase() )
-		.replace( /_([a-z])/g, ( c ) => c[ 1 ].toUpperCase() );
-	return `pcx${ name }`;
+  const name = prop
+    .replace( /^\w/, ( c ) => c.toUpperCase() )
+    .replace( /_([a-z])/g, ( c ) => c[ 1 ].toUpperCase() );
+  return `pcx${ name }`;
 };
 
 export {
-	getPositions,
-	getPresetSelection,
-	getPrevNextSelection,
-	getOriginalSettings,
-	objectValuesEqual,
-	checkInitialTab,
-	toConvertedProp,
-	addPreset,
-	removePreset,
-	shouldAnimate,
-	compareProps,
-	checkChanges,
-	verifyObjects,
-	animatableProps,
+  getPositions,
+  getPresetSelection,
+  getPrevNextSelection,
+  getOriginalSettings,
+  objectValuesEqual,
+  checkInitialTab,
+  toConvertedProp,
+  addPreset,
+  removePreset,
+  shouldAnimate,
+  compareProps,
+  checkChanges,
+  verifyObjects,
+  animatableProps,
 };
