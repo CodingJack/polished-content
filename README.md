@@ -1,5 +1,5 @@
 # Polished Content
-WordPress Gutenberg Block Animation Builder | [View Screenshots](https://www.codingjack.com/polished-content-screenshots/)
+WordPress Gutenberg Block Animation Builder
 
 ![Screenshot of the Plugin's Animation Editor, editing a post in WordPress](/admin/screenshots/dist/img/git-screenshot.jpg)
 
