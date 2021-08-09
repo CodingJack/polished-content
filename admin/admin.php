@@ -10,7 +10,7 @@ if ( ! class_exists( 'PolishedContentAdmin' ) ) {
   final class PolishedContentAdmin {
     
     private static $instance = null;
-    private $version = '1.2.0';
+    private $version = '1.2.1';
     
     public static function instance() {
       if ( is_null( self::$instance ) ) {

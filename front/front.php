@@ -10,7 +10,7 @@ if ( ! class_exists( 'PolishedContentFront' ) ) {
   final class PolishedContentFront {
   
     private static $instance = null;
-    private $version = '1.2.0';
+    private $version = '1.2.1';
     private $globalScript;
     private $scriptUrl;
     private $vendorScriptUrl;
